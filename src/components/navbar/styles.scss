@@ -1,0 +1,44 @@
+/* NAVBAR */
+
+.containerNavbar,
+div ul {
+  display: flex;
+  align-items: center;
+}
+
+.containerNavbar {
+  justify-content: space-between;
+  padding: 30px 100px 30px 54px;
+}
+
+div ul li {
+  // Navbar & NavbarIcons
+  list-style: none;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.navbar {
+  margin-left: 266px;
+  margin-right: 158px;
+
+  ul li {
+    padding-left: 75px;
+  
+    a {
+      color: #000;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+}
+
+.navbarIcons {
+  ul li {
+    padding-right: 45px;
+  }
+}
+
