@@ -1,7 +1,7 @@
 /* NAVBAR */
 
 .containerNavbar,
-div ul {
+div .nav {
   display: flex;
   align-items: center;
 }
@@ -11,7 +11,7 @@ div ul {
   padding: 30px 100px 30px 54px;
 }
 
-div ul li {
+div .nav li {
   // Navbar & NavbarIcons
   list-style: none;
 
@@ -26,14 +26,13 @@ div ul li {
 
   ul li {
     padding-left: 75px;
-  
+
     a {
       color: #000;
       font-size: 18px;
       font-weight: 600;
     }
   }
-
 }
 
 .navbarIcons {
@@ -42,3 +41,20 @@ div ul li {
   }
 }
 
+@media (min-width: 350px) and (max-width: 650px) {
+  .containerNavbar {
+    padding: 20px 60px 30px 10px;
+  
+  }
+
+  .navbarLogo {
+    img {
+      width: 100px;
+    }
+  }
+
+  .navbar, .navbarIcons {
+    display: none;
+  }
+
+}

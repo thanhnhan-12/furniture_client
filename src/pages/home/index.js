@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import Banner from './banner';
+import Category from './category';
+import Products from './products';
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <Banner />
+      <Category />
+      <Products />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

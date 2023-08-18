@@ -1,0 +1,32 @@
+/* CATEGORY */
+.category {
+
+  .categoryHeading, .categoryList {
+    text-align: center;
+  }
+
+  .categoryHeading {
+    margin: 45px 0;
+    p {
+      margin-top: 10px;
+    }
+  }
+
+  .categoryItems {
+    display: flex;
+    justify-content: space-between;
+    .categoryList {
+      img {
+        border-radius: 10px;
+      }
+
+      p {
+        margin-top: 20px;
+        font-size: 24px;
+        color: #000;
+        font-weight: 600;
+      }
+    }
+  }
+
+} 

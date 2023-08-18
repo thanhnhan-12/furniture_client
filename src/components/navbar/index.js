@@ -15,24 +15,24 @@ const Navbar = () => {
       </div>
 
       <div className="navbar">
-        <ul>
+        <ul className='nav' >
           <li>
-            <Link to="">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="">Shop</Link>
+            <Link to="/shop">Shop</Link>
           </li>
           <li>
-            <Link to="">About</Link>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </div>
 
       <div className="navbarIcons">
-        <ul>
+        <ul className='nav' >
           <li>
             <Link to="">
               <img src={NavbarIconUser} alt="" />

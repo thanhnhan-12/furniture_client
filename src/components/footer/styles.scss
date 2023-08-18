@@ -1,0 +1,66 @@
+/* FOOTER */
+.containerFooter {
+  border-top: 1px solid rgba(0, 0, 0, 0.17);
+}
+
+.funiro {
+  display: flex;
+  justify-content: space-between;
+  padding: 48px 206.99px 48px 100px;
+}
+
+.addressFooter {
+  margin-top: 50px;
+  width: 285px;
+}
+
+// Common
+div .navFooter li {
+  margin-bottom: 46px;
+
+  a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+  }
+}
+
+.space {
+  margin-bottom: 50px;
+}
+
+p {
+  color: #9f9f9f;
+}
+
+.column4 {
+  input,
+  .subscribe {
+    padding-bottom: 3px;
+  }
+
+  input {
+    border: none;
+    border-bottom: 1px solid #000;
+    padding-left: 8px;
+  }
+
+  .subscribe {
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    margin-left: 11px;
+  }
+}
+
+.copyright {
+  border-top: 1px solid #D9D9D9;
+  margin: 0 100px 0 100px;
+
+  p {
+    color: #000;
+    font-weight: 400;
+    margin: 35px 0 38px 0;
+  }
+}
