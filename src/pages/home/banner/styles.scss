@@ -2,9 +2,9 @@
 
 .bannerBg {
   background-image: url('../../../assets/images/bannerBg.jpg');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 48rem;
+  height: 75rem;
   position: relative;
 
   .bannerContent {
@@ -19,17 +19,19 @@
 
     h3 {
       padding-top: 62px;
+      font-size: 1.6rem;
     }
 
     h1 {
       color: var(--primary, #b88e2f);
-      font-size: 52px;
+      font-size: 5.2rem;
       margin: 4px 0 17px 0;
     }
 
     p {
       color: var(--font-color, #333);
-      font-size: 18px;
+      font-size: 1.8rem;
+      font-weight: 500;
     }
 
     .btnBuyNow {
@@ -38,7 +40,7 @@
       border: none;
       color: #fff;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 1.8rem;
       cursor: pointer;
       margin: 46px 0 37px 0;
     }

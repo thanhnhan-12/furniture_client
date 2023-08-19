@@ -13,17 +13,26 @@ const palette: PaletteOptions = {
     // blue
     dark: '#2c95ff',
   },
+
   error: {
     main: '#d63031',
   },
+
   secondary: {
     main: '#F4F5F7',
 
     // color text
-    contrastText: 'rgba(111,109,113,1)',
+    contrastText: '#B88E2F',
 
     // active
-    light: '#341678',
+    light: '#898989',
+
+    dark: '#FCF8F3',
+  },
+
+  common: {
+    white: '#B88E2F',
+    black: '#3A3A3A',
   },
 };
 
