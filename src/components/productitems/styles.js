@@ -1,7 +1,6 @@
 import { makeStyles } from '@mui/styles';
 import theme from '../../theme';
 
-
 export default makeStyles(() => ({
   nameImage: {
     width: '100%',
@@ -15,7 +14,6 @@ export default makeStyles(() => ({
     // display: 'block!important',
     '&:hover > div:last-child': {
       display: 'block',
-      
     },
   },
 

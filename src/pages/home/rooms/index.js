@@ -4,7 +4,6 @@ import { Box, Button, Grid } from '@mui/material';
 import BedRoom from '../../../assets/images/BedRoom.jpg';
 import Slide from './slide';
 import LayoutContainer from '../../../components/layoutcontainer/layoutcontainer';
-import theme from '../../../theme';
 
 const Rooms = () => {
   const classes = useStyles();
@@ -13,7 +12,7 @@ const Rooms = () => {
     <Box className={classes.intro}>
       <LayoutContainer>
         <Grid sx={{ mt: '6.9rem' }} container columnSpacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={3} sx={{ margin: 'auto' }}>
             <h1 className={classes.title}>50+ Beautiful rooms inspiration</h1>
             <p className={classes.desc}>
               Our designer already made a lot of beautiful prototipe of rooms

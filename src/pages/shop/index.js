@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import BackgroundBanner from '../../components/backgroundbanner';
+import Filter from './filter';
 
 const Shop = () => {
   return (
-    <div>Shop</div>
-  )
-}
+    <div>
+      <BackgroundBanner heading="Shop" title="Shop" />
+      <Filter />
+    </div>
+  );
+};
 
-export default Shop
+export default Shop;

@@ -1,6 +1,5 @@
 import Grid from '@mui/material/Grid';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import useStyles from './styles';
 import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
 

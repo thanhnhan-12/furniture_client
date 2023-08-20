@@ -178,17 +178,19 @@ table {
   content: '\2022';
   text-align: center;
   opacity: 0.25;
-  color: #000;
+  color: #b88e2f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #451da0;
   border-radius: 50%;
+
 }
 
 .slick-dots li.slick-active button:before {
   opacity: 0.75;
-  color: #000;
+  /* color: #b88e2f; */
   border-radius: 50%;
+  border: 1px solid #b88e2f;
+  
 }
 
 .slick-dots li button {

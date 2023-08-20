@@ -15,6 +15,7 @@ export default makeStyles(() => ({
     color: '#616161',
     fontSize: '1.6rem',
     fontWeight: '500',
+    margin: '2.5rem 0'
   },
 
   btnExplore: {
@@ -35,6 +36,7 @@ export default makeStyles(() => ({
     backgroundColor: 'rgba(255, 255, 255, 0.72)',
     backdropFilter: 'blur(0.15rem)',
     padding: '3.2rem',
+    opacity: '0.72',
   },
 
   boxItem: {

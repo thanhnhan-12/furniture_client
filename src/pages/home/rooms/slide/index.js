@@ -16,7 +16,6 @@ const Slide = () => {
     centerPadding: '80px',
     centerMode: true,
     infinite: true,
-    speed: 500,
   };
   return (
     <Box
@@ -66,7 +65,7 @@ const Slide = () => {
             }}
           ></Box>
         </div>
-        
+
         <div>
           <Box
             sx={{
