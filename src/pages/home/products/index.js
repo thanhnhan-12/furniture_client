@@ -4,8 +4,9 @@ import LayoutContainer from '../../../components/layoutcontainer/layoutcontainer
 import ProductItems from '../../../components/productitems';
 import { Button } from '@mui/material';
 
-const productList = [
+export const productList = [
   {
+    productID: 1,
     nameImage: require('../../../assets/images/productItem.jpg'),
     productName: 'Lolito',
     description: 'Stylish cafe chair',
@@ -13,6 +14,7 @@ const productList = [
   },
 
   {
+    productID: 2,
     nameImage: require('../../../assets/images/productItem.jpg'),
     productName: 'Lolito',
     description: 'Stylish cafe chair',
@@ -20,6 +22,7 @@ const productList = [
   },
 
   {
+    productID: 3,
     nameImage: require('../../../assets/images/productItem.jpg'),
     productName: 'Lolito',
     description: 'Stylish cafe chair',
@@ -27,6 +30,7 @@ const productList = [
   },
 
   {
+    productID: 4,
     nameImage: require('../../../assets/images/productItem.jpg'),
     productName: 'Lolito',
     description: 'Stylish cafe chair',
@@ -34,6 +38,7 @@ const productList = [
   },
 
   {
+    productID: 5,
     nameImage: require('../../../assets/images/productItem.jpg'),
     productName: 'Lolito',
     description: 'Stylish cafe chair',

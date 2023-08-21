@@ -8,6 +8,7 @@ import Contact from './pages/contact';
 import Home from './pages/home';
 import Shop from './pages/shop';
 import './App.css';
+import ProductDetail from './pages/productdetail';
 
 const Layout = () => {
   return (
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />,
+      },
+
+      {
+        path: '/productdetail/:productID',
+        element: <ProductDetail />,
       },
     ],
   },
