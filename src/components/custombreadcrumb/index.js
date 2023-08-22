@@ -4,8 +4,12 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import useStyles from './styles';
+import classNames from 'classnames/bind';
 
 const CustomBreadCrumb = ({ root, children, name }) => {
+  const cx = classNames.bind(useStyles());
+
   function handleClick(event) {
     console.info('You clicked a breadcrumb.');
   }
@@ -18,7 +22,7 @@ const CustomBreadCrumb = ({ root, children, name }) => {
       href="/"
       onClick={handleClick}
     >
-      <p>{root}</p>
+      <p className={cx('text')}>{root}</p>
     </Link>,
     <Link
       underline="hover"
@@ -27,17 +31,25 @@ const CustomBreadCrumb = ({ root, children, name }) => {
       href="/shop"
       onClick={handleClick}
     >
-      <p>{children}</p>
+      <p className={cx('text')}>{children}</p>
     </Link>,
     <Typography key="3" color="text.primary">
-      <b>{name}</b>
+      <b className={cx('text', 'productName')}>{name}</b>
     </Typography>,
   ];
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} className={cx('breadCrumb')}>
       <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="large" />}
+        separator={
+          <NavigateNextIcon
+            fontSize="large"
+            sx={{
+              color: '#000',
+              fontSize: '3rem',
+            }}
+          />
+        }
         aria-label="breadcrumb"
       >
         {breadcrumbs}

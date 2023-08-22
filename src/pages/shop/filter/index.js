@@ -1,17 +1,18 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import ShopFilter from '../../../assets/svg/shopFilter.svg';
 import ShopViewGrid from '../../../assets/svg/shopViewGrid.svg';
 import ShopViewList from '../../../assets/svg/shopViewList.svg';
 import useStyles from './styles';
-import { Box } from '@mui/material';
+import classNames from 'classnames/bind';
 
 const Filter = () => {
-  const classes = useStyles();
+  const cx = classNames.bind(useStyles());
 
   return (
-    <div className={classes.filterSort}>
-      <div className={classes.filterLeft}>
-        <Box className={classes.filter}>
+    <div className={cx('filterSort', 'filter')}>
+      <div className={cx('filter')}>
+        <Box className={cx('filter')}>
           <img src={ShopFilter} alt="" />
           <b
             style={{
@@ -24,21 +25,25 @@ const Filter = () => {
           </b>
         </Box>
 
-        <div className={classes.view}>
+        <div className={cx('filter', 'view')}>
           <img src={ShopViewGrid} alt="" style={{ marginRight: '2.3rem' }} />
           <img src={ShopViewList} alt="" />
         </div>
 
-        <div className={classes.border}></div>
+        <div className={cx('border')}></div>
 
-        <p className={classes.showing}>Showing 1-16 of 32 results</p>
+        <p className={cx('showing')}>Showing 1-16 of 32 results</p>
       </div>
 
-      <div className={classes.filterRight}>
-        <p className={classes.sort} >Show</p>
-        <input type="text" className={classes.inputShow} />
-        <p className={classes.sort }>Sort by</p>
-        <input type="text" placeholder='Default' className={classes.inputSort} />
+      <div className={cx('filter')}>
+        <p className={cx('sort')}>Show</p>
+        <input type="text" className={cx('inputCommon', 'inputShow')} />
+        <p className={cx('sort')}>Sort by</p>
+        <input
+          type="text"
+          placeholder="Default"
+          className={cx('inputCommon', 'inputSort')}
+        />
       </div>
     </div>
   );
