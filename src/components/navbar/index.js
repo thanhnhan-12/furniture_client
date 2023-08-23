@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLogo from '../../assets/icons/navbarLogo.jpg';
 import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
@@ -6,8 +6,11 @@ import NavbarIconHeart from '../../assets/svg/navbarIconHeart.svg';
 import NavbarIconSearch from '../../assets/svg/navbarIconSearch.svg';
 import NavbarIconUser from '../../assets/svg/navbarIconUser.svg';
 import './styles.scss';
+import ShoppingCart from '../shoppingcart';
 
 const Navbar = () => {
+  const [isShow, setIsShow] = useState(false);
+
   return (
     <div className="containerNavbar">
       <div className="navbarLogo">
@@ -15,7 +18,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar">
-        <ul className='nav' >
+        <ul className="nav">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -32,7 +35,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbarIcons">
-        <ul className='nav' >
+        <ul className="nav">
           <li>
             <Link to="">
               <img src={NavbarIconUser} alt="" />
@@ -48,13 +51,12 @@ const Navbar = () => {
               <img src={NavbarIconHeart} alt="" />
             </Link>
           </li>
-          <li>
-            <Link to="">
-              <img src={NavbarIconCart} alt="" />
-            </Link>
+          <li onClick={() => setIsShow(true)} style={{ cursor: 'pointer' }}>
+            <img src={NavbarIconCart} alt="" />
           </li>
         </ul>
       </div>
+      {isShow && <ShoppingCart onClose={() => setIsShow(false)} />}
     </div>
   );
 };
