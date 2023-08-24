@@ -27,16 +27,17 @@ export default makeStyles(() => ({
   },
 
   btnCart: {
-    borderRadius: '5rem !important',
-    border: '1px solid #000 !important',
-    color: '#000 !important',
-    fontSize: '1.2rem !important',
-    fontWeight: '400 !important',
-    padding: '0.6rem 3rem !important',
+    borderRadius: '5rem ',
+    border: '1px solid #000 ',
+    color: '#000 ',
+    fontSize: '1.6rem ',
+    fontWeight: '400 ',
+    padding: '0.6rem 3rem ',
+    textDecoration: 'none',
     '&:hover': {
-      backgroundColor: '#B88E2F !important',
-      color: '#fff !important',
-      border: 'none !important',
+      backgroundColor: '#B88E2F ',
+      color: '#fff ',
+      border: 'none ',
     },
   },
 }));

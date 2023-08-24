@@ -1,12 +1,13 @@
-import React from 'react';
-import useStyles from './styles';
-import classNames from 'classnames/bind';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button, Typography } from '@mui/material';
-import NameImage2 from '../../assets/images/ProductImages/nameImage2.png';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import { Box, Typography } from '@mui/material';
+import classNames from 'classnames/bind';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import NameImage2 from '../../assets/images/ProductImages/nameImage2.png';
+import useStyles from './styles';
 
-const cart = [
+const shopCart = [
   {
     cartID: 1,
     nameImage: NameImage2,
@@ -31,7 +32,6 @@ const ShoppingCart = ({ onClose }) => {
     <Box
       sx={{
         position: 'fixed',
-        right: '0',
         top: '0',
         left: '0',
         right: '0',
@@ -61,7 +61,7 @@ const ShoppingCart = ({ onClose }) => {
           </Box>
 
           <div className={cx('border')}>
-            {cart.map((item, index) => (
+            {shopCart.map((item, index) => (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -112,8 +112,10 @@ const ShoppingCart = ({ onClose }) => {
           </div>
 
           <Box p="2.6rem 0" className={cx('common')}>
-            <Button className={cx('btnCart')}>Cart</Button>
-            <Button className={cx('btnCart')}>Checkout</Button>
+            <Link to="/cart" className={cx('btnCart')}>
+              Cart
+            </Link>
+            <Link to="/checkout" className={cx('btnCart')}>Checkout</Link>
           </Box>
         </div>
       </Box>

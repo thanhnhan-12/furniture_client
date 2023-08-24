@@ -25,6 +25,7 @@ export default makeStyles(() => ({
   boxTitle: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: '2rem',
   },
 
