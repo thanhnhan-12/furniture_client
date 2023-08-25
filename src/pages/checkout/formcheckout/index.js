@@ -1,34 +1,32 @@
-import classNames from 'classnames/bind';
-import React from 'react';
-import useStyles from './styles';
-import { Box, Typography } from '@mui/material';
-import { FormInput, FormSelect } from '../../../components/hookform';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLogin } from '../../../constants/schema';
+import { Box } from '@mui/material';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { FormInput, FormSelect } from '../../../components/hookform';
+import { schemaCheckout } from '../../../constants/schema';
 
 const FormCheckout = () => {
-  const cx = classNames.bind(useStyles());
-
   const { control, handleSubmit } = useForm({
     defaultValues: {},
-    resolver: yupResolver(schemaLogin),
+    resolver: yupResolver(schemaCheckout),
   });
 
   return (
     <Box width="35%">
-      <Box display="flex" gap="5rem" >
+      <Box display="flex" gap="5rem" mb="3.6rem">
         <FormInput
           control={control}
           type="text"
           name="firstName"
           label="First Name"
+          placeholder="First Name"
         />
         <FormInput
           control={control}
           type="text"
           name="lastName"
           label="Last Name"
+          placeholder="Last Name"
         />
       </Box>
 
@@ -42,6 +40,7 @@ const FormCheckout = () => {
         label="Province"
         sx={{
           borderRadius: '4px',
+          marginBottom: '3.6rem',
         }}
         // handleChange={handleOnChange}
       />
@@ -56,6 +55,7 @@ const FormCheckout = () => {
         label="District"
         sx={{
           borderRadius: '4px',
+          marginBottom: '3.6rem',
         }}
         // handleChange={handleOnChange}
       />
@@ -70,6 +70,7 @@ const FormCheckout = () => {
         label="Ward"
         sx={{
           borderRadius: '4px',
+          marginBottom: '3.6rem',
         }}
         // handleChange={handleOnChange}
       />
@@ -79,11 +80,26 @@ const FormCheckout = () => {
         type="text"
         name="address"
         label="Address Name"
+        placeholder="Address Name"
+        sx={{ marginBottom: '3.6rem' }}
       />
 
-      <FormInput control={control} type="text" name="phone" label="Phone" />
+      <FormInput
+        control={control}
+        type="text"
+        name="phone"
+        label="Phone"
+        placeholder="Phone Number"
+        sx={{ marginBottom: '3.6rem' }}
+      />
 
-      <FormInput control={control} type="email" name="email" label="Email" />
+      <FormInput
+        control={control}
+        type="email"
+        name="email"
+        label="Email"
+        placeholder="Email Address"
+      />
     </Box>
   );
 };

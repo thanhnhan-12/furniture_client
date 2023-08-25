@@ -19,7 +19,7 @@ export const FormInput = (props) => {
     sx,
     name,
     label,
-    size = 'small',
+    size = 'large',
     disabled = false,
     variant = 'outlined',
     margin = 'dense',

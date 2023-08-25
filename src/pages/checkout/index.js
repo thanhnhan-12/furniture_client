@@ -4,6 +4,7 @@ import BackgroundBanner from '../../components/backgroundbanner';
 import LayoutContainer from '../../components/layoutcontainer/layoutcontainer';
 import FormCheckout from './formcheckout';
 import BillingDetails from './billingdetails';
+import Services from '../../components/services';
 
 const Checkout = () => {
   return (
@@ -25,11 +26,14 @@ const Checkout = () => {
           display="flex"
           alignItems="baseline"
           justifyContent="space-between"
+          mb="12.3rem"
         >
           <FormCheckout />
           <BillingDetails />
         </Box>
       </LayoutContainer>
+
+      <Services />
     </Box>
   );
 };

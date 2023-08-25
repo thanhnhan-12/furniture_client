@@ -20,7 +20,7 @@ export const FormSelect = (props) => {
     control,
     name,
     label,
-    size = 'small',
+    size = 'large',
     disabled = false,
     variant = 'outlined',
     required = false,

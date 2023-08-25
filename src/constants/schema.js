@@ -55,3 +55,16 @@ export const schemaCheckout = yup.object().shape({
 
   address: yup.string().required(messageRequired('Address')),
 });
+
+export const schemaContact = yup.object().shape({
+  yourname: yup.string().required(messageRequired('Your Name')),
+
+  email: yup
+    .string()
+    .email('Incorrect Email')
+    .required(messageRequired('Email')),
+
+  subject: yup.string().required(messageRequired('Subject')),
+
+  message: yup.string().required(messageRequired('Message')),
+});

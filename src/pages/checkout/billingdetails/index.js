@@ -63,7 +63,7 @@ const BillingDetails = () => {
           this website, to manage access to your account, and for other purposes
           described in our <b>privacy policy</b> .
         </Typography>
-        <Button className={cx('btnOrder')}>Place order</Button>
+        <Button className={cx('btnOrder')} type='submit'>Place order</Button>
       </Box>
     </Box>
   );
