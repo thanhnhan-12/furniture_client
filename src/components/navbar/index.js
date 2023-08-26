@@ -37,7 +37,7 @@ const Navbar = () => {
       <div className="navbarIcons">
         <ul className="nav">
           <li>
-            <Link to="">
+            <Link to="/login">
               <img src={NavbarIconUser} alt="" />
             </Link>
           </li>

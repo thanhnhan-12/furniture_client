@@ -1,7 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput, FormSelect } from '../../../components/hookform';
 import { schemaCheckout } from '../../../constants/schema';
 
