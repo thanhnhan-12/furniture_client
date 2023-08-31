@@ -3,19 +3,34 @@ import { Box, Button, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormInput } from '../../../components/hookform';
-import { schemaCheckout } from '../../../constants/schema';
+import { schemaLogin } from '../../../constants/schema';
 import BoxBackground from '../boxbackground';
-import useStyles from './styles';
+import useStyles from '../boxbackground/styles';
+import axios from 'axios';
 
 const Login = () => {
   const cx = classNames.bind(useStyles());
 
+  const navigate = useNavigate();
+
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
-    resolver: yupResolver(schemaCheckout),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(schemaLogin),
   });
+
+  const onSubmit = async () => {
+    try {
+      await axios.post('http://localhost:8080/api/v1/auth/login');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <BoxBackground>
@@ -24,7 +39,7 @@ const Login = () => {
           Login
         </Typography>
 
-        <Box>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             control={control}
             type="text"
@@ -41,19 +56,21 @@ const Login = () => {
             placeholder="Password"
           />
 
-          <Button className={cx('button')}>Login</Button>
+          <Button type="submit" className={cx('button')}>
+            Login
+          </Button>
 
           <Box
             display="flex"
             justifyContent="center"
             alignItems="baseline"
-            mt="4.8rem"
+            mt="3rem"
           >
             <Typography component="p" className={cx('account')}>
               Don't have an account?
             </Typography>
             <Link to="/register" className={cx('account', 'link')}>
-              Login with
+              Register with
             </Link>
           </Box>
         </Box>

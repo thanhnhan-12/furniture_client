@@ -44,7 +44,6 @@ div .nav li {
 @media (min-width: 350px) and (max-width: 650px) {
   .containerNavbar {
     padding: 20px 60px 30px 10px;
-  
   }
 
   .navbarLogo {
@@ -53,8 +52,8 @@ div .nav li {
     }
   }
 
-  .navbar, .navbarIcons {
+  .navbar,
+  .navbarIcons {
     display: none;
   }
-
 }

@@ -1,21 +1,28 @@
-import React from 'react';
-import BoxBackground from '../boxbackground';
-import { Box, Button, Typography } from '@mui/material';
-import useStyles from './styles';
-import classNames from 'classnames/bind';
-import { FormInput } from '../../../components/hookform';
-import { useForm } from 'react-hook-form';
-import { schemaCheckout } from '../../../constants/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Box, Button, Typography } from '@mui/material';
+import classNames from 'classnames/bind';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { FormInput } from '../../../components/hookform';
+import { schemaRegister } from '../../../constants/schema';
+import BoxBackground from '../boxbackground';
+import useStyles from '../boxbackground/styles';
+import axios from 'axios';
 
 const Register = () => {
   const cx = classNames.bind(useStyles());
 
+  const navigate = useNavigate();
+  
   const { control, handleSubmit } = useForm({
     defaultValues: {},
-    resolver: yupResolver(schemaCheckout),
+    resolver: yupResolver(schemaRegister),
   });
+
+  const onSubmit = (data) => {
+    //  console.log(data)
+  };
 
   return (
     <BoxBackground>
@@ -24,8 +31,8 @@ const Register = () => {
           Create your account
         </Typography>
 
-        <Box>
-          <Box display="flex" alignItems="baseline" gap="2rem" >
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} >
+          <Box display="flex" alignItems="baseline" gap="2rem">
             <FormInput
               control={control}
               type="text"
@@ -66,19 +73,19 @@ const Register = () => {
             placeholder="Confirm Password"
           />
 
-          <Button className={cx('button')}>Register</Button>
+          <Button type='submit' className={cx('button')}>Register</Button>
 
           <Box
             display="flex"
             justifyContent="center"
             alignItems="baseline"
-            mt="4.8rem"
+            mt="3rem"
           >
             <Typography component="p" className={cx('account')}>
               Already have an account?
             </Typography>
             <Link to="/login" className={cx('account', 'link')}>
-              Register with
+              Login with
             </Link>
           </Box>
         </Box>

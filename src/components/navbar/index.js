@@ -37,8 +37,21 @@ const Navbar = () => {
       <div className="navbarIcons">
         <ul className="nav">
           <li>
-            <Link to="/login">
+            {/* <Link to="/login">
               <img src={NavbarIconUser} alt="" />
+            </Link> */}
+            <Link
+              to="/login"
+              className="btnLogin"
+              style={{
+                color: '#000',
+                fontSize: '1.6rem',
+                border: '1px solid #000',
+                borderRadius: '1.5rem',
+                padding: '0.5rem 1.5rem',
+              }}
+            >
+              Login
             </Link>
           </li>
           <li>
