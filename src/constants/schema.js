@@ -21,7 +21,7 @@ export const schemaRegister = yup.object().shape({
     .email('Incorrect Email')
     .required(messageRequired('Email')),
 
-  username: yup.string().required(messageRequired('User Name')),
+  // username: yup.string().required(messageRequired('User Name')),
 
   password: yup.string().required('Please enter your password.').min(6),
 

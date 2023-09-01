@@ -8,12 +8,17 @@ import { FormInput } from '../../../components/hookform';
 import { schemaLogin } from '../../../constants/schema';
 import BoxBackground from '../boxbackground';
 import useStyles from '../boxbackground/styles';
-import axios from 'axios';
+import { useAppDispatch } from '../../../redux';
+import { loginUser } from '../../../redux/auth/authAction';
+import { toastMessage } from '../../../utils/toast';
+import { getMe } from '../../../redux/user/userAction';
 
 const Login = () => {
   const cx = classNames.bind(useStyles());
 
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -23,13 +28,15 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const onSubmit = async () => {
-    try {
-      await axios.post('http://localhost:8080/api/v1/auth/login');
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
+  const handleOnSubmit = (data) => {
+    console.log('LOGIN', data);
+    dispatch(loginUser(data))
+      .unwrap()
+      .then((payload) => {
+        toastMessage.success('Login successfully');
+        // dispatch(getMe());
+        navigate('/');
+      });
   };
 
   return (
@@ -39,7 +46,7 @@ const Login = () => {
           Login
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}>
           <FormInput
             control={control}
             type="text"

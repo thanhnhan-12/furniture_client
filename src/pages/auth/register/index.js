@@ -8,20 +8,35 @@ import { FormInput } from '../../../components/hookform';
 import { schemaRegister } from '../../../constants/schema';
 import BoxBackground from '../boxbackground';
 import useStyles from '../boxbackground/styles';
-import axios from 'axios';
+import { toastMessage } from '../../../utils/toast';
+import { registerUser } from '../../../redux/auth/authAction';
+import { useAppDispatch } from '../../../redux';
 
 const Register = () => {
   const cx = classNames.bind(useStyles());
 
   const navigate = useNavigate();
-  
+
+  const dispatch = useAppDispatch();
+
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+    },
     resolver: yupResolver(schemaRegister),
   });
 
-  const onSubmit = (data) => {
-    //  console.log(data)
+  const handleOnSubmit = (data) => {
+    console.log('REGISTER', data);
+    dispatch(registerUser(data))
+      .unwrap()
+      .then((data) => {
+        navigate('/login');
+        toastMessage.success('Register successfully');
+      });
   };
 
   return (
@@ -31,7 +46,7 @@ const Register = () => {
           Create your account
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} >
+        <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}>
           <Box display="flex" alignItems="baseline" gap="2rem">
             <FormInput
               control={control}
@@ -73,7 +88,9 @@ const Register = () => {
             placeholder="Confirm Password"
           />
 
-          <Button type='submit' className={cx('button')}>Register</Button>
+          <Button type="submit" className={cx('button')}>
+            Register
+          </Button>
 
           <Box
             display="flex"
