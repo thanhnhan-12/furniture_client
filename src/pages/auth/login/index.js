@@ -11,7 +11,7 @@ import useStyles from '../boxbackground/styles';
 import { useAppDispatch } from '../../../redux';
 import { loginUser } from '../../../redux/auth/authAction';
 import { toastMessage } from '../../../utils/toast';
-import { getMe } from '../../../redux/user/userAction';
+import { loginSuccess } from '../../../redux/auth/authSlice';
 
 const Login = () => {
   const cx = classNames.bind(useStyles());
@@ -33,9 +33,21 @@ const Login = () => {
     dispatch(loginUser(data))
       .unwrap()
       .then((payload) => {
-        toastMessage.success('Login successfully');
-        // dispatch(getMe());
-        navigate('/');
+        if (payload && payload.error) {
+          toastMessage.error('Sai email hoặc mật khẩu. Vui lòng thử lại.');
+        } else {
+          // Đăng nhập thành công
+          dispatch(loginSuccess());
+          localStorage.setItem('isLoggedIn', 'true');
+          toastMessage.success('Login successfully');
+          navigate('/');
+        }
+      })
+      .catch((error) => {
+        console.error('Error during login:', error);
+        toastMessage.error(
+          'An error occurred during login. Please try again later.',
+        );
       });
   };
 

@@ -5,12 +5,17 @@ import { loginUser } from './authAction';
 const initialState = {
   token: getLocalStorage('token'),
   roles: getRoles(),
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    loginSuccess: (state) => {
+      state.isAuthenticated = true;
+    },
+
     logout: (state) => {
       state.token = '';
       state.roles = [];
@@ -31,6 +36,6 @@ const authSlice = createSlice({
 
 const { actions, reducer } = authSlice;
 
-export const { logout } = actions;
+export const { loginSuccess, logout } = actions;
 
 export default reducer;

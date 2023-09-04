@@ -23,6 +23,7 @@ const Register = () => {
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
       firstName: '',
       lastName: '',
     },
@@ -34,8 +35,8 @@ const Register = () => {
     dispatch(registerUser(data))
       .unwrap()
       .then((data) => {
-        navigate('/login');
         toastMessage.success('Register successfully');
+        navigate('/login');
       });
   };
 
@@ -83,7 +84,7 @@ const Register = () => {
           <FormInput
             control={control}
             type="password"
-            name="password"
+            name="confirmPassword"
             label="Confirm Password"
             placeholder="Confirm Password"
           />

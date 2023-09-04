@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLogo from '../../assets/icons/navbarLogo.jpg';
 import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
@@ -7,9 +7,19 @@ import NavbarIconSearch from '../../assets/svg/navbarIconSearch.svg';
 import NavbarIconUser from '../../assets/svg/navbarIconUser.svg';
 import './styles.scss';
 import ShoppingCart from '../shoppingcart';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [isShow, setIsShow] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(storedIsLoggedIn);
+  }, []);
 
   return (
     <div className="containerNavbar">
@@ -36,24 +46,30 @@ const Navbar = () => {
 
       <div className="navbarIcons">
         <ul className="nav">
-          <li>
-            {/* <Link to="/login">
-              <img src={NavbarIconUser} alt="" />
-            </Link> */}
-            <Link
-              to="/login"
-              className="btnLogin"
-              style={{
-                color: '#000',
-                fontSize: '1.6rem',
-                border: '1px solid #000',
-                borderRadius: '1.5rem',
-                padding: '0.5rem 1.5rem',
-              }}
-            >
-              Login
-            </Link>
-          </li>
+          {isAuthenticated || isLoggedIn ? (
+            <li>
+              <Link to="/">
+                <img src={NavbarIconUser} alt="" />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/login"
+                className="btnLogin"
+                style={{
+                  color: '#000',
+                  fontSize: '1.6rem',
+                  border: '1px solid #000',
+                  borderRadius: '1.5rem',
+                  padding: '0.5rem 1.5rem',
+                }}
+              >
+                Login
+              </Link>
+            </li>
+          )}
+
           <li>
             <Link to="">
               <img src={NavbarIconSearch} alt="" />
