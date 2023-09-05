@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { productApi } from '../../api/productapi';
+import { categoryApi } from '../../api/categoryapi';
 import { toastMessage } from '../../utils/toast';
 
-export const getAllProduct = createAsyncThunk('product/getAllProduct', async () => {
+export const getAllCategory = createAsyncThunk('category/getAllCategory', async () => {
   try {
-    const { data } = await productApi.getAllProduct();
+    const { data } = await categoryApi.getAllCategory();
     return data;
   } catch (error) {
     toastMessage.setErrors(error);

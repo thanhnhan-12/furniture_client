@@ -1,7 +1,7 @@
 /* CATEGORY */
 .category {
-
-  .categoryHeading, .categoryList {
+  .categoryHeading,
+  .categoryList {
     text-align: center;
   }
 
@@ -23,6 +23,8 @@
     .categoryList {
       img {
         border-radius: 10px;
+        width: 38.1rem;
+        height: 48rem;
       }
 
       p {
@@ -33,5 +35,4 @@
       }
     }
   }
-
-} 
+}

@@ -3,8 +3,8 @@ import { createClient } from './axiosClient';
 
 const client = createClient(mainURL);
 
-export const productApi = {
-  getAllProduct: () => {
-    return client.get('/product');
-  },
-};
+export const imagesApi = {
+  getImages: () => {
+    return client.get('/images');
+  }
+}

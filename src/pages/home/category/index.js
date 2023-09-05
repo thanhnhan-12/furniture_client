@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CategoryImg from '../../../assets/images/category.jpg';
 import './styles.scss';
 import LayoutContainer from '../../../components/layoutcontainer/layoutcontainer';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import { getAllCategory } from '../../../redux/category/categoryAction';
 
 const Category = () => {
+  const dispatch = useAppDispatch();
+
+  const categories = useAppSelector((state) => state.category.categories);
+  
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, [dispatch]);
+
   return (
     <LayoutContainer>
       <div className="category">
@@ -13,20 +23,16 @@ const Category = () => {
         </div>
 
         <div className="categoryItems">
-          <div className="categoryList">
-            <img src={CategoryImg} alt="" />
-            <p>Dining</p>
-          </div>
-
-          <div className="categoryList">
-            <img src={CategoryImg} alt="" />
-            <p>Living</p>
-          </div>
-
-          <div className="categoryList">
-            <img src={CategoryImg} alt="" />
-            <p>Bedroom</p>
-          </div>
+          {categories && categories.length > 0 ? (
+            categories.map((category, index) => (
+              <div className="categoryList" key={index}>
+                <img src={category.categoryImg} alt="" />
+                <p>{category.categoryName}</p>
+              </div>
+            ))
+          ) : (
+            <p>Loading categories...</p>
+          )}
         </div>
       </div>
     </LayoutContainer>
