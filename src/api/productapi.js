@@ -7,4 +7,8 @@ export const productApi = {
   getAllProduct: () => {
     return client.get('/product');
   },
+
+  getProductByID: (productID) => {
+    return client.get(`/product/${productID}`);
+  },
 };

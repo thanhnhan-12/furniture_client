@@ -11,3 +11,13 @@ export const getAllProduct = createAsyncThunk('product/getAllProduct', async () 
     return error;
   }
 });
+
+export const getProductByID = createAsyncThunk('product/getProductByID', async (productID) => {
+  try {
+    const { data } = await productApi.getProductByID(productID);
+    return data;
+  } catch (error) {
+    toastMessage.setErrors(error);
+    return error;
+  }
+});

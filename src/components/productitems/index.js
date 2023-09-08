@@ -1,8 +1,9 @@
 import Grid from '@mui/material/Grid';
 import React from 'react';
-import useStyles from './styles';
-import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
 import { useNavigate } from 'react-router-dom';
+import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
+import { formatPrice } from '../../constants/common';
+import useStyles from './styles';
 
 const ProductItems = ({ productList }) => {
   const classes = useStyles();
@@ -10,7 +11,8 @@ const ProductItems = ({ productList }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (productID) => {
-    navigate(`/productdetail/${productID}`);
+    console.log("ID: ", productID);
+    navigate(`/product/${productID}`);
   };
 
   return (
@@ -28,7 +30,7 @@ const ProductItems = ({ productList }) => {
             <div className={classes.productItemContent}>
               <h3 className={classes.productName}>{list.productName}</h3>
               <p className={classes.description}>{list.description}</p>
-              <strong className={classes.price}>{list.price}</strong>
+              <strong className={classes.price}>{formatPrice(Number(list.price))}</strong>
             </div>
           </div>
 

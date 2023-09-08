@@ -28,7 +28,7 @@ const imagesList = [
   },
 ];
 
-const ProductImage = () => {
+const ProductImage = ({ productImages }) => {
   const cx = classNames.bind(useStyles());
 
   const [index, setIndex] = useState(0);
@@ -36,7 +36,7 @@ const ProductImage = () => {
   return (
     <div className={cx('allImg')}>
       <div className={cx('imgList')}>
-        {imagesList.map((item, i) => (
+        {productImages.map((item, i) => (
           <div
             className={cx('img', 'imgItem', `${index === i && 'active'}`)}
             key={i}
@@ -54,7 +54,7 @@ const ProductImage = () => {
       <div style={{ marginLeft: '2.8rem' }}>
         <div className={cx('img')}>
           <img
-            src={imagesList[index].nameImage}
+            src={productImages[0]?.nameImage}
             alt=""
             style={{ width: '48.1rem', height: '39.1rem' }}
           />

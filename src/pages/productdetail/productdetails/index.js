@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import classNames from 'classnames/bind';
-import useStyles from './styles';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Button } from '@mui/material';
+import classNames from 'classnames/bind';
+import React, { useState } from 'react';
+import { formatPrice } from '../../../constants/common';
+import useStyles from './styles';
 
 const productSize = [
   {
@@ -23,17 +24,21 @@ const productSize = [
   },
 ];
 
-const ProductDetails = () => {
+const ProductDetails = ({ productDetails }) => {
   const cx = classNames.bind(useStyles());
 
   const [selectedSize, setSelectedSize] = useState(1);
 
   const [amount, setAmount] = useState(1);
 
+  console.log('Log: ', productDetails);
+
   return (
     <div style={{ marginLeft: '10.6rem' }}>
-      <h1 className={cx('productName', 'common')}>Sofa</h1>
-      <p className={cx('price')}>250 VND</p>
+      <h1 className={cx('productName', 'common')}>
+        {productDetails[0]?.productName}
+      </h1>
+      <p className={cx('price')}>{formatPrice(Number(productDetails[0]?.price))}</p>
 
       <div className={cx('evalute')}>
         <div className={cx('starRating')}>
@@ -60,9 +65,7 @@ const ProductDetails = () => {
       </div>
 
       <p className={cx('description')}>
-        Setting the bar as one of the loudest speakers in its class, the Kilburn
-        is a compact, stout-hearted hero with a well-balanced audio which boasts
-        a clear midrange and extended highs for a sound.
+        {productDetails[0]?.description}
       </p>
 
       <p className={cx('size', 'common')}>Size</p>
@@ -70,7 +73,10 @@ const ProductDetails = () => {
       <div className={cx('productSize', 'evalute')}>
         {productSize.map((item, i) => (
           <div
-            className={cx('sizeCommon', `${item.sizeID === selectedSize && 'selected'}`)}
+            className={cx(
+              'sizeCommon',
+              `${item.sizeID === selectedSize && 'selected'}`,
+            )}
             onClick={() => setSelectedSize(item.sizeID)}
             key={i}
           >

@@ -23,7 +23,7 @@ export default makeStyles(() => ({
   },
 
   productName: {
-    fontSize: '2.4rem',
+    fontSize: '1.6rem',
   },
 
   description: {

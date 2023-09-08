@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomBreadCrumb from '../../components/custombreadcrumb';
 import LayoutContainer from '../../components/layoutcontainer/layoutcontainer';
 import { Box, Button } from '@mui/material';
@@ -8,17 +8,39 @@ import ProductDescription from './productdescription';
 import ProductItems from '../../components/productitems';
 import { productList } from '../home/products';
 import theme from '../../theme';
+import { useAppDispatch, useAppSelector } from '../../redux';
+import {
+  getProductByID,
+} from '../../redux/product/productAction';
+import { useParams } from 'react-router-dom';
 
 const ProductDetail = () => {
+  const dispatch = useAppDispatch();
+
+  const { productID } = useParams();
+
+  const productDetails = useAppSelector((state) => state.product.product);
+
+  const loading = useAppSelector((state) => state.product.loading);
+
+  useEffect(() => {
+    // console.log('LOG', productID);
+    dispatch(getProductByID(productID));
+  }, [dispatch, productID]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <CustomBreadCrumb root="Home" children="Shop" name="Product Name" />
+      <CustomBreadCrumb root="Home" children="Shop" name={productDetails[0]?.productName} />
 
       <Box sx={{ marginTop: '3.5rem' }}>
         <LayoutContainer>
           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-            <ProductImage />
-            <ProductDetails />
+            <ProductImage productImages={productDetails} />
+            <ProductDetails productDetails={productDetails} />
           </Box>
         </LayoutContainer>
 
