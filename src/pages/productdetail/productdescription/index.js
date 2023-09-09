@@ -3,12 +3,12 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import classNames from 'classnames/bind';
+// import classNames from 'classnames/bind';
 import React, { useState } from 'react';
-import useStyles from './styles';
+// import useStyles from './styles';
 
 const ProductDescription = () => {
-  const cx = classNames.bind(useStyles());
+  // const cx = classNames.bind(useStyles());
 
   const [value, setValue] = useState('1');
 

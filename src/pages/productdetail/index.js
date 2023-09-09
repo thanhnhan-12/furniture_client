@@ -6,10 +6,10 @@ import ProductDetails from './productdetails';
 import ProductImage from './productimage';
 import ProductDescription from './productdescription';
 import ProductItems from '../../components/productitems';
-import { productList } from '../home/products';
 import theme from '../../theme';
 import { useAppDispatch, useAppSelector } from '../../redux';
 import {
+  getAllProduct,
   getProductByID,
 } from '../../redux/product/productAction';
 import { useParams } from 'react-router-dom';
@@ -21,12 +21,18 @@ const ProductDetail = () => {
 
   const productDetails = useAppSelector((state) => state.product.product);
 
+  const products = useAppSelector((state) => state.product.products);
+
   const loading = useAppSelector((state) => state.product.loading);
 
   useEffect(() => {
     // console.log('LOG', productID);
     dispatch(getProductByID(productID));
   }, [dispatch, productID]);
+
+  useEffect(() => {
+    dispatch(getAllProduct());
+  }, [dispatch]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -69,7 +75,7 @@ const ProductDetail = () => {
             Related Products
           </h2>
 
-          <ProductItems productList={productList} />
+          <ProductItems productList={products} />
 
           <div style={{ textAlign: 'center', marginBottom: '9.2rem' }}>
             <Button

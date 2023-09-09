@@ -1,32 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import useStyles from './styles';
-import nameImage1 from '../../../assets/images/ProductImages/nameImage1.png';
-import nameImage2 from '../../../assets/images/ProductImages/nameImage2.png';
-import nameImage3 from '../../../assets/images/ProductImages/nameImage3.png';
-import nameImage4 from '../../../assets/images/ProductImages/nameImage4.png';
-
-const imagesList = [
-  {
-    imageID: 1,
-    nameImage: nameImage1,
-  },
-
-  {
-    imageID: 2,
-    nameImage: nameImage2,
-  },
-
-  {
-    imageID: 3,
-    nameImage: nameImage3,
-  },
-
-  {
-    imageID: 4,
-    nameImage: nameImage4,
-  },
-];
 
 const ProductImage = ({ productImages }) => {
   const cx = classNames.bind(useStyles());

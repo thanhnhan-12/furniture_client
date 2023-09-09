@@ -31,14 +31,16 @@ const ProductDetails = ({ productDetails }) => {
 
   const [amount, setAmount] = useState(1);
 
-  console.log('Log: ', productDetails);
+  // console.log('Log: ', productDetails);
 
   return (
     <div style={{ marginLeft: '10.6rem' }}>
       <h1 className={cx('productName', 'common')}>
         {productDetails[0]?.productName}
       </h1>
-      <p className={cx('price')}>{formatPrice(Number(productDetails[0]?.price))}</p>
+      <p className={cx('price')}>
+        {formatPrice(Number(productDetails[0]?.price))}
+      </p>
 
       <div className={cx('evalute')}>
         <div className={cx('starRating')}>
@@ -64,9 +66,7 @@ const ProductDetails = ({ productDetails }) => {
         <p className={cx('review', 'common')}>5 Customer Review</p>
       </div>
 
-      <p className={cx('description')}>
-        {productDetails[0]?.description}
-      </p>
+      <p className={cx('description')}>{productDetails[0]?.description}</p>
 
       <p className={cx('size', 'common')}>Size</p>
 

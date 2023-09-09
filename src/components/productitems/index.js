@@ -11,7 +11,7 @@ const ProductItems = ({ productList }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (productID) => {
-    console.log("ID: ", productID);
+    // console.log("ID: ", productID);
     navigate(`/product/${productID}`);
   };
 
