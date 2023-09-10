@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import authSlice from './auth/authSlice';
 import productSlice from './product/productSlice';
 import categorySlice from './category/categorySlice';
+import cartSlice from './cart/cartSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
   product: productSlice,
   category: categorySlice,
+  cart: cartSlice,
 });
 
 const store = configureStore({

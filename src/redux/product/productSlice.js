@@ -33,6 +33,7 @@ const productSlice = createSlice({
       })
       .addCase(getProductByID.fulfilled, (state, action) => {
         state.loading = false;
+        // console.log('payload', action.payload);
         state.product = action.payload;
       })
       .addCase(getProductByID.rejected, (state, action) => {

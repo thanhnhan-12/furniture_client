@@ -36,10 +36,10 @@ const ProductDetails = ({ productDetails }) => {
   return (
     <div style={{ marginLeft: '10.6rem' }}>
       <h1 className={cx('productName', 'common')}>
-        {productDetails[0]?.productName}
+        {productDetails?.productName}
       </h1>
       <p className={cx('price')}>
-        {formatPrice(Number(productDetails[0]?.price))}
+        {formatPrice(Number(productDetails?.price))}
       </p>
 
       <div className={cx('evalute')}>
@@ -66,7 +66,7 @@ const ProductDetails = ({ productDetails }) => {
         <p className={cx('review', 'common')}>5 Customer Review</p>
       </div>
 
-      <p className={cx('description')}>{productDetails[0]?.description}</p>
+      <p className={cx('description')}>{productDetails?.description}</p>
 
       <p className={cx('size', 'common')}>Size</p>
 
@@ -106,6 +106,11 @@ const ProductDetails = ({ productDetails }) => {
             fontSize: '2rem',
             fontWeight: '400',
             color: '#000',
+            '&:hover': {
+              backgroundColor: '#B88E2F !important',
+              color: '#fff !important',
+              border: 'none',
+            },
           }}
         >
           Add To Cart

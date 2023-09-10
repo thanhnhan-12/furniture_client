@@ -21,12 +21,13 @@ const ProductDetail = () => {
 
   const productDetails = useAppSelector((state) => state.product.product);
 
+  // console.log('productDetails: ', productDetails);
+
   const products = useAppSelector((state) => state.product.products);
 
   const loading = useAppSelector((state) => state.product.loading);
 
   useEffect(() => {
-    // console.log('LOG', productID);
     dispatch(getProductByID(productID));
   }, [dispatch, productID]);
 
@@ -40,12 +41,16 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <CustomBreadCrumb root="Home" children="Shop" name={productDetails[0]?.productName} />
+      <CustomBreadCrumb
+        root="Home"
+        children="Shop"
+        name={productDetails[0]?.productName}
+      />
 
       <Box sx={{ marginTop: '3.5rem' }}>
         <LayoutContainer>
           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-            <ProductImage productImages={productDetails} />
+            <ProductImage productImages={productDetails.imagesList} />
             <ProductDetails productDetails={productDetails} />
           </Box>
         </LayoutContainer>

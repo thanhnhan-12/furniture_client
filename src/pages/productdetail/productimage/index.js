@@ -7,10 +7,12 @@ const ProductImage = ({ productImages }) => {
 
   const [index, setIndex] = useState(0);
 
+  // console.log('Log', productImages);
+
   return (
     <div className={cx('allImg')}>
       <div className={cx('imgList')}>
-        {productImages.map((item, i) => (
+        {productImages?.map((item, i) => (
           <div
             className={cx('img', 'imgItem', `${index === i && 'active'}`)}
             key={i}
@@ -28,7 +30,7 @@ const ProductImage = ({ productImages }) => {
       <div style={{ marginLeft: '2.8rem' }}>
         <div className={cx('img')}>
           <img
-            src={productImages[0]?.nameImage}
+            src={productImages && productImages[index].nameImage}
             alt=""
             style={{ width: '48.1rem', height: '39.1rem' }}
           />

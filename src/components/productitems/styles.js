@@ -20,6 +20,7 @@ export default makeStyles(() => ({
   productItemContent: {
     backgroundColor: theme.palette.secondary.main,
     padding: '16px 0 30px 16px',
+    height: '14.5rem',
   },
 
   productName: {
