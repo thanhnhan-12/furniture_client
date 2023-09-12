@@ -63,6 +63,7 @@ export default makeStyles(() => ({
     border: 'none',
     marginBottom: '24px',
     cursor: 'pointer',
+    // zIndex: '100',
   },
 
   btnLike: {

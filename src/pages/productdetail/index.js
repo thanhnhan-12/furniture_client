@@ -44,7 +44,7 @@ const ProductDetail = () => {
       <CustomBreadCrumb
         root="Home"
         children="Shop"
-        name={productDetails[0]?.productName}
+        name={productDetails.productName}
       />
 
       <Box sx={{ marginTop: '3.5rem' }}>

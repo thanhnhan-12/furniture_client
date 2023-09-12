@@ -10,26 +10,24 @@ const initialState = {
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(createCart.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(createCart.fulfilled, (state, action) => {
-        state.loading = false;
-        state.products = action.payload;
-      })
-      .addCase(createCart.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+  reducers: {
+    addToCart: (state, action) => {
+      state.items.push(action.payload);
+    },
 
-      
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload.id);
+    },
+
+    clearCart: (state) => {
+      state.items = [];
+    },
   },
 });
 
-const { reducer } = cartSlice;
+
+const { actions, reducer } = cartSlice;
+
+export const { addToCart, removeFromCart, clearCart } = actions;
 
 export default reducer;

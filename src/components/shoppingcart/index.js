@@ -6,6 +6,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NameImage2 from '../../assets/images/ProductImages/nameImage2.png';
 import useStyles from './styles';
+import { useAppSelector } from '../../redux';
 
 const shopCart = [
   {
@@ -27,6 +28,8 @@ const shopCart = [
 
 const ShoppingCart = ({ onClose }) => {
   const cx = classNames.bind(useStyles());
+
+  const cartItems = useAppSelector((state) => state.cart.items);
 
   return (
     <Box
@@ -115,7 +118,9 @@ const ShoppingCart = ({ onClose }) => {
             <Link to="/cart" className={cx('btnCart')}>
               Cart
             </Link>
-            <Link to="/checkout" className={cx('btnCart')}>Checkout</Link>
+            <Link to="/checkout" className={cx('btnCart')}>
+              Checkout
+            </Link>
           </Box>
         </div>
       </Box>
