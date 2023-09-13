@@ -11,7 +11,6 @@ export default makeStyles(() => ({
     position: 'relative',
     paddingTop: '0px!important',
     marginBottom: '32px!important',
-    // display: 'block!important',
     '&:hover > div:last-child': {
       display: 'block',
     },

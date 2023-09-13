@@ -5,8 +5,8 @@ import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
 import { formatPrice } from '../../constants/common';
 import useStyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../redux';
-import { toast } from 'react-hot-toast';
 import { addToCart } from '../../redux/cart/cartSlice';
+import { createCart } from '../../redux/cart/cartAction';
 
 const ProductItems = ({ productList }) => {
   const classes = useStyles();
@@ -15,18 +15,15 @@ const ProductItems = ({ productList }) => {
 
   const dispatch = useAppDispatch();
 
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const { roles, token } = useAppSelector((state) => state.auth);
 
-  const handleAddToCart = (product) => {
-    console.log('isAuthenticated:', isAuthenticated);
-    if (!isAuthenticated) {
-      // Người dùng chưa đăng nhập, hiển thị thông báo
-      toast.error('Xin lỗi, bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.', {
-        position: 'top-center',
-        duration: 4000,
-      });
+  const handleAddToCart = (productID) => {
+    // console.log('Token:', token);
+    if (!token) {
+      navigate('/login');
     } else {
-      dispatch(addToCart(product));
+      console.log("Product", productID);
+      dispatch(createCart({productID, quantity: 1}));
     }
   };
 
@@ -36,16 +33,17 @@ const ProductItems = ({ productList }) => {
   };
 
   return (
-    <Grid container columnSpacing={4} rowSpacing={4} sx={{ marginTop: '32px' }}>
+    <Grid
+      container
+      columnSpacing={4}
+      rowSpacing={4}
+      sx={{
+        marginTop: '32px',
+      }}
+    >
       {productList.map((list, index) => (
-        <Grid
-          key={index}
-          item
-          xs={3}
-          className={classes.productItemList}
-          // onClick={() => handleNavigate(list.productID)}
-        >
-          <div>
+        <Grid key={index} item xs={3} className={classes.productItemList}>
+          <div onClick={() => handleNavigate(list.productID)}>
             <img src={list.nameImage} alt="" className={classes.nameImage} />
             <div className={classes.productItemContent}>
               <h3 className={classes.productName}>{list.productName}</h3>
@@ -56,12 +54,16 @@ const ProductItems = ({ productList }) => {
             </div>
           </div>
 
-          <div className={classes.productHover}>
+          <div
+            className={classes.productHover}
+            // onClick={() => handleNavigate(list.productID)}
+            // style={{ position: 'absolute' }}
+          >
             <div className={classes.displayFlex}>
               <div>
                 <button
                   className={classes.btnAddCart}
-                  onClick={handleAddToCart}
+                  onClick={() => handleAddToCart(list.productID)}
                 >
                   Add to cart
                 </button>

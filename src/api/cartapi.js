@@ -4,7 +4,7 @@ import { createClient } from './axiosClient';
 const client = createClient(mainURL);
 
 export const cartApi = {
-  createCart: () => {
-    return client.post("/cart")
-  }
-}
+  createCart: (payload) => {
+    return client.post('/cart/createCart', payload);
+  },
+};

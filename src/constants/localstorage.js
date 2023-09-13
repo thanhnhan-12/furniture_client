@@ -1,5 +1,3 @@
-import { TRole } from '../types/common';
-
 export const getLocalStorage = (key) => {
   if (typeof window !== 'undefined') {
     const item = localStorage.getItem(key);
@@ -9,7 +7,7 @@ export const getLocalStorage = (key) => {
 
 export const getRoles = () => {
   if (typeof window !== 'undefined') {
-    const roles: TRole[] = JSON.parse(localStorage.getItem('roles')) || [];
+    const roles = JSON.parse(localStorage.getItem('roles')) || [];
     return roles;
   }
   return [];

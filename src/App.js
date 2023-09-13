@@ -11,6 +11,8 @@ import './App.css';
 import ProductDetail from './pages/productdetail';
 import Cart from './pages/cart';
 import Checkout from './pages/checkout';
+import { PrivateUser } from './routes/private/user';
+import { useAppSelector } from './redux';
 
 const Layout = () => {
   return (
@@ -21,6 +23,12 @@ const Layout = () => {
     </>
   );
 };
+
+function Func() {
+  const { token } = useAppSelector((state) => state.authSlice);
+
+  return token;
+}
 
 const router = createBrowserRouter([
   {
@@ -49,7 +57,11 @@ const router = createBrowserRouter([
 
       {
         path: '/cart',
-        element: <Cart />,
+        element: (
+          <PrivateUser >
+            <Cart />,
+          </PrivateUser>
+        ),
       },
 
       {
