@@ -11,3 +11,13 @@ export const createCart = createAsyncThunk('cart/createCart', async (payload) =>
     return error;
   }
 });
+
+export const getAllCart = createAsyncThunk('cart/getAllCart', async () => {
+  try {
+    const { data } = await cartApi.getAllCart();
+    return data;
+  } catch (error) {
+    toastMessage.setErrors(error);
+    return error;
+  }
+});

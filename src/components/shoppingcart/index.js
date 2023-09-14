@@ -2,11 +2,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { Box, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NameImage2 from '../../assets/images/ProductImages/nameImage2.png';
 import useStyles from './styles';
-import { useAppSelector } from '../../redux';
+import { useAppDispatch, useAppSelector } from '../../redux';
+import { getAllCart } from '../../redux/cart/cartAction';
 
 const shopCart = [
   {
@@ -29,7 +30,17 @@ const shopCart = [
 const ShoppingCart = ({ onClose }) => {
   const cx = classNames.bind(useStyles());
 
-  const cartItems = useAppSelector((state) => state.cart.items);
+  const dispatch = useAppDispatch();
+
+  const cartItems = useAppSelector((state) => state.cart.cart);
+
+  const { token } = useAppSelector((state) => state.auth);
+
+  console.log("Token", token);
+
+  useEffect(() => {
+    dispatch(getAllCart(token));
+  }, [dispatch]);
 
   return (
     <Box
@@ -64,7 +75,7 @@ const ShoppingCart = ({ onClose }) => {
           </Box>
 
           <div className={cx('border')}>
-            {shopCart.map((item, index) => (
+            {cartItems.map((item, index) => (
               <Box
                 display="flex"
                 justifyContent="space-between"

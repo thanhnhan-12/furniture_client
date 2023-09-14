@@ -7,6 +7,8 @@ import useStyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../redux';
 import { addToCart } from '../../redux/cart/cartSlice';
 import { createCart } from '../../redux/cart/cartAction';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductItems = ({ productList }) => {
   const classes = useStyles();
@@ -17,13 +19,22 @@ const ProductItems = ({ productList }) => {
 
   const { roles, token } = useAppSelector((state) => state.auth);
 
+  const notify = () => {
+    toast('Product has been added in cart', {
+      className: 'custom-toast',
+      draggable: true,
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   const handleAddToCart = (productID) => {
     // console.log('Token:', token);
     if (!token) {
       navigate('/login');
     } else {
-      console.log("Product", productID);
-      dispatch(createCart({productID, quantity: 1}));
+      notify();
+      console.log('Product', productID);
+      dispatch(createCart({ productID, quantity: 1 }));
     }
   };
 
@@ -41,6 +52,7 @@ const ProductItems = ({ productList }) => {
         marginTop: '32px',
       }}
     >
+      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />;
       {productList.map((list, index) => (
         <Grid key={index} item xs={3} className={classes.productItemList}>
           <div onClick={() => handleNavigate(list.productID)}>
@@ -67,6 +79,7 @@ const ProductItems = ({ productList }) => {
                 >
                   Add to cart
                 </button>
+
                 <button className={classes.btnLike}>
                   <img src={ProductIconHeart} alt="" />
                   <span style={{ marginLeft: '8px' }}>Like</span>
