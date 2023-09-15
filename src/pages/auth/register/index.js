@@ -11,6 +11,7 @@ import useStyles from '../boxbackground/styles';
 import { toastMessage } from '../../../utils/toast';
 import { registerUser } from '../../../redux/auth/authAction';
 import { useAppDispatch } from '../../../redux';
+import { nofifyRegisterSuccessfully } from '../../../constants/common';
 
 const Register = () => {
   const cx = classNames.bind(useStyles());
@@ -36,6 +37,7 @@ const Register = () => {
       .unwrap()
       .then((data) => {
         toastMessage.success('Register successfully');
+        nofifyRegisterSuccessfully();
         navigate('/login');
       });
   };

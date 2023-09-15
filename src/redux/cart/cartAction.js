@@ -12,9 +12,9 @@ export const createCart = createAsyncThunk('cart/createCart', async (payload) =>
   }
 });
 
-export const getAllCart = createAsyncThunk('cart/getAllCart', async () => {
+export const getCartByUser = createAsyncThunk('cart/getCartByUser', async () => {
   try {
-    const { data } = await cartApi.getAllCart();
+    const { data } = await cartApi.getCartByUser();
     return data;
   } catch (error) {
     toastMessage.setErrors(error);

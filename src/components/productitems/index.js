@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
-import { formatPrice } from '../../constants/common';
+import { formatPrice, notifyAddCart } from '../../constants/common';
 import useStyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../redux';
 import { addToCart } from '../../redux/cart/cartSlice';
@@ -19,21 +19,13 @@ const ProductItems = ({ productList }) => {
 
   const { roles, token } = useAppSelector((state) => state.auth);
 
-  const notify = () => {
-    toast('Product has been added in cart', {
-      className: 'custom-toast',
-      draggable: true,
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
-
   const handleAddToCart = (productID) => {
     // console.log('Token:', token);
     if (!token) {
       navigate('/login');
     } else {
-      notify();
-      console.log('Product', productID);
+      notifyAddCart();
+      // console.log('Product', productID);
       dispatch(createCart({ productID, quantity: 1 }));
     }
   };

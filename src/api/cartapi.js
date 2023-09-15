@@ -8,7 +8,7 @@ export const cartApi = {
     return client.post('/cart/createCart', payload);
   },
 
-  getAllCart: () => {
-    return client.get('/cart');
+  getCartByUser: () => {
+    return client.get(`/cart`);
   },
 };
