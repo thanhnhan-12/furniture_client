@@ -4,14 +4,16 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, Zoom } from 'react-toastify';
 import { FormInput } from '../../../components/hookform';
+import { nofifyLoginSuccessfully } from '../../../constants/common';
 import { schemaLogin } from '../../../constants/schema';
-import BoxBackground from '../boxbackground';
-import useStyles from '../boxbackground/styles';
 import { useAppDispatch } from '../../../redux';
 import { loginUser } from '../../../redux/auth/authAction';
-import { toastMessage } from '../../../utils/toast';
 import { loginSuccess } from '../../../redux/auth/authSlice';
+import { toastMessage } from '../../../utils/toast';
+import BoxBackground from '../boxbackground';
+import useStyles from '../boxbackground/styles';
 
 const Login = () => {
   const cx = classNames.bind(useStyles());
@@ -37,6 +39,7 @@ const Login = () => {
           toastMessage.error('Sai email hoặc mật khẩu. Vui lòng thử lại.');
         } else {
           // Đăng nhập thành công
+          nofifyLoginSuccessfully();
           dispatch(loginSuccess());
           localStorage.setItem('isLoggedIn', 'true');
           toastMessage.success('Login successfully');
@@ -53,11 +56,11 @@ const Login = () => {
 
   return (
     <BoxBackground>
+      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />;
       <Box>
         <Typography component="h2" className={cx('heading')}>
           Login
         </Typography>
-
         <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}>
           <FormInput
             control={control}

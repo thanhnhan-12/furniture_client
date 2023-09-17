@@ -11,4 +11,8 @@ export const cartApi = {
   getCartByUser: () => {
     return client.get(`/cart`);
   },
+
+  deleteCartByID: (cartID) => {
+    return client.delete(`/cart/${cartID}`);
+  },
 };

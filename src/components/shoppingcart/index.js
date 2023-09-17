@@ -1,32 +1,14 @@
 import CloseIcon from '@mui/icons-material/Close';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { Box, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import NameImage2 from '../../assets/images/ProductImages/nameImage2.png';
-import useStyles from './styles';
-import { useAppDispatch, useAppSelector } from '../../redux';
-import { getAllCart, getCartByUser } from '../../redux/cart/cartAction';
 import { formatPrice } from '../../constants/common';
-
-const shopCart = [
-  {
-    cartID: 1,
-    nameImage: NameImage2,
-    productName: 'Sofa',
-    quantity: 1,
-    price: '250 VND',
-  },
-
-  {
-    cartID: 2,
-    nameImage: NameImage2,
-    productName: 'Sofa',
-    quantity: 1,
-    price: '250 VND',
-  },
-];
+import { useAppDispatch, useAppSelector } from '../../redux';
+import { deleteCartByID, getCartByUser } from '../../redux/cart/cartAction';
+import useStyles from './styles';
+import CartEmpty from '../../assets/svg/CartEmpty.svg';
 
 const ShoppingCart = ({ onClose }) => {
   const cx = classNames.bind(useStyles());
@@ -45,6 +27,14 @@ const ShoppingCart = ({ onClose }) => {
     const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
     return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
   }, 0); // Giá trị ban đầu của accumulator là 0
+
+  const handleRemoveCart = (cartID) => {
+    // console.log('CartID: ', cartID);
+    // notifyRemoveCart();
+    dispatch(deleteCartByID(cartID)).then(() => {
+      dispatch(getCartByUser());
+    });
+  };
 
   useEffect(() => {
     dispatch(getCartByUser());
@@ -85,7 +75,8 @@ const ShoppingCart = ({ onClose }) => {
           <div className={cx('border')}>
             {cartItems.length === 0 ? (
               <Box className={cx('common')}>
-                <Typography variant="h6">Your cart is empty</Typography>
+                {/* <Typography variant="h6">Your cart is empty</Typography> */}
+                <Avatar src={CartEmpty} sx={{ width: '27.5rem', height: '26.5rem', m: 'auto', p: '2rem 0' }} />
               </Box>
             ) : (
               <Box>
@@ -130,7 +121,10 @@ const ShoppingCart = ({ onClose }) => {
                       </div>
                     </Box>
 
-                    <HighlightOffRoundedIcon fontSize="large" />
+                    <HighlightOffRoundedIcon
+                      fontSize="large"
+                      onClick={() => handleRemoveCart(item.cartID)}
+                    />
                   </Box>
                 ))}
               </Box>

@@ -7,7 +7,7 @@ import useStyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../redux';
 import { addToCart } from '../../redux/cart/cartSlice';
 import { createCart } from '../../redux/cart/cartAction';
-import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductItems = ({ productList }) => {
@@ -47,27 +47,32 @@ const ProductItems = ({ productList }) => {
       <ToastContainer draggable={false} transition={Zoom} autoClose={800} />;
       {productList.map((list, index) => (
         <Grid key={index} item xs={3} className={classes.productItemList}>
-          <div onClick={() => handleNavigate(list.productID)}>
-            <img src={list.nameImage} alt="" className={classes.nameImage} />
+          <div>
+            <img
+              src={list.nameImage}
+              alt=""
+              className={classes.nameImage}
+              onClick={() => handleNavigate(list.productID)}
+            />
             <div className={classes.productItemContent}>
               <h3 className={classes.productName}>{list.productName}</h3>
               <p className={classes.description}>{list.description}</p>
               <strong className={classes.price}>
                 {formatPrice(Number(list.price))}
               </strong>
-            </div>
-          </div>
-
-          <div
-            className={classes.productHover}
-            // onClick={() => handleNavigate(list.productID)}
-            // style={{ position: 'absolute' }}
-          >
-            <div className={classes.displayFlex}>
-              <div>
+              <div
+                style={{
+                  marginTop: '10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
                 <button
                   className={classes.btnAddCart}
                   onClick={() => handleAddToCart(list.productID)}
+                  style={{
+                    marginRight: '12px',
+                  }}
                 >
                   Add to cart
                 </button>

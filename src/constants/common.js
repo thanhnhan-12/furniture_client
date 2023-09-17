@@ -1,4 +1,4 @@
-import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const phoneRegExp =
@@ -9,7 +9,15 @@ export const formatPrice = (price) =>
 
 export const notifyAddCart = () => {
   toast('Product has been added in cart', {
-    className: 'custom-toast',
+    className: 'notifyAdd',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
+
+export const notifyRemoveCart = () => {
+  toast('Product has been remove in cart', {
+    className: 'notifyRemove',
     draggable: true,
     position: toast.POSITION.TOP_CENTER,
   });
@@ -17,15 +25,15 @@ export const notifyAddCart = () => {
 
 export const nofifyLoginSuccessfully = () => {
   toast('Login Successfully!', {
-    className: 'custom-toast',
+    className: 'notifyLogin',
     draggable: true,
-    position: toast.POSITION.TOP_CENTER,
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 }
 
 export const nofifyRegisterSuccessfully = () => {
   toast('Register Successfully!', {
-    className: 'custom-toast',
+    className: 'notifyRegister',
     draggable: true,
     position: toast.POSITION.TOP_CENTER,
   });

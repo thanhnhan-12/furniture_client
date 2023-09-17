@@ -21,3 +21,13 @@ export const getCartByUser = createAsyncThunk('cart/getCartByUser', async () => 
     return error;
   }
 });
+
+export const deleteCartByID = createAsyncThunk('cart/deleteCartByID', async (cartID) => {
+  try {
+    const { data } = await cartApi.deleteCartByID(cartID);
+    return data;
+  } catch (error) {
+    toastMessage.setErrors(error);
+    return error;
+  }
+});

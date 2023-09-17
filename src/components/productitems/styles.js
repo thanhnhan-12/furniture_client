@@ -11,15 +11,11 @@ export default makeStyles(() => ({
     position: 'relative',
     paddingTop: '0px!important',
     marginBottom: '32px!important',
-    '&:hover > div:last-child': {
-      display: 'block',
-    },
   },
 
   productItemContent: {
     backgroundColor: theme.palette.secondary.main,
     padding: '16px 0 30px 16px',
-    height: '14.5rem',
   },
 
   productName: {
@@ -29,6 +25,7 @@ export default makeStyles(() => ({
   description: {
     margin: '8px 0',
     color: theme.palette.secondary.light,
+    minHeight: '34px',
   },
 
   price: {
@@ -36,21 +33,19 @@ export default makeStyles(() => ({
   },
 
   productHover: {
-    backgroundColor: theme.palette.common.black,
-    position: 'absolute',
+    position: 'relative',
     top: 0,
     width: 'calc(100% - 32px)',
-    height: '100%',
-    opacity: '0.72',
     textAlign: 'center',
-    display: 'none',
   },
 
   displayFlex: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     height: '100%',
+    width: 'calc(100% - 32px)',
+    display: 'flex',
+    alignItems: 'center',
+    zIndex: '100',
+    justifyContent: 'center',
   },
 
   btnAddCart: {
@@ -62,13 +57,12 @@ export default makeStyles(() => ({
     border: 'none',
     marginBottom: '24px',
     cursor: 'pointer',
-    // zIndex: '100',
   },
 
   btnLike: {
     border: 'none',
     fontWeight: 600,
-    color: '#fff',
+    color: '#000',
     background: 'none',
     display: 'flex',
     alignItems: 'center',
