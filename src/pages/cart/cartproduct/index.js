@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import useStyles from './styles';
 import classNames from 'classnames/bind';
-import { Box, Typography } from '@mui/material';
+import { Box, Checkbox, Typography } from '@mui/material';
 import { formatPrice } from '../../../constants/common';
+import { CheckBox } from '@mui/icons-material';
+import { useAppDispatch } from '../../../redux';
+import { checkedCart } from '../../../redux/cart/cartSlice';
 
-const CartProduct = ({ cartProds, handleRemoveCart }) => {
+const CartProduct = ({ cartProds, handleRemoveCart, handleCheckedCart }) => {
   const cx = classNames.bind(useStyles());
+
+  const dispatch = useAppDispatch();
+
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
+
+  const handleOnChecked = (cartID, checked) => {
+    console.log(checked);
+    dispatch(
+      checkedCart({
+        cartID,
+        checked: checked || false ,
+      }),
+    );
+  };
+
+  const handleCheckAll = () => {
+    setIsCheckedAll(!isCheckedAll);
+    cartProds.forEach((item) => {
+      handleOnChecked(item.cartID, !isCheckedAll);
+    });
+  };
+
+  // console.log('Cart Producs: ', cartProds);
 
   return (
     <Box>
@@ -18,6 +44,8 @@ const CartProduct = ({ cartProds, handleRemoveCart }) => {
         alignItems="center"
         gap="9.8rem"
       >
+        <Checkbox size="" sx={{ fontSize: '2rem' }} checked={isCheckedAll} onChange={handleCheckAll} />
+
         <Typography className={cx('txtTitle')}>Product</Typography>
         <Typography className={cx('txtTitle')}>Price</Typography>
         <Typography className={cx('txtTitle')}>Quantity</Typography>
@@ -33,6 +61,12 @@ const CartProduct = ({ cartProds, handleRemoveCart }) => {
             alignItems="center"
             m="5.5rem 0 3.5rem"
           >
+            <Checkbox
+              checked={item?.checked || false }
+              sx={{ fontSize: '2rem' }}
+              onChange={() => handleOnChecked(item.cartID, item.checked)}
+            />
+
             <div style={{ backgroundColor: '#F9F1E7', borderRadius: '1rem' }}>
               <img src={item.nameImage} alt="" className={cx('nameImage')} />
             </div>

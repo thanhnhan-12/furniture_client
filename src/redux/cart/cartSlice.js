@@ -20,6 +20,16 @@ const cartSlice = createSlice({
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
 
+    checkedCart: (state, action) => {
+      const { cartID, checked } = action.payload;
+      console.log(cartID, checked);
+      const index = state.cartUser.findIndex((item) => item.cartID === cartID);
+      console.log({ index });
+      if (index >= 0) {
+        state.cartUser[index].checked = checked;
+      }
+    },
+
     clearCart: (state) => {
       state.cart = [];
     },
@@ -55,6 +65,6 @@ const cartSlice = createSlice({
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart, removeFromCart, clearCart } = actions;
+export const { addToCart, removeFromCart, clearCart, checkedCart } = actions;
 
 export default reducer;

@@ -1,17 +1,23 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import { reducer } from './reducer';
+import districtSlice from './address/districtSlice';
+import provinceSlice from './address/provinceSlice';
+import wardSlice from './address/wardSlice';
 import authSlice from './auth/authSlice';
-import productSlice from './product/productSlice';
-import categorySlice from './category/categorySlice';
 import cartSlice from './cart/cartSlice';
+import categorySlice from './category/categorySlice';
+import productSlice from './product/productSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
   product: productSlice,
   category: categorySlice,
   cart: cartSlice,
+  province: provinceSlice,
+  district: districtSlice,
+  ward: wardSlice,
 });
 
 const store = configureStore({

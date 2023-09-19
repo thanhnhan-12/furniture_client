@@ -1,16 +1,44 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput, FormSelect } from '../../../components/hookform';
 import { schemaCheckout } from '../../../constants/schema';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import {
+  getDistrict,
+  getProvince,
+  getWard,
+} from '../../../redux/address/addressAction';
+import { resetData } from '../../../redux/address/wardSlice';
 
 const FormCheckout = () => {
+  const dispatch = useAppDispatch();
+  const province = useAppSelector((state) => state.province.province);
+
+  const district = useAppSelector((state) => state.district.district);
+
+  const ward = useAppSelector((state) => state.ward.ward);
+
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      province: '',
+      district: '',
+      ward: '',
+      address: '',
+      phone: '',
+      email: '',
+    },
     resolver: yupResolver(schemaCheckout),
   });
 
+  const handleOnChange = (name, value) => {
+    if (value) return dispatch(getWard(value));
+    dispatch(resetData());
+  };
+  
   return (
     <Box width="35%">
       <Box display="flex" gap="5rem" mb="3.6rem">
@@ -32,11 +60,11 @@ const FormCheckout = () => {
 
       <FormSelect
         control={control}
-        name="companyfield"
-        placeholder="Province"
-        options={[]}
-        keyOption="id_companyField"
-        labelOption="name_field"
+        name="province"
+        placeholder="No Select"
+        options={province}
+        keyOption="provinceID"
+        labelOption="provinceName"
         label="Province"
         sx={{
           borderRadius: '4px',
@@ -47,26 +75,26 @@ const FormCheckout = () => {
 
       <FormSelect
         control={control}
-        name="companyfield"
-        placeholder="District"
-        options={[]}
-        keyOption="id_companyField"
-        labelOption="name_field"
+        name="district"
+        placeholder="No Select"
+        options={district}
+        keyOption="districtID"
+        labelOption="districtName"
         label="District"
         sx={{
           borderRadius: '4px',
           marginBottom: '3.6rem',
         }}
-        // handleChange={handleOnChange}
+        handleChange={handleOnChange}
       />
 
       <FormSelect
         control={control}
-        name="companyfield"
-        placeholder="Ward"
-        options={[]}
-        keyOption="id_companyField"
-        labelOption="name_field"
+        name="ward"
+        placeholder="No Select"
+        options={ward}
+        keyOption="wardID"
+        labelOption="wardName"
         label="Ward"
         sx={{
           borderRadius: '4px',
