@@ -1,12 +1,40 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Typography } from '@mui/material';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import LogoutIcon from '@mui/icons-material/Logout';
+import useStyles from '../styles';
+import classNames from 'classnames/bind';
+import { logout } from '../../../redux/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
+  const cx = classNames.bind(useStyles());
+
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
   return (
-    <Box>
-
+    <Box
+    
+      onClick={() => {
+        if (!localStorage.getItem('token')) {
+          // console.log('LOG: ', dispatch(logout()));
+          dispatch(logout());
+          navigate('/login');
+        }
+      }}
+    >
+      <Box className={cx('logout')}>
+        <LogoutIcon className={cx('logoutIcon')} />
+        <Typography component="h3" className={cx('logoutIcon')}>
+          Logout
+        </Typography>
+      </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Logout
+export default Logout;

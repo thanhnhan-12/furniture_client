@@ -4,9 +4,20 @@ import useStyles from './styles';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../../constants/common';
+import { useAppDispatch, useAppSelector } from '../../../redux';
 
-const CartTotals = ({ cartTotals }) => {
+const CartTotals = ({ cartID }) => {
   const cx = classNames.bind(useStyles());
+
+  const dispatch = useAppDispatch();
+
+  const cartTotals = useAppSelector((state) => state.cart.cartTotals);
+
+  const productsSelected = useAppSelector(
+    (state) => state.cart.productsSelected,
+  );
+
+  const isProductsSelected = productsSelected.length > 0;
 
   return (
     <Box bgcolor="#F9F1E7" width="39.3rem" height="39rem" textAlign="center">
@@ -28,9 +39,17 @@ const CartTotals = ({ cartTotals }) => {
         </Box>
       </Box>
 
-      <Link to="/checkout" className={cx('btnCheckout')}>
-        Check Out
-      </Link>
+      {!isProductsSelected && (
+        <Typography className={cx('warning')}>
+          Please select at least one product before proceeding to checkout.
+        </Typography>
+      )}
+
+      {isProductsSelected && (
+        <Link to="/checkout" className={cx('btnCheckout')}>
+          Check Out
+        </Link>
+      )}
     </Box>
   );
 };

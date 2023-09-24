@@ -37,4 +37,9 @@ export default makeStyles(() => ({
       border: 'none',
     },
   },
+
+  warning: {
+    fontSize: '1.6rem !important',
+    fontWeight: '500 !important',
+  },
 }));

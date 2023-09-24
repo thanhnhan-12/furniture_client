@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { Avatar, Box, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../redux';
@@ -39,6 +39,7 @@ const ShoppingCart = ({ onClose }) => {
   useEffect(() => {
     dispatch(getCartByUser());
   }, [dispatch]);
+
 
   return (
     <Box

@@ -56,7 +56,7 @@ const Login = () => {
 
   return (
     <BoxBackground>
-      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />;
+      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
       <Box>
         <Typography component="h2" className={cx('heading')}>
           Login

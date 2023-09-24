@@ -4,6 +4,8 @@ import { deleteCartByID, getCartByUser } from './cartAction';
 const initialState = {
   cart: [],
   cartUser: [],
+  cartTotals: 0,
+  productsSelected: [],
   loading: false,
   error: null,
 };
@@ -32,6 +34,23 @@ const cartSlice = createSlice({
 
     clearCart: (state) => {
       state.cart = [];
+    },
+
+    totalPrice: (state, action) => {
+      const carts = action.payload;
+      state.cartTotals = 0;
+      for (let index = 0; index < carts.length; index++) {
+        const element = carts[index];
+        // console.log('Element: ', element);
+        const cart = state.cartUser.filter(
+          (item) => item.cartID === element,
+        )[0];
+        state.cartTotals += cart.price * cart.quantity;
+      }
+    },
+
+    setProductsSelected: (state, action) => {
+      state.productsSelected = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,6 +84,7 @@ const cartSlice = createSlice({
 
 const { actions, reducer } = cartSlice;
 
-export const { addToCart, removeFromCart, clearCart, checkedCart } = actions;
+export const { addToCart, removeFromCart, clearCart, checkedCart, totalPrice, setProductsSelected } =
+  actions;
 
 export default reducer;

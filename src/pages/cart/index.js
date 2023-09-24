@@ -11,8 +11,9 @@ import { notifyRemoveCart } from '../../constants/common';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useMemo } from 'react';
+import CartData from './cartdata';
 
-const Cart = () => {
+const Cart = ({ total }) => {
   const dispatch = useAppDispatch();
 
   const cartItems = useAppSelector((state) => state.cart.cartUser);
@@ -61,11 +62,14 @@ const Cart = () => {
         >
           <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
 
-          <CartProduct
+          {/* <CartProduct
             cartProds={cartItems}
             handleRemoveCart={handleRemoveCart}
-          />
-          <CartTotals cartTotals={totalAmount} />
+          /> */}
+
+          <CartData rows={cartItems} handleRemoveCart={handleRemoveCart} />
+
+          <CartTotals cartID={cartItems.cartID} />
         </Box>
       </LayoutContainer>
       <Services />

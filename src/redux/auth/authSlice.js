@@ -21,6 +21,7 @@ const authSlice = createSlice({
       state.roles = [];
       localStorage.removeItem('token');
       localStorage.removeItem('roles');
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {

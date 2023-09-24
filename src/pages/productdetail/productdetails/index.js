@@ -4,8 +4,11 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Button } from '@mui/material';
 import classNames from 'classnames/bind';
 import React, { useState } from 'react';
-import { formatPrice } from '../../../constants/common';
+import { formatPrice, notifyAddCart } from '../../../constants/common';
 import useStyles from './styles';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import { createCart } from '../../../redux/cart/cartAction';
 
 const productSize = [
   {
@@ -31,7 +34,36 @@ const ProductDetails = ({ productDetails }) => {
 
   const [amount, setAmount] = useState(1);
 
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+  const { roles, token } = useAppSelector((state) => state.auth);
+
   // console.log('Log: ', productDetails);
+
+  const handleIncrement = () => {
+    // console.log('Quanity: ', productDetails?.quantity);
+    if (amount < productDetails?.quantity) {
+      setAmount(amount + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    }
+  };
+
+  const handleAddToCart = (productID) => {
+    if (!token) {
+      navigate('/login');
+    } else {
+      notifyAddCart();
+      // console.log('Product', productID);
+      dispatch(createCart({ productID, quantity: 1 }));
+    }
+  }
 
   return (
     <div style={{ marginLeft: '10.6rem' }}>
@@ -87,13 +119,13 @@ const ProductDetails = ({ productDetails }) => {
 
       <div className={cx('btnCart')}>
         <div className={cx('btnAmount')}>
-          <Button sx={{ p: '0', minWidth: '0' }}>
+          <Button sx={{ p: '0', minWidth: '0' }} onClick={handleDecrement}>
             <RemoveIcon sx={{ color: '#000' }} />
           </Button>
 
           <p className={cx('amount')}>{amount}</p>
 
-          <Button sx={{ p: '0', minWidth: '0' }}>
+          <Button sx={{ p: '0', minWidth: '0' }} onClick={handleIncrement}>
             <AddIcon sx={{ color: '#000' }} />
           </Button>
         </div>
@@ -112,6 +144,7 @@ const ProductDetails = ({ productDetails }) => {
               border: 'none',
             },
           }}
+          onClick={() => handleAddToCart(productDetails?.productID)}
         >
           Add To Cart
         </Button>

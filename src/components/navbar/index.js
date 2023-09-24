@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarLogo from '../../assets/icons/navbarLogo.jpg';
 import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
@@ -8,17 +8,44 @@ import NavbarIconUser from '../../assets/svg/navbarIconUser.svg';
 import './styles.scss';
 import ShoppingCart from '../shoppingcart';
 import { useSelector } from 'react-redux';
+import Options from '../options';
 
 const Navbar = () => {
   const [isShow, setIsShow] = useState(false);
 
+  const [isShows, setIsShows] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const shoppingCartRef = useRef(null);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(storedIsLoggedIn);
+  }, []);
+
+  const handleClose = (e) => {
+    // if (
+    //   isShow &&
+    //   shoppingCartRef.current &&
+    //   !shoppingCartRef.current.contains(e.target)
+    // ) {
+    //   console.log('OUTSIDE');
+    //   setIsShow(true);
+    // } else if (
+    //   !isShow &&
+    //   shoppingCartRef.current &&
+    //   shoppingCartRef.current.contains(e.target)
+    // ) {
+    //   console.log('INSIDE');
+    //   setIsShow(false);
+    // }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClose, true);
   }, []);
 
   return (
@@ -49,8 +76,8 @@ const Navbar = () => {
       <div className="navbarIcons">
         <ul className="nav">
           {isAuthenticated || isLoggedIn ? (
-            <li>
-              <Link to="/">
+            <li onClick={() => setIsShows(true)}>
+              <Link to="">
                 <img src={NavbarIconUser} alt="" />
               </Link>
             </li>
@@ -87,7 +114,13 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      {isShow && <ShoppingCart onClose={() => setIsShow(false)} />}
+      {isShow && (
+        <div ref={shoppingCartRef}>
+          <ShoppingCart onClose={() => setIsShow(false)} />
+        </div>
+      )}
+
+      {isShows && <Options />}
     </div>
   );
 };
