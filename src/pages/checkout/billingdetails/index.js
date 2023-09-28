@@ -1,10 +1,21 @@
 import { Box, Button, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useStyles from './styles';
+import { formatPrice } from '../../../constants/common';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import { setProductsSelected } from '../../../redux/cart/cartSlice';
 
 const BillingDetails = () => {
   const cx = classNames.bind(useStyles());
+
+  const dispatch = useAppDispatch();
+
+  const productsSelected = useAppSelector(
+    (state) => state.cart.productsSelected,
+  );
+
+  // console.log('Product Selected: ', productsSelected);
 
   return (
     <Box width="35%" display="flex" flexDirection="column" gap="2.2rem">
@@ -18,15 +29,23 @@ const BillingDetails = () => {
         </Typography>
       </Box>
 
-      <Box className={cx('flex')}>
-        <Typography className={cx('fs')} sx={{ color: '#9F9F9F' }}>
-          Sofa <span style={{ color: '#000', fontSize: '1.2rem' }}>X 1</span>
-        </Typography>
+      {productsSelected?.map((product, index) => (
+        <Box className={cx('flex')} key={index}>
+          <Typography className={cx('fs')} sx={{ color: '#9F9F9F' }}>
+            {product.productName}
+            <span style={{ color: '#000', fontSize: '1.2rem' }}>
+              X {product.quantity}
+            </span>
+          </Typography>
 
-        <Typography className={cx('fs')} sx={{ fontWeight: '300 !imoportant' }}>
-          250 VND
-        </Typography>
-      </Box>
+          <Typography
+            className={cx('fs')}
+            sx={{ fontWeight: '300 !imoportant' }}
+          >
+            {formatPrice(Number(product.price * product.quantity))}
+          </Typography>
+        </Box>
+      ))}
 
       <Box className={cx('flex')}>
         <Typography className={cx('fs')} sx={{ fontWeight: '400 !imoportant' }}>
@@ -63,7 +82,9 @@ const BillingDetails = () => {
           this website, to manage access to your account, and for other purposes
           described in our <b>privacy policy</b> .
         </Typography>
-        <Button className={cx('btnOrder')} type='submit'>Place order</Button>
+        <Button className={cx('btnOrder')} type="submit">
+          Place order
+        </Button>
       </Box>
     </Box>
   );

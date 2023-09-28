@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import { Avatar, Box, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../redux';
@@ -40,7 +40,6 @@ const ShoppingCart = ({ onClose }) => {
     dispatch(getCartByUser());
   }, [dispatch]);
 
-
   return (
     <Box
       sx={{
@@ -77,7 +76,15 @@ const ShoppingCart = ({ onClose }) => {
             {cartItems.length === 0 ? (
               <Box className={cx('common')}>
                 {/* <Typography variant="h6">Your cart is empty</Typography> */}
-                <Avatar src={CartEmpty} sx={{ width: '27.5rem', height: '26.5rem', m: 'auto', p: '2rem 0' }} />
+                <Avatar
+                  src={CartEmpty}
+                  sx={{
+                    width: '27.5rem',
+                    height: '26.5rem',
+                    m: 'auto',
+                    p: '2rem 0',
+                  }}
+                />
               </Box>
             ) : (
               <Box>

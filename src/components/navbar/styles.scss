@@ -9,6 +9,9 @@ div .nav {
 .containerNavbar {
   justify-content: space-between;
   padding: 30px 100px 30px 54px;
+  position: fixed;
+  z-index: 10;
+  background-color: #fff;
 }
 
 div .nav li {

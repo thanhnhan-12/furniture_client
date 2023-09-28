@@ -4,7 +4,7 @@ export default makeStyles(() => ({
   loginContainer: {
     background: 'linear-gradient(90deg, #EDE0D4 0%, #F6F3EF 100%)',
     position: 'relative',
-    height: '100vh',
+    height: '130vh',
   },
 
   login: {

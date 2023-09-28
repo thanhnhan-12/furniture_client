@@ -18,13 +18,12 @@ const Logout = () => {
 
   return (
     <Box
-    
       onClick={() => {
-        if (!localStorage.getItem('token')) {
-          // console.log('LOG: ', dispatch(logout()));
-          dispatch(logout());
-          navigate('/login');
-        }
+        dispatch(logout());
+        localStorage.removeItem('token');
+        localStorage.removeItem('roles');
+        localStorage.setItem('isLoggedIn', 'false');
+        window.location.reload();
       }}
     >
       <Box className={cx('logout')}>

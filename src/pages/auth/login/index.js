@@ -39,11 +39,12 @@ const Login = () => {
           toastMessage.error('Sai email hoặc mật khẩu. Vui lòng thử lại.');
         } else {
           // Đăng nhập thành công
-          nofifyLoginSuccessfully();
           dispatch(loginSuccess());
           localStorage.setItem('isLoggedIn', 'true');
           toastMessage.success('Login successfully');
+          nofifyLoginSuccessfully();
           navigate('/');
+          window.location.reload();
         }
       })
       .catch((error) => {

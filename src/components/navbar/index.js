@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import NavbarLogo from '../../assets/icons/navbarLogo.jpg';
 import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
 import NavbarIconHeart from '../../assets/svg/navbarIconHeart.svg';
@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import Options from '../options';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [isShow, setIsShow] = useState(false);
 
   const [isShows, setIsShows] = useState(false);
@@ -25,6 +27,14 @@ const Navbar = () => {
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(storedIsLoggedIn);
   }, []);
+
+  const handleCartClick = () => {
+    if (!isAuthenticated) {
+      navigate('/login')
+    } else {
+      setIsShow(true);
+    }
+  };
 
   const handleClose = (e) => {
     // if (
@@ -44,9 +54,9 @@ const Navbar = () => {
     // }
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClose, true);
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener('click', handleClose, true);
+  // }, []);
 
   return (
     <div className="containerNavbar">
@@ -77,9 +87,7 @@ const Navbar = () => {
         <ul className="nav">
           {isAuthenticated || isLoggedIn ? (
             <li onClick={() => setIsShows(true)}>
-              <Link to="">
-                <img src={NavbarIconUser} alt="" />
-              </Link>
+              <img src={NavbarIconUser} alt="" style={{ cursor: 'pointer' }} />
             </li>
           ) : (
             <li>

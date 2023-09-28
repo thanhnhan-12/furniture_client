@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
@@ -13,6 +13,12 @@ const CartData = ({ rows, handleRemoveCart }) => {
   const totals = useAppSelector((state) => state.cart.cartUser);
 
   const [selectedRows, setSelectedRows] = useState([]);
+
+  const [isProductsSelected, setIsProductsSelected] = useState(false);
+
+  const updateIsProductsSelected = (value) => {
+    setIsProductsSelected(value);
+  };
 
   const columns = [
     {
@@ -99,10 +105,14 @@ const CartData = ({ rows, handleRemoveCart }) => {
       return newSelection.includes(row.cartID);
     });
 
-    dispatch(setProductsSelected(selectedProducts))
+    dispatch(setProductsSelected(selectedProducts));
     // console.log('Select: ', newSelection);
     dispatch(totalPrice(newSelection));
     // console.log('Selected Product:', selectedProducts);
+
+    // const updatedIsProductsSelected = selectedProducts.length > 0;
+    // // Gọi hàm cập nhật isProductsSelected
+    // updateIsProductsSelected(updatedIsProductsSelected);
   };
 
   return (

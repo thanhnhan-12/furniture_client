@@ -10,15 +10,12 @@ import { deleteCartByID, getCartByUser } from '../../redux/cart/cartAction';
 import { notifyRemoveCart } from '../../constants/common';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useMemo } from 'react';
 import CartData from './cartdata';
 
 const Cart = ({ total }) => {
   const dispatch = useAppDispatch();
 
   const cartItems = useAppSelector((state) => state.cart.cartUser);
-
-  // console.log('Cart: ', cartItems);
 
   const { token } = useAppSelector((state) => state.auth);
 
@@ -36,15 +33,6 @@ const Cart = ({ total }) => {
       dispatch(getCartByUser());
     });
   };
-
-  // const cartItemsMemo = useMemo(() => {
-  //   return cartItems.map((item) => {
-  //     return {
-  //       ...item,
-  //       checked: false,
-  //     };
-  //   });
-  // }, [cartItems]);
 
   useEffect(() => {
     dispatch(getCartByUser());

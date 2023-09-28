@@ -14,18 +14,19 @@ import { useAppDispatch, useAppSelector } from '../../redux';
 
 const Checkout = () => {
   const dispatch = useAppDispatch();
+
   const district = useAppSelector((state) => state.district.district);
 
   useEffect(() => {
     dispatch(getProvince());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getDistrict());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
-    if (district.length > 0) return dispatch(getWard());
+    // if (district.length > 0) return dispatch(getWard());
   }, [dispatch]);
 
   return (

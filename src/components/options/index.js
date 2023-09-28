@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 import Logout from './logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../redux';
 
 const Options = ({}) => {
   const cx = classNames.bind(useStyles());

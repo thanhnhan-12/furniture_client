@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../../redux';
+import { setProductsSelected } from '../../../redux/cart/cartSlice';
 
 const CartTotals = ({ cartID }) => {
   const cx = classNames.bind(useStyles());
@@ -17,7 +18,10 @@ const CartTotals = ({ cartID }) => {
     (state) => state.cart.productsSelected,
   );
 
-  const isProductsSelected = productsSelected.length > 0;
+  const isProductsSelected = productsSelected?.length > 0;
+
+  // const productsSelect = productsSelected.some((product) => product.isSelected);
+
 
   return (
     <Box bgcolor="#F9F1E7" width="39.3rem" height="39rem" textAlign="center">
