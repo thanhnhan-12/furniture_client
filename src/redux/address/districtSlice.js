@@ -10,7 +10,11 @@ const initialState = {
 const districtSlice = createSlice({
   name: 'district',
   initialState,
-  reducers: {},
+  reducers: {
+    resetDataDistrict: (state, action) => {
+      state.district = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getDistrict.pending, (state) => {
@@ -28,6 +32,8 @@ const districtSlice = createSlice({
   },
 });
 
-const { reducer } = districtSlice;
+const { reducer, actions } = districtSlice;
+
+export const { resetDataDistrict } = actions;
 
 export default reducer;

@@ -9,6 +9,7 @@ import authSlice from './auth/authSlice';
 import cartSlice from './cart/cartSlice';
 import categorySlice from './category/categorySlice';
 import productSlice from './product/productSlice';
+import orderSlice from './order/orderSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   province: provinceSlice,
   district: districtSlice,
   ward: wardSlice,
+  order: orderSlice,
 });
 
 const store = configureStore({

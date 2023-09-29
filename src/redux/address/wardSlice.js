@@ -33,5 +33,7 @@ const wardSlice = createSlice({
 });
 
 const { reducer, actions } = wardSlice;
+
 export const { resetData } = actions;
+
 export default reducer;

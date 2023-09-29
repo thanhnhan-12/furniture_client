@@ -5,11 +5,19 @@ import useStyles from './styles';
 import { formatPrice } from '../../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import { setProductsSelected } from '../../../redux/cart/cartSlice';
+import { checkCartForm } from '../../../redux/order/orderSlice';
+import { schemaCheckout } from '../../../constants/schema';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const BillingDetails = () => {
   const cx = classNames.bind(useStyles());
 
   const dispatch = useAppDispatch();
+
+  // const watch = watch();
+
+  const orderProduct = useAppSelector((state) => state.order.order);
 
   const productsSelected = useAppSelector(
     (state) => state.cart.productsSelected,
@@ -17,8 +25,19 @@ const BillingDetails = () => {
 
   // console.log('Product Selected: ', productsSelected);
 
+  const handlePlaceOrder = (data) => {
+    console.log('Data: ', data);
+  };
+
   return (
-    <Box width="35%" display="flex" flexDirection="column" gap="2.2rem">
+    <Box
+      width="35%"
+      display="flex"
+      flexDirection="column"
+      gap="2.2rem"
+      // component="form"
+      // onSubmit={handleSubmit(handleOnSubmit)}
+    >
       <Box className={cx('flex')}>
         <Typography component="h2" className={cx('productHeading', 'mb')}>
           Product
@@ -82,7 +101,7 @@ const BillingDetails = () => {
           this website, to manage access to your account, and for other purposes
           described in our <b>privacy policy</b> .
         </Typography>
-        <Button className={cx('btnOrder')} type="submit">
+        <Button className={cx('btnOrder')} type="submit" form='checkout' >
           Place order
         </Button>
       </Box>

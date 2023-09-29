@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput, FormSelect } from '../../../components/hookform';
@@ -14,6 +14,7 @@ import { resetData } from '../../../redux/address/wardSlice';
 
 const FormCheckout = () => {
   const dispatch = useAppDispatch();
+
   const province = useAppSelector((state) => state.province.province);
 
   const district = useAppSelector((state) => state.district.district);
@@ -34,13 +35,18 @@ const FormCheckout = () => {
     resolver: yupResolver(schemaCheckout),
   });
 
+  const handleOnSubmit = (data) => {
+    // Đoạn mã xử lý khi form được submit ở đây
+    console.log(data); // In ra dữ liệu form
+  };
+
   const handleOnChange = (name, value) => {
     if (value) return dispatch(getWard(value));
     dispatch(resetData());
   };
-  
+
   return (
-    <Box width="35%">
+    <Box width="35%" component="form" id='checkout' onSubmit={handleSubmit(handleOnSubmit)} >
       <Box display="flex" gap="5rem" mb="3.6rem">
         <FormInput
           control={control}
@@ -70,7 +76,7 @@ const FormCheckout = () => {
           borderRadius: '4px',
           marginBottom: '3.6rem',
         }}
-        // handleChange={handleOnChange}
+        // handleChange={}
       />
 
       <FormSelect

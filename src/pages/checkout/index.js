@@ -17,13 +17,16 @@ const Checkout = () => {
 
   const district = useAppSelector((state) => state.district.district);
 
+  const province = useAppSelector((state) => state.district.province);
+
   useEffect(() => {
     dispatch(getProvince());
   }, []);
 
   useEffect(() => {
+    // if (province.length > 0) return dispatch(getDistrict());
     dispatch(getDistrict());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     // if (district.length > 0) return dispatch(getWard());

@@ -50,11 +50,6 @@ const Cart = ({ total }) => {
         >
           <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
 
-          {/* <CartProduct
-            cartProds={cartItems}
-            handleRemoveCart={handleRemoveCart}
-          /> */}
-
           <CartData rows={cartItems} handleRemoveCart={handleRemoveCart} />
 
           <CartTotals cartID={cartItems.cartID} />

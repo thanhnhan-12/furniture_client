@@ -23,10 +23,13 @@ const ShoppingCart = ({ onClose }) => {
 
   // console.log('UserID: ', token);
 
-  const totalAmount = cartItems.reduce((accumulator, currentItem) => {
-    const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
-    return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
-  }, 0); // Giá trị ban đầu của accumulator là 0
+  const totalAmount =
+    cartItems && cartItems.length > 0
+      ? cartItems.reduce((accumulator, currentItem) => {
+          const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
+          return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
+        }, 0)
+      : 0; // Giá trị ban đầu của accumulator là 0
 
   const handleRemoveCart = (cartID) => {
     // console.log('CartID: ', cartID);
@@ -75,7 +78,6 @@ const ShoppingCart = ({ onClose }) => {
           <div className={cx('border')}>
             {cartItems.length === 0 ? (
               <Box className={cx('common')}>
-                {/* <Typography variant="h6">Your cart is empty</Typography> */}
                 <Avatar
                   src={CartEmpty}
                   sx={{
@@ -88,53 +90,54 @@ const ShoppingCart = ({ onClose }) => {
               </Box>
             ) : (
               <Box>
-                {cartItems.map((item, index) => (
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    key={index}
-                  >
+                {Array.isArray(cartItems) &&
+                  cartItems.map((item, index) => (
                     <Box
-                      sx={{ p: '1rem 0 2.3rem' }}
-                      gap="2rem"
-                      className={cx('common')}
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      key={index}
                     >
-                      <div
-                        style={{
-                          backgroundColor: '#F9F1E7',
-                          borderRadius: '1rem',
-                        }}
+                      <Box
+                        sx={{ p: '1rem 0 2.3rem' }}
+                        gap="2rem"
+                        className={cx('common')}
                       >
-                        <img
-                          src={item.nameImage}
-                          alt=""
-                          className={cx('nameImage')}
-                        />
-                      </div>
+                        <div
+                          style={{
+                            backgroundColor: '#F9F1E7',
+                            borderRadius: '1rem',
+                          }}
+                        >
+                          <img
+                            src={item.nameImage}
+                            alt=""
+                            className={cx('nameImage')}
+                          />
+                        </div>
 
-                      <div className={cx('productCart')}>
-                        <h4 className={cx('productName')}>
-                          {item.productName}
-                        </h4>
-                        <Box className={cx('common')} sx={{ gap: '1rem' }}>
-                          <Typography fontSize="1.6rem" color="#000">
-                            {item.quantity}
-                          </Typography>
-                          <b>X</b>
-                          <Typography fontSize="1.2rem" color="#B88E2F">
-                            {formatPrice(Number(item.price))}
-                          </Typography>
-                        </Box>
-                      </div>
+                        <div className={cx('productCart')}>
+                          <h4 className={cx('productName')}>
+                            {item.productName}
+                          </h4>
+                          <Box className={cx('common')} sx={{ gap: '1rem' }}>
+                            <Typography fontSize="1.6rem" color="#000">
+                              {item.quantity}
+                            </Typography>
+                            <b>X</b>
+                            <Typography fontSize="1.2rem" color="#B88E2F">
+                              {formatPrice(Number(item.price))}
+                            </Typography>
+                          </Box>
+                        </div>
+                      </Box>
+
+                      <HighlightOffRoundedIcon
+                        fontSize="large"
+                        onClick={() => handleRemoveCart(item.cartID)}
+                      />
                     </Box>
-
-                    <HighlightOffRoundedIcon
-                      fontSize="large"
-                      onClick={() => handleRemoveCart(item.cartID)}
-                    />
-                  </Box>
-                ))}
+                  ))}
               </Box>
             )}
 
