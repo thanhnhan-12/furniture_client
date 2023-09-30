@@ -4,6 +4,7 @@ import useStyles from './styles';
 import { Box, Typography } from '@mui/material';
 import Logout from './logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux';
 
@@ -36,11 +37,20 @@ const Options = ({}) => {
           borderRadius: '2px',
         }}
       >
-        <Link style={{ textDecoration: 'none', color: '#000' }}>
+        <Link to="/" style={{ textDecoration: 'none', color: '#000' }}>
           <Box className={cx('commonHover', 'logout')}>
             <AdminPanelSettingsIcon className={cx('logoutIcon')} />
             <Typography component="h3" className={cx('logoutIcon')}>
               Admin
+            </Typography>
+          </Box>
+        </Link>
+
+        <Link to="/address" style={{ textDecoration: 'none', color: '#000' }}>
+          <Box className={cx('commonHover', 'logout')}>
+            <ContactPageIcon className={cx('logoutIcon')} />
+            <Typography component="h3" className={cx('logoutIcon')}>
+              Address
             </Typography>
           </Box>
         </Link>

@@ -19,8 +19,6 @@ const Navbar = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const shoppingCartRef = useRef(null);
-
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
@@ -28,35 +26,32 @@ const Navbar = () => {
     setIsLoggedIn(storedIsLoggedIn);
   }, []);
 
-  const handleCartClick = () => {
-    if (!isAuthenticated) {
-      navigate('/login')
-    } else {
-      setIsShow(true);
-    }
-  };
+  // const handleCartClick = () => {
+  //   if (!isAuthenticated) {
+  //     navigate('/login');
+  //   } else {
+  //     setIsShow(true);
+  //   }
+  // };
 
-  const handleClose = (e) => {
-    // if (
-    //   isShow &&
-    //   shoppingCartRef.current &&
-    //   !shoppingCartRef.current.contains(e.target)
-    // ) {
-    //   console.log('OUTSIDE');
-    //   setIsShow(true);
-    // } else if (
-    //   !isShow &&
-    //   shoppingCartRef.current &&
-    //   shoppingCartRef.current.contains(e.target)
-    // ) {
-    //   console.log('INSIDE');
-    //   setIsShow(false);
-    // }
-  };
+  const ref = useRef();
 
-  // useEffect(() => {
-  //   document.addEventListener('click', handleClose, true);
-  // }, []);
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (isShow && ref.current && !ref.current.contains(e.target)) {
+        setIsShow(false);
+      }
+    };
+
+    document.addEventListener('click', checkIfClickedOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener('click', checkIfClickedOutside);
+    };
+  }, [isShow]);
 
   return (
     <div className="containerNavbar">
@@ -117,16 +112,23 @@ const Navbar = () => {
               <img src={NavbarIconHeart} alt="" />
             </Link>
           </li>
-          <li onClick={() => setIsShow(true)} style={{ cursor: 'pointer' }}>
+          <li
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsShow(true);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             <img src={NavbarIconCart} alt="" />
           </li>
         </ul>
       </div>
-      {isShow && (
-        <div ref={shoppingCartRef}>
-          <ShoppingCart onClose={() => setIsShow(false)} />
-        </div>
-      )}
+
+        {isShow && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <ShoppingCart onClose={() => setIsShow(false)} />
+          </div>
+        )}
 
       {isShows && <Options />}
     </div>
