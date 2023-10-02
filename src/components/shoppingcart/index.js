@@ -10,10 +10,12 @@ import { deleteCartByID, getCartByUser } from '../../redux/cart/cartAction';
 import useStyles from './styles';
 import CartEmpty from '../../assets/svg/CartEmpty.svg';
 
-const ShoppingCart = ({ onClose }) => {
+const ShoppingCart = ({ onClose, shown }) => {
   const cx = classNames.bind(useStyles());
 
   const dispatch = useAppDispatch();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const cartItems = useAppSelector((state) => state.cart.cartUser);
 
@@ -43,7 +45,7 @@ const ShoppingCart = ({ onClose }) => {
     dispatch(getCartByUser());
   }, [dispatch]);
 
-  return (
+  return shown ? (
     <Box
       sx={{
         position: 'fixed',
@@ -51,8 +53,11 @@ const ShoppingCart = ({ onClose }) => {
         left: '0',
         right: '0',
         bottom: '0',
-        zIndex: '1',
+        zIndex: '2',
         bgcolor: 'rgba(0, 0, 0, 0.5)',
+      }}
+      onClick={() => {
+        onClose();
       }}
     >
       <Box
@@ -63,7 +68,9 @@ const ShoppingCart = ({ onClose }) => {
           top: '0',
           backgroundColor: '#fff',
           p: '2.8rem 3rem 0',
-          zIndex: '2',
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
         }}
       >
         <div>
@@ -164,7 +171,7 @@ const ShoppingCart = ({ onClose }) => {
         </div>
       </Box>
     </Box>
-  );
+  ) : null;
 };
 
 export default ShoppingCart;

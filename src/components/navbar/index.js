@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import NavbarLogo from '../../assets/icons/navbarLogo.jpg';
 import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
 import NavbarIconHeart from '../../assets/svg/navbarIconHeart.svg';
 import NavbarIconSearch from '../../assets/svg/navbarIconSearch.svg';
 import NavbarIconUser from '../../assets/svg/navbarIconUser.svg';
-import './styles.scss';
-import ShoppingCart from '../shoppingcart';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../redux';
+import { PrivateUser } from '../../routes/private/user';
 import Options from '../options';
+import ShoppingCart from '../shoppingcart';
+import './styles.scss';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,39 +20,12 @@ const Navbar = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(storedIsLoggedIn);
   }, []);
-
-  // const handleCartClick = () => {
-  //   if (!isAuthenticated) {
-  //     navigate('/login');
-  //   } else {
-  //     setIsShow(true);
-  //   }
-  // };
-
-  const ref = useRef();
-
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (isShow && ref.current && !ref.current.contains(e.target)) {
-        setIsShow(false);
-      }
-    };
-
-    document.addEventListener('click', checkIfClickedOutside);
-
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener('click', checkIfClickedOutside);
-    };
-  }, [isShow]);
 
   return (
     <div className="containerNavbar">
@@ -113,9 +87,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsShow(true);
+            onClick={() => {
+              setIsShow(!isShow);
             }}
             style={{ cursor: 'pointer' }}
           >
@@ -124,13 +97,11 @@ const Navbar = () => {
         </ul>
       </div>
 
-        {isShow && (
-          <div onClick={(e) => e.stopPropagation()}>
-            <ShoppingCart onClose={() => setIsShow(false)} />
-          </div>
-        )}
+      <PrivateUser>
+        <ShoppingCart shown={isShow} onClose={() => setIsShow(false)} />
+      </PrivateUser>
 
-      {isShows && <Options />}
+      <Options show={isShows} close={() => setIsShows(false)} />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import { reducer } from './reducer';
+import addressSlice from './address/addressSlice';
 import districtSlice from './address/districtSlice';
 import provinceSlice from './address/provinceSlice';
 import wardSlice from './address/wardSlice';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   province: provinceSlice,
   district: districtSlice,
   ward: wardSlice,
+  address: addressSlice,
   order: orderSlice,
 });
 

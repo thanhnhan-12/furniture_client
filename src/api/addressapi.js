@@ -15,4 +15,8 @@ export const addressApi = {
   getWard: (districtID) => {
     return client.get(`/ward?districtID=${districtID}`);
   },
+
+  addAddress: (payload) => {
+    return client.post(`/address/addAddress`, payload);
+  },
 };

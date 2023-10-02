@@ -8,10 +8,10 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux';
 
-const Options = ({}) => {
+const Options = ({ close, show }) => {
   const cx = classNames.bind(useStyles());
 
-  return (
+  return show ? (
     <Box
       sx={{
         position: 'fixed',
@@ -19,9 +19,12 @@ const Options = ({}) => {
         left: '0',
         right: '0',
         bottom: '0',
-        zIndex: '1',
+        zIndex: '2',
         // bgcolor: 'rgba(0, 0, 0, 0.5)',
         cursor: 'pointer',
+      }}
+      onClick={() => {
+        close();
       }}
     >
       <Box
@@ -31,7 +34,6 @@ const Options = ({}) => {
           right: '21%',
           top: '9%',
           backgroundColor: '#fff',
-          zIndex: '2',
           boxShadow: '0.5rem 1rem rgba(0, 0, 0, 0.5)',
           border: '1px solid rgba(0, 0, 0, 0.09)',
           borderRadius: '2px',
@@ -60,7 +62,7 @@ const Options = ({}) => {
         </Box>
       </Box>
     </Box>
-  );
+  ) : null;
 };
 
 export default Options;

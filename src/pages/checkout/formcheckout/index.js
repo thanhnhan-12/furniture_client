@@ -36,7 +36,6 @@ const FormCheckout = () => {
   });
 
   const handleOnSubmit = (data) => {
-    // Đoạn mã xử lý khi form được submit ở đây
     console.log(data); // In ra dữ liệu form
   };
 
