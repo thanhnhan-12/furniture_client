@@ -18,7 +18,6 @@ export default makeStyles(() => ({
     width: '40rem',
     padding: '1.6rem',
     borderRadius: '1.5rem ',
-    border: '1px solid #000 ',
     backgroundColor: '#fff',
   },
 

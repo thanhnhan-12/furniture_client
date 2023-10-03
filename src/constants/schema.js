@@ -56,6 +56,16 @@ export const schemaCheckout = yup.object().shape({
   address: yup.string().required(messageRequired('Address')),
 });
 
+export const schemaAddress = yup.object().shape({
+  province: yup.string().required(messageRequired('Province')),
+
+  district: yup.string().required(messageRequired('District')),
+
+  ward: yup.string().required(messageRequired('Ward')),
+
+  address: yup.string().required(messageRequired('Address')),
+});
+
 export const schemaContact = yup.object().shape({
   yourname: yup.string().required(messageRequired('Your Name')),
 

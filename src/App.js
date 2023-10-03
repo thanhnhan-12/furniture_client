@@ -11,7 +11,7 @@ import './App.css';
 import ProductDetail from './pages/productdetail';
 import Cart from './pages/cart';
 import Checkout from './pages/checkout';
-import { PrivateUser } from './routes/private/user';
+// import { PrivateUser } from './routes/private/user';
 import { useAppSelector } from './redux';
 import Address from './components/options/address';
 

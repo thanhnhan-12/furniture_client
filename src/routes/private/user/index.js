@@ -7,12 +7,12 @@ export const PrivateUser = ({ children }) => {
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  console.log("isAuthenticated: ", isAuthenticated);
+  // console.log("isAuthenticated: ", isAuthenticated);
 
-  console.log("LOG", token);
+  // console.log("LOG", token);
 
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" />
   }
 
   return children;

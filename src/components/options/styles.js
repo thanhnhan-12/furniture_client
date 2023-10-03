@@ -18,11 +18,11 @@ export default makeStyles(() => ({
   },
 
   formAddress: {
-    padding: '16rem 0',
+    padding: '16rem 0 16rem 1.6rem',
   },
 
   addAddress: {
-    marginLeft: '1.6rem',
+    marginBottom: '1.6rem',
   },
 
   btnNewAddress: {

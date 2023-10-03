@@ -38,6 +38,19 @@ export const getWard = createAsyncThunk('ward/getWard', async (districtID) => {
   }
 });
 
+export const getAddressByUser = createAsyncThunk(
+  'address/getAddressByUser',
+  async () => {
+    try {
+      const { data } = await addressApi.getAddressByUser();
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);
+
 export const addAddress = createAsyncThunk(
   'address/addAddress',
   async (payload) => {

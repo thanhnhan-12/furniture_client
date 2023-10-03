@@ -15,6 +15,14 @@ export const notifyAddCart = () => {
   });
 };
 
+export const notifyAddAddress = () => {
+  toast('Address has been added in address ', {
+    className: 'notifyAdd',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
+
 export const notifyRemoveCart = () => {
   toast('Product has been remove in cart', {
     className: 'notifyRemove',

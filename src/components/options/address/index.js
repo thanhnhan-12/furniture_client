@@ -5,10 +5,13 @@ import classNames from 'classnames/bind';
 import FormAddress from './formaddress';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import {
+  getAddressByUser,
   getDistrict,
   getProvince,
   getWard,
 } from '../../../redux/address/addressAction';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { DataGrid } from '@mui/x-data-grid';
 
 const Address = () => {
   const cx = classNames.bind(useStyles());
@@ -16,6 +19,9 @@ const Address = () => {
   const dispatch = useAppDispatch();
 
   const [showFormAddress, setShowFormAddress] = useState(false);
+
+  const address = useAppSelector((state) => state.address.address);
+  // console.log('Address: ', address);
 
   const province = useAppSelector((state) => state.province.province);
 
@@ -33,8 +39,58 @@ const Address = () => {
     // if (district.length > 0) return dispatch(getWard());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAddressByUser())
+  }, [dispatch]);
+
+  const columns = [
+    {
+      field: 'addressName',
+      headerName: 'Address Name',
+      width: 150,
+    },
+
+    {
+      field: 'provinceName',
+      headerName: 'Province Name',
+      width: 150,
+    },
+
+    {
+      field: 'districtName',
+      headerName: 'District Name',
+      type: 'number',
+      width: 150,
+      editable: true,
+    },
+
+    {
+      field: 'wardName',
+      headerName: 'Ward Name',
+      type: 'number',
+      width: 150,
+      editable: true,
+    },
+
+    {
+      field: 'deleteIcon',
+      headerName: '',
+      width: 20,
+      renderCell: (params) => {
+        // console.log("Log", params);
+        return (
+          <DeleteIcon
+            fontSize="large"
+            // onClick={() => handleRemoveAddress(params.row.addressID)}
+            sx={{ color: '#B88E2F', cursor: 'pointer' }}
+          />
+        );
+      },
+    },
+  ];
+
   return (
-    <Box className={cx('formAddress')} >
+    <Box className={cx('formAddress')}>
       <Box className={cx('addAddress')}>
         <Button
           className={cx('btnNewAddress')}
@@ -47,6 +103,34 @@ const Address = () => {
           closeForm={() => {
             setShowFormAddress(false);
           }}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          height: 600,
+          width: '60%',
+          '& .MuiDataGrid-columnHeaders': { bgcolor: '#F9F1E7' },
+          '& .MuiDataGrid-columnHeaderTitle, .MuiDataGrid-cellContent, .MuiTypography-root':
+            { fontSize: '1.6rem' },
+        }}
+      >
+        <DataGrid
+          rows={address}
+          columns={columns}
+          getRowId={(row) => row.addressID}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          rowHeight={120}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+          // onRowSelectionModelChange={handleSelectionChange}
         />
       </Box>
     </Box>

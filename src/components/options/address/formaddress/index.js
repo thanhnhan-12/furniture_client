@@ -3,18 +3,17 @@ import { Box, Button } from '@mui/material';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { schemaCheckout } from '../../../../constants/schema';
+import { schemaAddress } from '../../../../constants/schema';
 import { useAppDispatch, useAppSelector } from '../../../../redux';
 import { FormInput, FormSelect } from '../../../hookform';
 import useStyles from './styles';
 import { addAddress, getWard } from '../../../../redux/address/addressAction';
 import { resetData } from '../../../../redux/address/wardSlice';
-import { useNavigate } from 'react-router-dom';
+import { ToastContainer, Zoom } from 'react-toastify';
+import { notifyAddAddress } from '../../../../constants/common';
 
 const FormAddress = ({ showForm, closeForm }) => {
   const cx = classNames.bind(useStyles());
-
-  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -35,7 +34,7 @@ const FormAddress = ({ showForm, closeForm }) => {
       ward: '',
       address: '',
     },
-    resolver: yupResolver(schemaCheckout),
+    resolver: yupResolver(schemaAddress),
   });
 
   const handleOnChange = (name, value) => {
@@ -43,18 +42,20 @@ const FormAddress = ({ showForm, closeForm }) => {
     dispatch(resetData());
   };
 
-  const handleAddAddress = (addressName) => {
-    console.log('Data: ', addressName);
-    dispatch(addAddress(addressName)).then(() => {
-      // reset({ province: '' });
-      // setFocus('province')
-      // reset({ district: '' });
-      // setFocus('district')
-      // reset({ ward: '' });
-      // setFocus('ward')
-      reset({ addressName: '' });
-      setFocus('address');
-    });
+  const handleAddAddress = ({ address, ward }) => {
+    console.log('Address: ', address);
+    console.log('Ward: ', ward);
+    dispatch(addAddress({ addressName: address, wardID: ward }))
+      .then(() => {
+        notifyAddAddress();
+        reset({ ward: '' });
+        setFocus('ward');
+        reset({ address: '' });
+        setFocus('address');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   return showForm ? (
@@ -75,6 +76,8 @@ const FormAddress = ({ showForm, closeForm }) => {
           className={cx('modalForm')}
           onSubmit={handleSubmit(handleAddAddress)}
         >
+          <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
+
           <FormSelect
             control={control}
             name="province"
@@ -124,10 +127,10 @@ const FormAddress = ({ showForm, closeForm }) => {
             control={control}
             type="text"
             name="address"
-            label="Address Name"
             placeholder="Address Name"
             keyOption="addressName"
             labelOption="addressName"
+            label="Address Name"
             sx={{ marginBottom: '3.6rem' }}
           />
 
