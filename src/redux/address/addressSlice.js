@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addAddress, getAddressByUser } from './addressAction';
+import {
+  addAddress,
+  deleteAddressByID,
+  getAddressByUser,
+} from './addressAction';
 
 const initialState = {
   address: [],
@@ -23,7 +27,32 @@ const addressSlice = createSlice({
       })
       .addCase(getAddressByUser.rejected, (state, action) => {
         state.loading = false;
-        state.address = action.error.message;
+        state.error = action.error.message;
+      })
+
+      .addCase(addAddress.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addAddress.fulfilled, (state, action) => {
+        state.loading = false;
+        state.address.push(action.payload);
+      })
+      .addCase(addAddress.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(deleteAddressByID.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteAddressByID.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(deleteAddressByID.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });

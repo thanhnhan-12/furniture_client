@@ -42,7 +42,7 @@ const ShoppingCart = ({ onClose, shown }) => {
   };
 
   useEffect(() => {
-    dispatch(getCartByUser());
+    if (token) dispatch(getCartByUser());
   }, [dispatch]);
 
   return shown ? (

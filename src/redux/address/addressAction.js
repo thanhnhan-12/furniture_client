@@ -63,3 +63,16 @@ export const addAddress = createAsyncThunk(
     }
   },
 );
+
+export const deleteAddressByID = createAsyncThunk(
+  'address/deleteAddressByID',
+  async (addressID) => {
+    try {
+      const { data } = await addressApi.deleteAddressByID(addressID);
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);

@@ -31,6 +31,14 @@ export const notifyRemoveCart = () => {
   });
 };
 
+export const notifyRemoveAddress = () => {
+  toast('Address has been remove in cart', {
+    className: 'notifyRemove',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
+
 export const nofifyLoginSuccessfully = () => {
   toast('Login Successfully!', {
     className: 'notifyLogin',

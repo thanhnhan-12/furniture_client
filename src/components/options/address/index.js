@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import FormAddress from './formaddress';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import {
+  deleteAddressByID,
   getAddressByUser,
   getDistrict,
   getProvince,
@@ -12,6 +13,7 @@ import {
 } from '../../../redux/address/addressAction';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import { notifyRemoveAddress } from '../../../constants/common';
 
 const Address = () => {
   const cx = classNames.bind(useStyles());
@@ -20,12 +22,30 @@ const Address = () => {
 
   const [showFormAddress, setShowFormAddress] = useState(false);
 
+  const [selectedAddress, setSelectedAddress] = useState([]);
+
   const address = useAppSelector((state) => state.address.address);
   // console.log('Address: ', address);
 
   const province = useAppSelector((state) => state.province.province);
 
   const district = useAppSelector((state) => state.district.district);
+
+  const handleRemoveAddress = (addressID) => {
+    // console.log('AddressID: ', addressID);
+    notifyRemoveAddress();
+    dispatch(deleteAddressByID(addressID)).then(() => {
+      dispatch(getAddressByUser());
+    });
+  };
+
+  const handleSelectionAddress = (newSelectionAddress) => {
+    setSelectedAddress(newSelectionAddress);
+  };
+
+  useEffect(() => {
+    console.log('Address is selected: ', selectedAddress);
+  }, [selectedAddress]);
 
   useEffect(() => {
     dispatch(getProvince());
@@ -40,7 +60,7 @@ const Address = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAddressByUser())
+    dispatch(getAddressByUser());
   }, [dispatch]);
 
   const columns = [
@@ -81,7 +101,7 @@ const Address = () => {
         return (
           <DeleteIcon
             fontSize="large"
-            // onClick={() => handleRemoveAddress(params.row.addressID)}
+            onClick={() => handleRemoveAddress(params.row.addressID)}
             sx={{ color: '#B88E2F', cursor: 'pointer' }}
           />
         );
@@ -130,7 +150,7 @@ const Address = () => {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
-          // onRowSelectionModelChange={handleSelectionChange}
+          onRowSelectionModelChange={handleSelectionAddress}
         />
       </Box>
     </Box>

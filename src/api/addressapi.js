@@ -23,4 +23,8 @@ export const addressApi = {
   addAddress: (payload) => {
     return client.post('/address/addAddress', payload);
   },
+
+  deleteAddressByID: (addressID) => {
+    return client.delete(`/address/${addressID}`);
+  },
 };
