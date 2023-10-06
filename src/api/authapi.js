@@ -11,4 +11,4 @@ export const authApi = {
   register: (payload) => {
     return client.post('/auth/register', payload);
   },
-}
+};

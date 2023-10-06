@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   address: [],
+  saveAddress: '',
   loading: false,
   error: null,
 };
@@ -14,7 +15,12 @@ const initialState = {
 const addressSlice = createSlice({
   name: 'province',
   initialState,
-  reducers: {},
+  reducers: {
+    saveAddressSelected: (state, action) => {
+      state.saveAddress = action.payload;
+      localStorage.setItem('savedAddresses', JSON.stringify(action.payload));
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAddressByUser.pending, (state) => {
@@ -57,6 +63,8 @@ const addressSlice = createSlice({
   },
 });
 
-const { reducer } = addressSlice;
+const { actions, reducer } = addressSlice;
+
+export const { saveAddressSelected } = actions;
 
 export default reducer;

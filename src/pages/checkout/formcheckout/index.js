@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,28 +15,37 @@ import { resetData } from '../../../redux/address/wardSlice';
 const FormCheckout = () => {
   const dispatch = useAppDispatch();
 
+  const userInfor = useAppSelector((state) => state.auth.userInfor);
+  console.log('UserInfor: ', userInfor);
+
+  const { firstName, lastName } = userInfor;
+  // console.log('First Name: ', firstName);
+  // console.log('Last Name: ', lastName);
+
   const province = useAppSelector((state) => state.province.province);
 
   const district = useAppSelector((state) => state.district.district);
 
   const ward = useAppSelector((state) => state.ward.ward);
 
+  const saveAddress = useAppSelector((state) => state.address.saveAddress);
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      province: '',
-      district: '',
-      ward: '',
-      address: '',
-      phone: '',
-      email: '',
+      // firstName: '',
+      // lastName: '',
+      // province: '',
+      // district: '',
+      // ward: '',
+      // address: '',
+      // phone: '',
+      // email: '',
     },
     resolver: yupResolver(schemaCheckout),
   });
 
   const handleOnSubmit = (data) => {
-    console.log(data); // In ra dữ liệu form
+    console.log(data);
   };
 
   const handleOnChange = (name, value) => {
@@ -45,94 +54,21 @@ const FormCheckout = () => {
   };
 
   return (
-    <Box width="35%" component="form" id='checkout' onSubmit={handleSubmit(handleOnSubmit)} >
-      <Box display="flex" gap="5rem" mb="3.6rem">
-        <FormInput
-          control={control}
-          type="text"
-          name="firstName"
-          label="First Name"
-          placeholder="First Name"
-        />
-        <FormInput
-          control={control}
-          type="text"
-          name="lastName"
-          label="Last Name"
-          placeholder="Last Name"
-        />
+    <Box
+      width="35%"
+      component="form"
+      id="formCheckout"
+      onSubmit={handleSubmit(handleOnSubmit)}
+    >
+      <Box>
+        <Typography>{firstName}</Typography>
+        {/* <Typography>{userInfor.lastName}</Typography> */}
+        <Typography></Typography>
+        <Typography></Typography>
+        <Typography></Typography>
+        <Typography></Typography>
+        <Typography></Typography>
       </Box>
-
-      <FormSelect
-        control={control}
-        name="province"
-        placeholder="No Select"
-        options={province}
-        keyOption="provinceID"
-        labelOption="provinceName"
-        label="Province"
-        sx={{
-          borderRadius: '4px',
-          marginBottom: '3.6rem',
-        }}
-        // handleChange={}
-      />
-
-      <FormSelect
-        control={control}
-        name="district"
-        placeholder="No Select"
-        options={district}
-        keyOption="districtID"
-        labelOption="districtName"
-        label="District"
-        sx={{
-          borderRadius: '4px',
-          marginBottom: '3.6rem',
-        }}
-        handleChange={handleOnChange}
-      />
-
-      <FormSelect
-        control={control}
-        name="ward"
-        placeholder="No Select"
-        options={ward}
-        keyOption="wardID"
-        labelOption="wardName"
-        label="Ward"
-        sx={{
-          borderRadius: '4px',
-          marginBottom: '3.6rem',
-        }}
-        // handleChange={handleOnChange}
-      />
-
-      <FormInput
-        control={control}
-        type="text"
-        name="address"
-        label="Address Name"
-        placeholder="Address Name"
-        sx={{ marginBottom: '3.6rem' }}
-      />
-
-      <FormInput
-        control={control}
-        type="text"
-        name="phone"
-        label="Phone"
-        placeholder="Phone Number"
-        sx={{ marginBottom: '3.6rem' }}
-      />
-
-      <FormInput
-        control={control}
-        type="email"
-        name="email"
-        label="Email"
-        placeholder="Email Address"
-      />
     </Box>
   );
 };

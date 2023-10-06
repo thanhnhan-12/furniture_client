@@ -21,7 +21,12 @@ export const schemaRegister = yup.object().shape({
     .email('Incorrect Email')
     .required(messageRequired('Email')),
 
-  // username: yup.string().required(messageRequired('User Name')),
+  phoneNumber: yup
+    .string()
+    .required(messageRequired('Phone Number'))
+    .matches(phoneRegExp, 'Incorrect phone number format')
+    .min(9, 'Incorrect phone number format')
+    .max(10, 'Incorrect phone number format'),
 
   password: yup.string().required('Please enter your password.').min(6),
 
@@ -77,4 +82,8 @@ export const schemaContact = yup.object().shape({
   subject: yup.string().required(messageRequired('Subject')),
 
   message: yup.string().required(messageRequired('Message')),
+});
+
+export const schemaSearchProduct = yup.object().shape({
+  searchProduct: yup.string().required(messageRequired('Search Product')),
 });

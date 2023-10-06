@@ -6,6 +6,12 @@ const initialState = {
   token: getLocalStorage('token'),
   roles: getRoles(),
   isAuthenticated: false,
+  userInfor: {
+    email: '',
+    phoneNumber: '',
+    firstName: '',
+    lastName: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -26,9 +32,13 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      const { token, roles } = action.payload;
+      const { token, roles, email, phoneNumber, firstName, lastName } =
+        action.payload;
       state.token = token;
       state.roles = roles;
+      state.userInfor = { email, phoneNumber, firstName, lastName };
+      console.log('UserInfor: ', state.userInfor);
+
       localStorage.setItem('roles', JSON.stringify(roles));
       localStorage.setItem('token', token);
     });

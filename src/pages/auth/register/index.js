@@ -23,6 +23,7 @@ const Register = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       email: '',
+      phoneNumber: '',
       password: '',
       confirmPassword: '',
       firstName: '',
@@ -67,12 +68,21 @@ const Register = () => {
               placeholder="Last Name"
             />
           </Box>
+
           <FormInput
             control={control}
             type="text"
             name="email"
             label="Email"
             placeholder="Email"
+          />
+
+          <FormInput
+            control={control}
+            type="tel"
+            name="phoneNumber"
+            label="Phone Number"
+            placeholder="Phone Number"
           />
 
           <FormInput
