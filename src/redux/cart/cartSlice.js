@@ -37,7 +37,15 @@ const cartSlice = createSlice({
         JSON.stringify(state.productsSelected),
       );
     },
-    
+
+    refreshCheckout: (state) => {
+      state.productsSelected = [];
+      state.cartUser = [];
+      state.loading = false;
+      state.error = null;
+      localStorage.removeItem('productsSelected');
+      localStorage.removeItem('cartUser');
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,6 +85,7 @@ export const {
   checkedCart,
   totalPrice,
   setProductsSelected,
+  refreshCheckout,
 } = actions;
 
 export default reducer;

@@ -4,7 +4,10 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { formatPrice } from '../../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../../redux';
-import { setProductsSelected } from '../../../redux/cart/cartSlice';
+import {
+  refreshCheckout,
+  setProductsSelected,
+} from '../../../redux/cart/cartSlice';
 import { checkCartForm } from '../../../redux/order/orderSlice';
 import { schemaCheckout } from '../../../constants/schema';
 import { useForm } from 'react-hook-form';
@@ -17,9 +20,13 @@ const BillingDetails = () => {
 
   const dispatch = useAppDispatch();
 
+  const cartItems = useAppSelector((state) => state.cart.cartUser);
+
+  const product = useAppSelector((state) => state.product.product);
+
   const orderProduct = useAppSelector((state) => state.order.order);
 
-  const address = useAppSelector((state) => state.address.address);
+  const saveAddress = useAppSelector((state) => state.address.saveAddress);
 
   const [openAlert, setOpenAlert] = useState(false);
 
@@ -33,15 +40,18 @@ const BillingDetails = () => {
 
   // console.log('Product Selected: ', productsSelected);
 
-  const handlePlaceOrder = ({ addressID, orderItems }) => {
-    // console.log('Data: ', data);
-    if (address.length === 0) {
+  const handlePlaceOrder = () => {
+    // console.log('AddressID: ', addressID);
+    if (saveAddress.length === 0) {
       handleOpenAlert();
     } else {
       dispatch(
         createOrder({
-          addressID: addressID,
-          orderItems: orderItems.map((item) => {
+          cartItems: cartItems.map((item) => {
+            return { cartID: item.cartID };
+          }),
+          addressID: saveAddress.addressID,
+          orderItems: productsSelected.map((item) => {
             return {
               productID: item.productID,
               quantity: item.quantity,
@@ -49,6 +59,8 @@ const BillingDetails = () => {
           }),
         }),
       );
+
+      dispatch(refreshCheckout());
     }
   };
 
@@ -87,16 +99,26 @@ const BillingDetails = () => {
           Subtotal
         </Typography>
 
-        <Typography className={cx('fs')} sx={{ fontWeight: '300 !imoportant' }}>
-          250 VND
-        </Typography>
+        {productsSelected?.map((product, index) => (
+          <Typography
+            className={cx('fs')}
+            sx={{ fontWeight: '300 !imoportant' }}
+            key={index}
+          >
+            {formatPrice(Number(product.price * product.quantity) || 0)}
+          </Typography>
+        ))}
       </Box>
 
       <Box className={cx('flex')}>
         <Typography className={cx('fs')} sx={{ fontWeight: '400 !imoportant' }}>
           Total
         </Typography>
-        <Typography className={cx('total')}>250 VND</Typography>
+        {productsSelected?.map((product, index) => (
+          <Typography className={cx('total')} key={index}>
+            {formatPrice(Number(product.price * product.quantity) || 0)}
+          </Typography>
+        ))}
       </Box>
 
       <Box borderTop="1px solid #D9D9D9" paddingTop="2.25rem">

@@ -11,16 +11,19 @@ import {
   getWard,
 } from '../../../redux/address/addressAction';
 import { resetData } from '../../../redux/address/wardSlice';
+import useStyles from './styles';
+import classNames from 'classnames/bind';
 
 const FormCheckout = () => {
+  const cx = classNames.bind(useStyles());
+
   const dispatch = useAppDispatch();
 
-  const userInfor = useAppSelector((state) => state.auth.userInfor);
-  console.log('UserInfor: ', userInfor);
+  const token = useAppSelector((state) => state.auth.token);
+  // console.log('Token: ', token);
 
-  const { firstName, lastName } = userInfor;
-  // console.log('First Name: ', firstName);
-  // console.log('Last Name: ', lastName);
+  const userInfor = useAppSelector((state) => state.auth.userInfor);
+  // console.log('UserInfor: ', userInfor);
 
   const province = useAppSelector((state) => state.province.province);
 
@@ -29,6 +32,7 @@ const FormCheckout = () => {
   const ward = useAppSelector((state) => state.ward.ward);
 
   const saveAddress = useAppSelector((state) => state.address.saveAddress);
+  // console.log('Address: ', saveAddress);
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -61,13 +65,47 @@ const FormCheckout = () => {
       onSubmit={handleSubmit(handleOnSubmit)}
     >
       <Box>
-        <Typography>{firstName}</Typography>
-        {/* <Typography>{userInfor.lastName}</Typography> */}
-        <Typography></Typography>
-        <Typography></Typography>
-        <Typography></Typography>
-        <Typography></Typography>
-        <Typography></Typography>
+        <Box>
+          <Typography className={cx('inforName', 'color')}>
+            {userInfor.firstName} {userInfor.lastName}
+          </Typography>
+
+          <Box className={cx('region')}>
+            <Typography className={cx('regionName', 'inforCommon', 'color')}>
+              {saveAddress.addressName},
+            </Typography>
+            <Typography className={cx('regionName', 'inforCommon', 'color')}>
+              {saveAddress.wardName},
+            </Typography>
+            <Typography className={cx('regionName', 'inforCommon', 'color')}>
+              {saveAddress.districtName},
+            </Typography>
+            <Typography className={cx('regionName', 'inforCommon', 'color')}>
+              {saveAddress.provinceName}
+            </Typography>
+          </Box>
+
+          <Typography className={cx('infor', 'inforCommon', 'color')}>
+            Email:
+            <Typography
+              component="span"
+              className={cx('inforCommon')}
+              sx={{ ml: '1.1rem' }}
+            >
+              {userInfor.email}
+            </Typography>
+          </Typography>
+          <Typography className={cx('infor', 'inforCommon', 'color')} mt="1rem">
+            Contact -
+            <Typography
+              component="span"
+              className={cx('inforCommon')}
+              sx={{ ml: '1.1rem' }}
+            >
+              {userInfor.phoneNumber}
+            </Typography>
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

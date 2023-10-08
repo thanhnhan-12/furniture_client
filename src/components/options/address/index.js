@@ -28,7 +28,7 @@ const Address = () => {
   const [saveAddress, setSaveAddress] = useState([]);
 
   const address = useAppSelector((state) => state.address.address);
-  // console.log('Address: ', address);
+  console.log('Address: ', address);
 
   const province = useAppSelector((state) => state.province.province);
 
@@ -43,9 +43,13 @@ const Address = () => {
   };
 
   const handleSelectionAddress = (newSelectionAddress) => {
-    setSelectedAddress(newSelectionAddress);
-    console.log('AddressID: ', newSelectionAddress);
-    dispatch(saveAddressSelected(newSelectionAddress));
+    const selectedAddressInfo = address.find(
+      (item) => item.addressID === newSelectionAddress[0],
+    );
+      // console.log("Address: ", selectedAddressInfo);
+    if (selectedAddressInfo) {
+      dispatch(saveAddressSelected(selectedAddressInfo));
+    }
   };
 
   useEffect(() => {

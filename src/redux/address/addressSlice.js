@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   address: [],
-  saveAddress: '',
+  saveAddress: JSON.parse(localStorage.getItem('saveAddress')) || [],
   loading: false,
   error: null,
 };
@@ -18,7 +18,8 @@ const addressSlice = createSlice({
   reducers: {
     saveAddressSelected: (state, action) => {
       state.saveAddress = action.payload;
-      localStorage.setItem('savedAddresses', JSON.stringify(action.payload));
+      localStorage.setItem('saveAddress', JSON.stringify(state.saveAddress));
+      console.log('Address: ', state.saveAddress);
     },
   },
   extraReducers: (builder) => {

@@ -6,12 +6,7 @@ const initialState = {
   token: getLocalStorage('token'),
   roles: getRoles(),
   isAuthenticated: false,
-  userInfor: {
-    email: '',
-    phoneNumber: '',
-    firstName: '',
-    lastName: '',
-  },
+  userInfor: JSON.parse(localStorage.getItem('userInfor')) || null,
 };
 
 const authSlice = createSlice({
@@ -37,8 +32,9 @@ const authSlice = createSlice({
       state.token = token;
       state.roles = roles;
       state.userInfor = { email, phoneNumber, firstName, lastName };
-      console.log('UserInfor: ', state.userInfor);
 
+      localStorage.setItem('userInfor', JSON.stringify(state.userInfor));
+      // console.log('UserInfor: ', state.userInfor);
       localStorage.setItem('roles', JSON.stringify(roles));
       localStorage.setItem('token', token);
     });

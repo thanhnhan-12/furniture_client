@@ -43,8 +43,8 @@ const FormAddress = ({ showForm, closeForm }) => {
   };
 
   const handleAddAddress = ({ address, ward }) => {
-    console.log('Address: ', address);
-    console.log('Ward: ', ward);
+    // console.log('Address: ', address);
+    // console.log('Ward: ', ward);
     dispatch(addAddress({ addressName: address, wardID: ward }))
       .then(() => {
         notifyAddAddress();
