@@ -39,7 +39,7 @@ const Options = ({ close, show }) => {
           borderRadius: '2px',
         }}
       >
-        <Link to="/" style={{ textDecoration: 'none', color: '#000' }}>
+        <Link to="admin/dashboard" style={{ textDecoration: 'none', color: '#000' }}>
           <Box className={cx('commonHover', 'logout')}>
             <AdminPanelSettingsIcon className={cx('logoutIcon')} />
             <Typography component="h3" className={cx('logoutIcon')}>

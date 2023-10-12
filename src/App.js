@@ -14,6 +14,13 @@ import Checkout from './pages/checkout';
 // import { PrivateUser } from './routes/private/user';
 import { useAppSelector } from './redux';
 import Address from './components/options/address';
+import MainLayout from './layouts/mainlayout';
+import { PrivateDashboard } from './routes/private/admin';
+import Dashboard from './pages/admin/dashboard';
+import SidebarLayout from './layouts/sidebarlayout';
+import Customers from './pages/admin/customer';
+import ProductAdmin from './pages/admin/product';
+import OrderAdmin from './pages/admin/order';
 
 const Layout = () => {
   return (
@@ -60,7 +67,7 @@ const router = createBrowserRouter([
         path: '/cart',
         element: (
           // <PrivateUser>
-            <Cart />
+          <Cart />
           // </PrivateUser>
         ),
       },
@@ -80,6 +87,11 @@ const router = createBrowserRouter([
       },
 
       {
+        path: '/address',
+        element: <Address />,
+      },
+
+      {
         path: '/register',
         element: <Register />,
       },
@@ -88,10 +100,35 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
       },
+    ],
+  },
+
+  {
+    path: 'admin',
+    element: (
+      <PrivateDashboard>
+        <SidebarLayout />
+      </PrivateDashboard>
+    ),
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
 
       {
-        path: '/address',
-        element: <Address />,
+        path: 'customers',
+        element: <Customers />,
+      },
+
+      {
+        path: 'products',
+        element: <ProductAdmin />,
+      },
+
+      {
+        path: 'orders',
+        element: <OrderAdmin />,
       },
     ],
   },
