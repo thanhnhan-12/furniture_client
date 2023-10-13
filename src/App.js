@@ -21,6 +21,7 @@ import SidebarLayout from './layouts/sidebarlayout';
 import Customers from './pages/admin/customer';
 import ProductAdmin from './pages/admin/product';
 import OrderAdmin from './pages/admin/order';
+import AddProduct from './pages/admin/product/addproduct';
 
 const Layout = () => {
   return (
@@ -117,17 +118,22 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'customers',
+        path: 'customer-list',
         element: <Customers />,
       },
 
       {
-        path: 'products',
+        path: 'product-list',
         element: <ProductAdmin />,
       },
 
       {
-        path: 'orders',
+        path: 'add-product',
+        element: <AddProduct />,
+      },
+
+      {
+        path: 'order-list',
         element: <OrderAdmin />,
       },
     ],

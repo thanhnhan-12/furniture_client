@@ -87,3 +87,21 @@ export const schemaContact = yup.object().shape({
 export const schemaSearchProduct = yup.object().shape({
   searchProduct: yup.string().required(messageRequired('Search Product')),
 });
+
+export const schemaNewProduct = yup.object().shape({
+  productName: yup.string().required(messageRequired('Product Name')),
+
+  description: yup.string().required(messageRequired('Description')),
+
+  price: yup
+    .number()
+    .typeError('Price must be a number')
+    .positive('Price must be a positive number')
+    .required(messageRequired('Price is required')),
+
+  quantity: yup
+    .number()
+    .typeError('Quantity must be a number')
+    .positive('Quantity must be a positive number')
+    .required(messageRequired('Quantity is required')),
+});

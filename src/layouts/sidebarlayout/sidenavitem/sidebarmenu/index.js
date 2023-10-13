@@ -42,7 +42,7 @@ const SidebarMenu = () => {
                 component="div"
                 subheader={
                   <ListSubheader component="div" disableSticky>
-                    {path.title}
+                    {path.subheader}
                   </ListSubheader>
                 }
               >

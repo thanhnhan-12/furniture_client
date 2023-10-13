@@ -2,6 +2,7 @@ import ArchiveBoxIcon from '@heroicons/react/24/solid/ArchiveBoxIcon';
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import ShoppingBagIcon from '@heroicons/react/24/solid/ShoppingBagIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
+import { NoteAddOutlined } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 
 export const navConfig = [
@@ -20,10 +21,11 @@ export const navConfig = [
   // },
 
   {
+    subheader: 'Customer Manegement',
     children: [
       {
         title: 'Customers',
-        path: '/admin/customers',
+        path: '/admin/customer-list',
         icon: (
           <SvgIcon fontSize="small">
             <UserIcon />
@@ -34,24 +36,31 @@ export const navConfig = [
   },
 
   {
+    subheader: 'Product Manegement',
     children: [
       {
         title: 'Product',
-        path: '/admin/products',
+        path: '/admin/product-list',
         icon: (
           <SvgIcon fontSize="small">
             <ShoppingBagIcon />
           </SvgIcon>
         ),
       },
+      {
+        title: 'Add Product',
+        path: '/admin/add-product',
+        icon: <NoteAddOutlined />,
+      },
     ],
   },
 
   {
+    subheader: 'Order Manegement',
     children: [
       {
         title: 'Orders',
-        path: '/admin/orders',
+        path: '/admin/order-list',
         icon: (
           <SvgIcon fontSize="small">
             <ArchiveBoxIcon />
