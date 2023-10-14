@@ -48,7 +48,7 @@ export const FormInput = (props) => {
       rules={{
         required: {
           value: required,
-          message: 'Vui lòng nhập trường này!',
+          message: 'Please enter this field!',
         },
       }}
       control={control}

@@ -44,7 +44,7 @@ const ProductItems = ({ productList }) => {
         marginTop: '32px',
       }}
     >
-      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />;
+      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
       {productList.map((list, index) => (
         <Grid key={index} item xs={3} className={classes.productItemList}>
           <div>

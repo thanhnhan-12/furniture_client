@@ -104,4 +104,6 @@ export const schemaNewProduct = yup.object().shape({
     .typeError('Quantity must be a number')
     .positive('Quantity must be a positive number')
     .required(messageRequired('Quantity is required')),
+
+  category: yup.string().required(messageRequired('Category')),
 });

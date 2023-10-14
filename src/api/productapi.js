@@ -11,4 +11,8 @@ export const productApi = {
   getProductByID: (productID) => {
     return client.get(`/product/${productID}`);
   },
+
+  addProduct: (payload) => {
+    return client.post('/product/addProduct', payload);
+  },
 };

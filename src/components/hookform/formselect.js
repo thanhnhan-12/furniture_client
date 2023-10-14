@@ -99,7 +99,7 @@ export const FormSelect = (props) => {
       rules={{
         required: {
           value: required,
-          message: 'Vui lòng chọn trường này!',
+          message: 'Please select this field!',
         },
       }}
       render={({

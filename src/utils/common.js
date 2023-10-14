@@ -1,7 +1,7 @@
 import { ROLE_ADMIN, ROLE_USER } from '../constants/defaults';
 
 export const messageRequired = (key) => {
-  return `${key} không được bỏ trống`;
+  return `${key} not be empty`;
 };
 
 export const checkRoleUser = (roleID, token) => {

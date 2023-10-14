@@ -15,14 +15,14 @@ const CardProduct = ({ cardProducts }) => {
         marginTop: '32px',
       }}
     >
-      {cardProducts.map((list, index) => (
+      {cardProducts.map((card, index) => (
         <Grid key={index} item xs={3} className={classes.productItemList}>
           <div>
-            <img src={list.nameImage} alt="" className={classes.nameImage} />
+            <img src={card.nameImage} alt="" className={classes.nameImage} />
             <div className={classes.productItemContent}>
-              <h3 className={classes.productName}>{list.productName}</h3>
+              <h3 className={classes.productName}>{card.productName}</h3>
               <strong className={classes.price}>
-                {formatPrice(Number(list.price))}
+                {formatPrice(Number(card.price))}
               </strong>
             </div>
           </div>
