@@ -11,9 +11,11 @@ import cartSlice from './cart/cartSlice';
 import categorySlice from './category/categorySlice';
 import productSlice from './product/productSlice';
 import orderSlice from './order/orderSlice';
+import userSlice from './user/userSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  user: userSlice,
   product: productSlice,
   category: categorySlice,
   cart: cartSlice,

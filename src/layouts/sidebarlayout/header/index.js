@@ -39,9 +39,19 @@ const Header = () => {
         background: '#fff',
       }}
     >
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        p="0 2rem"
+      >
         <Box>
-          <Typography fontSize="18px" fontWeight="600" textAlign="center">
+          <Typography
+            fontSize="18px"
+            fontWeight="600"
+            textAlign="center"
+            color="#111927"
+          >
             Furniture sales system management
           </Typography>
         </Box>
