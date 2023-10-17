@@ -4,7 +4,7 @@ import CustomerTable from './customertable';
 
 const Customers = () => {
   return (
-    <Box>
+    <Box sx={{ mr: '1.5rem' }}>
       <CustomerTable />
     </Box>
   );

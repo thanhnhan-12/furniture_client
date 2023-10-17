@@ -15,4 +15,8 @@ export const cartApi = {
   deleteCartByID: (cartID) => {
     return client.delete(`/cart/${cartID}`);
   },
+
+  updateCart: (payload) => {
+    return client.put('/cart/updateCart', payload);
+  },
 };

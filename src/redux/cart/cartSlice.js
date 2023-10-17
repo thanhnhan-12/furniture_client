@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteCartByID, getCartByUser } from './cartAction';
+import { deleteCartByID, getCartByUser, updateCart } from './cartAction';
 
 const savedProducts = JSON.parse(localStorage.getItem('productsSelected'));
 
@@ -70,6 +70,18 @@ const cartSlice = createSlice({
         state.loading = false;
       })
       .addCase(deleteCartByID.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(updateCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateCart.fulfilled, (state, action) => {
+        state.cartUser = action.payload;
+      })
+      .addCase(updateCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

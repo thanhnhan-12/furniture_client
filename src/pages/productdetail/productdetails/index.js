@@ -42,7 +42,7 @@ const ProductDetails = ({ productDetails }) => {
 
   // console.log('Log: ', productDetails);
 
-  const handleIncrement = () => {
+  const handleIncrement = (productID) => {
     // console.log('Quanity: ', productDetails?.quantity);
     if (amount < productDetails?.quantity) {
       setAmount(amount + 1);
@@ -61,7 +61,7 @@ const ProductDetails = ({ productDetails }) => {
     } else {
       notifyAddCart();
       // console.log('Product', productID);
-      dispatch(createCart({ productID, quantity: 1 }));
+      dispatch(createCart({ productID: productDetails?.productID, quantity: amount  }));
     }
   }
 

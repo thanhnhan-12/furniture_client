@@ -22,6 +22,16 @@ const BillingDetails = () => {
 
   const cartItems = useAppSelector((state) => state.cart.cartUser);
 
+  const cartTotals = useAppSelector((state) => state.cart.cartTotals);
+
+  const totalAmount =
+    cartItems && cartItems.length > 0
+      ? cartItems.reduce((accumulator, currentItem) => {
+          const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
+          return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
+        }, 0)
+      : 0; // Giá trị ban đầu của accumulator là 0
+
   const product = useAppSelector((state) => state.product.product);
 
   const orderProduct = useAppSelector((state) => state.order.order);
@@ -99,26 +109,26 @@ const BillingDetails = () => {
           Subtotal
         </Typography>
 
-        {productsSelected?.map((product, index) => (
-          <Typography
-            className={cx('fs')}
-            sx={{ fontWeight: '300 !imoportant' }}
-            key={index}
-          >
-            {formatPrice(Number(product.price * product.quantity) || 0)}
-          </Typography>
-        ))}
+        {/* {productsSelected?.map((product, index) => ( */}
+        <Typography
+          className={cx('fs')}
+          sx={{ fontWeight: '300 !imoportant' }}
+          // key={index}
+        >
+          {formatPrice(Number(totalAmount) || 0)}
+        </Typography>
+        {/* ))} */}
       </Box>
 
       <Box className={cx('flex')}>
         <Typography className={cx('fs')} sx={{ fontWeight: '400 !imoportant' }}>
           Total
         </Typography>
-        {productsSelected?.map((product, index) => (
-          <Typography className={cx('total')} key={index}>
-            {formatPrice(Number(product.price * product.quantity) || 0)}
-          </Typography>
-        ))}
+        {/* {productsSelected?.map((product, index) => ( */}
+        <Typography className={cx('total')}>
+          {formatPrice(Number(totalAmount) || 0)}
+        </Typography>
+        {/* ))} */}
       </Box>
 
       <Box borderTop="1px solid #D9D9D9" paddingTop="2.25rem">

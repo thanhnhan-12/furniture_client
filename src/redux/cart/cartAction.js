@@ -31,3 +31,13 @@ export const deleteCartByID = createAsyncThunk('cart/deleteCartByID', async (car
     return error;
   }
 });
+
+export const updateCart = createAsyncThunk('cart/updateCart', async (payload) => {
+  try {
+    const { data } = await cartApi.updateCart(payload);
+    return data;
+  } catch (error) {
+    toastMessage.setErrors(error);
+    return error;
+  }
+});
