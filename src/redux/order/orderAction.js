@@ -14,3 +14,16 @@ export const createOrder = createAsyncThunk(
     }
   },
 );
+
+export const getAllOrders = createAsyncThunk(
+  'order/getAllOrders',
+  async () => {
+    try {
+      const { data } = await orderApi.getAllOrders();
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);

@@ -11,6 +11,12 @@ import {
 } from 'chart.js';
 import React from 'react';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
+import { useAppDispatch, useAppSelector } from '../../../redux';
+import {
+  optionsDoughnut,
+  renderColors,
+  renderdata,
+} from '../../../utils/function';
 
 ChartJS.register(
   ArcElement,
@@ -22,11 +28,40 @@ ChartJS.register(
   Title,
 );
 
+const labels = ['Admin', 'Members'];
+
 const Dashboard = () => {
+  const dispatch = useAppDispatch();
+
+  const userListStatistics = useAppSelector(
+    (state) => state.admin.userListStatistics,
+  );
+
   return (
-    <Box>
+    <Grid
+      container
+      direction="row"
+      alignItems="stretch"
+      rowSpacing={2}
+      columnSpacing={2}
+      my={2}
+    >
       <Typography>Dashboard</Typography>
-    </Box>
+
+      <Grid item xs={12} lg={5.5}>
+        <Paper>
+          <Doughnut
+            options={optionsDoughnut('User Statistics')}
+            data={renderdata({
+              data: userListStatistics.map((item) => item.totalUsers),
+              labels,
+              title: 'User Statistics',
+              label: 'User',
+            })}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 

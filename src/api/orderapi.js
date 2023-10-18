@@ -7,4 +7,8 @@ export const orderApi = {
   createOrder: (payload) => {
     return client.post('/order/createOrder', payload);
   },
+
+  getAllOrders: () => {
+    return client.get('/order');
+  },
 };

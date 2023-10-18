@@ -6,11 +6,12 @@ import addressSlice from './address/addressSlice';
 import districtSlice from './address/districtSlice';
 import provinceSlice from './address/provinceSlice';
 import wardSlice from './address/wardSlice';
+import adminSlice from './admin/adminSlice';
 import authSlice from './auth/authSlice';
 import cartSlice from './cart/cartSlice';
 import categorySlice from './category/categorySlice';
-import productSlice from './product/productSlice';
 import orderSlice from './order/orderSlice';
+import productSlice from './product/productSlice';
 import userSlice from './user/userSlice';
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   ward: wardSlice,
   address: addressSlice,
   order: orderSlice,
+  admin: adminSlice,
 });
 
 const store = configureStore({
