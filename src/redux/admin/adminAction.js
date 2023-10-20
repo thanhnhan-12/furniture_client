@@ -14,3 +14,29 @@ export const userStatistics = createAsyncThunk(
     }
   },
 );
+
+export const bestSellingProducts = createAsyncThunk(
+  'admin/bestSellingProducts',
+  async () => {
+    try {
+      const { data } = await adminApi.bestSellingProducts();
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);
+
+export const monthlyRevenueStatistics = createAsyncThunk(
+  'admin/monthlyRevenueStatistics',
+  async () => {
+    try {
+      const { data } = await adminApi.monthlyRevenueStatistics();
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);

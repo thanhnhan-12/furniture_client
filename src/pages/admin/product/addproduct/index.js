@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux';
 import { getAllCategory } from '../../../../redux/category/categoryAction';
 import useStyles from '../styles';
 import ArrowDownTrayIcon from '@heroicons/react/24/solid/ArrowDownTrayIcon';
+import { addProduct } from '../../../../redux/product/productAction';
 
 const AddProduct = () => {
   const cx = classNames.bind(useStyles());
@@ -27,7 +28,7 @@ const AddProduct = () => {
   const category = useAppSelector((state) => state.category.categories);
   // console.log('Category: ', category);
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset, setFocus } = useForm({
     defaultValues: {
       productName: '',
       description: '',
@@ -46,7 +47,38 @@ const AddProduct = () => {
     navigate('/admin/product-list');
   };
 
-  const handleAddNewProduct = () => {};
+  const handleAddNewProduct = ({
+    productName,
+    description,
+    price,
+    quantity,
+    category,
+  }) => {
+    dispatch(
+      addProduct({
+        productName: productName,
+        description: description,
+        price: price,
+        quantity: quantity,
+        category: category,
+      }),
+    )
+      .then(() => {
+        reset({ productName: '' });
+        setFocus('productName');
+        reset({ description: '' });
+        setFocus('description');
+        reset({ price: '' });
+        setFocus('price');
+        reset({ quantity: '' });
+        setFocus('quantity');
+        reset({ category: '' });
+        setFocus('category');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
 
   return (
     <Box className={cx('formAddNewProduct')}>

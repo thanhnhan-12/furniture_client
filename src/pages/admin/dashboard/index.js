@@ -8,8 +8,8 @@ import {
   LinearScale,
   Title,
   Tooltip,
-} from 'chart.js';
-import React from 'react';
+} from 'chart.js/auto';
+import React, { useEffect } from 'react';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import {
@@ -17,6 +17,12 @@ import {
   renderColors,
   renderdata,
 } from '../../../utils/function';
+import {
+  bestSellingProducts,
+  monthlyRevenueStatistics,
+  userStatistics,
+} from '../../../redux/admin/adminAction';
+import Revenue from './revenue';
 
 ChartJS.register(
   ArcElement,
@@ -33,9 +39,21 @@ const labels = ['Admin', 'Members'];
 const Dashboard = () => {
   const dispatch = useAppDispatch();
 
-  const userListStatistics = useAppSelector(
-    (state) => state.admin.userListStatistics,
-  );
+  const {
+    statistics: { userListStatistics, productListSelling, monthlyRevenue },
+  } = useAppSelector((state) => state.admin);
+
+  console.log('Statistics: ', {
+    userStatistics: userListStatistics,
+    productSelling: productListSelling,
+    monthlyRevenue: monthlyRevenue,
+  });
+
+  useEffect(() => {
+    dispatch(userStatistics());
+    dispatch(bestSellingProducts());
+    dispatch(monthlyRevenueStatistics());
+  }, []);
 
   return (
     <Grid
@@ -46,8 +64,6 @@ const Dashboard = () => {
       columnSpacing={2}
       my={2}
     >
-      <Typography>Dashboard</Typography>
-
       <Grid item xs={12} lg={5.5}>
         <Paper>
           <Doughnut
@@ -55,11 +71,34 @@ const Dashboard = () => {
             data={renderdata({
               data: userListStatistics.map((item) => item.totalUsers),
               labels,
+              colors: renderColors(userListStatistics.length),
               title: 'User Statistics',
               label: 'User',
             })}
           />
         </Paper>
+      </Grid>
+
+      <Grid item xs={12} lg={11}>
+        <Paper>
+          <Line
+            options={optionsDoughnut('Statistics of best-selling products')}
+            data={renderdata({
+              data: productListSelling.map((item) => item.productID),
+              labels: productListSelling.map((item) => item.productName),
+              colors: renderColors(productListSelling.length),
+              title: 'Statistics of best-selling products',
+              label: 'Quantity',
+            })}
+          />
+        </Paper>
+      </Grid>
+
+      <Grid item lg={11}>
+        <Revenue
+          totalRevenue={monthlyRevenue.map((item) => item.totalRevenue)}
+          totalDataMonth={monthlyRevenue.map((item) => item.month)}
+        />
       </Grid>
     </Grid>
   );

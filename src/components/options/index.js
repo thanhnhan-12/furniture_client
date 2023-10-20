@@ -6,10 +6,18 @@ import Logout from './logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../redux';
+import { useAppDispatch, useAppSelector } from '../../redux';
 
 const Options = ({ close, show }) => {
   const cx = classNames.bind(useStyles());
+
+  const dispatch = useAppDispatch();
+
+  const role = useAppSelector((state) => state.auth.roles);
+
+  // console.log('Role: ', role);
+
+  const userInfor = useAppSelector((state) => state.auth.userInfor);
 
   return show ? (
     <Box
@@ -20,7 +28,6 @@ const Options = ({ close, show }) => {
         right: '0',
         bottom: '0',
         zIndex: '2',
-        // bgcolor: 'rgba(0, 0, 0, 0.5)',
         cursor: 'pointer',
       }}
       onClick={() => {
@@ -39,14 +46,23 @@ const Options = ({ close, show }) => {
           borderRadius: '2px',
         }}
       >
-        <Link to="admin/dashboard" style={{ textDecoration: 'none', color: '#000' }}>
-          <Box className={cx('commonHover', 'logout')}>
-            <AdminPanelSettingsIcon className={cx('logoutIcon')} />
-            <Typography component="h3" className={cx('logoutIcon')}>
-              Admin
-            </Typography>
+        {role.includes('ROLE_ADMIN') ? (
+          <Box>
+            <Link
+              to="admin/dashboard"
+              style={{ textDecoration: 'none', color: '#000' }}
+            >
+              <Box className={cx('commonHover', 'logout')}>
+                <AdminPanelSettingsIcon className={cx('logoutIcon')} />
+                <Typography component="h3" className={cx('logoutIcon')}>
+                  Admin
+                </Typography>
+              </Box>
+            </Link>
           </Box>
-        </Link>
+        ) : (
+          <Box></Box>
+        )}
 
         <Link to="/address" style={{ textDecoration: 'none', color: '#000' }}>
           <Box className={cx('commonHover', 'logout')}>
@@ -59,6 +75,12 @@ const Options = ({ close, show }) => {
 
         <Box className={cx('commonHover')}>
           <Logout />
+        </Box>
+
+        <Box className={cx('commonHover', 'logout')}>
+          <Typography component="h3" className={cx('logoutIcon')}>
+            {userInfor.email}
+          </Typography>
         </Box>
       </Box>
     </Box>

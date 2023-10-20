@@ -5,14 +5,17 @@ import NavbarIconCart from '../../assets/svg/navbarIconCart.svg';
 import NavbarIconHeart from '../../assets/svg/navbarIconHeart.svg';
 import NavbarIconSearch from '../../assets/svg/navbarIconSearch.svg';
 import NavbarIconUser from '../../assets/svg/navbarIconUser.svg';
-import { useAppSelector } from '../../redux';
+import { useAppDispatch, useAppSelector } from '../../redux';
 import { PrivateUser } from '../../routes/private/user';
 import Options from '../options';
 import ShoppingCart from '../shoppingcart';
 import './styles.scss';
+import { getCartByUser } from '../../redux/cart/cartAction';
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const [isShow, setIsShow] = useState(false);
 
@@ -21,6 +24,8 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+  const userInfor = useAppSelector((state) => state.auth.userInfor);
 
   useEffect(() => {
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -89,6 +94,7 @@ const Navbar = () => {
           <li
             onClick={() => {
               setIsShow(!isShow);
+              dispatch(getCartByUser());
             }}
             style={{ cursor: 'pointer' }}
           >

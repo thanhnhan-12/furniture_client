@@ -28,10 +28,10 @@ const ShoppingCart = ({ onClose, shown }) => {
   const totalAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce((accumulator, currentItem) => {
-          const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
-          return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
+          const productTotal = currentItem.quantity * currentItem.price;
+          return accumulator + productTotal;
         }, 0)
-      : 0; // Giá trị ban đầu của accumulator là 0
+      : 0;
 
   const handleRemoveCart = (cartID) => {
     // console.log('CartID: ', cartID);
@@ -42,7 +42,9 @@ const ShoppingCart = ({ onClose, shown }) => {
   };
 
   useEffect(() => {
-    if (token) dispatch(getCartByUser());
+    if (token) {
+      dispatch(getCartByUser());
+    }
   }, [dispatch]);
 
   return shown ? (

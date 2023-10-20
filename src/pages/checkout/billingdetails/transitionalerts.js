@@ -33,10 +33,10 @@ export default function TransitionAlerts({ openAlert, setOpenAlert }) {
           sx={{ mb: 2, fontSize: '1.2rem' }}
         >
           <AlertTitle>Warning</AlertTitle>
-          You haven't added an address. Would you like to add one ?
+          Please select product or address before payment
           <Link
             to="/address"
-            style={{ textDecoration: 'none', fontSize: '1.6rem' }}
+            style={{ textDecoration: 'none', fontSize: '1.6rem', display: 'block' }}
           >
             Add Address
           </Link>

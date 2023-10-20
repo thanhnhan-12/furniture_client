@@ -38,6 +38,14 @@ const Address = () => {
     // console.log('AddressID: ', addressID);
     notifyRemoveAddress();
     dispatch(deleteAddressByID(addressID)).then(() => {
+      const updatedSaveAddress = saveAddress.filter(
+        (address) => address.addressID !== addressID,
+      );
+
+      dispatch(saveAddressSelected(updatedSaveAddress));
+
+      localStorage.setItem('saveAddress', JSON.stringify(updatedSaveAddress));
+
       dispatch(getAddressByUser());
     });
   };
@@ -46,14 +54,14 @@ const Address = () => {
     const selectedAddressInfo = address.find(
       (item) => item.addressID === newSelectionAddress[0],
     );
-      // console.log("Address: ", selectedAddressInfo);
+    // console.log("Address: ", selectedAddressInfo);
     if (selectedAddressInfo) {
       dispatch(saveAddressSelected(selectedAddressInfo));
     }
   };
 
   useEffect(() => {
-    console.log('Address is selected: ', selectedAddress);
+    // console.log('Address is selected: ', selectedAddress);
   }, [selectedAddress]);
 
   useEffect(() => {

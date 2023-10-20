@@ -40,11 +40,11 @@ const cartSlice = createSlice({
 
     refreshCheckout: (state) => {
       state.productsSelected = [];
-      state.cartUser = [];
+      // state.cartUser = [];
       state.loading = false;
       state.error = null;
       localStorage.removeItem('productsSelected');
-      localStorage.removeItem('cartUser');
+      // localStorage.removeItem('cartUser');
     },
   },
   extraReducers: (builder) => {

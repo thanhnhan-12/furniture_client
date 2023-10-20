@@ -22,6 +22,8 @@ const BillingDetails = () => {
 
   const cartItems = useAppSelector((state) => state.cart.cartUser);
 
+  // console.log('cartItems', cartItems);
+
   const cartTotals = useAppSelector((state) => state.cart.cartTotals);
 
   const totalAmount =
@@ -54,12 +56,12 @@ const BillingDetails = () => {
     // console.log('AddressID: ', addressID);
     if (saveAddress.length === 0) {
       handleOpenAlert();
+    } else if (productsSelected.length === 0) {
+      handleOpenAlert();
     } else {
       dispatch(
         createOrder({
-          cartItems: cartItems.map((item) => {
-            return { cartID: item.cartID };
-          }),
+          cartIDs: [...productsSelected.map((item) => item.cartID)],
           addressID: saveAddress.addressID,
           orderItems: productsSelected.map((item) => {
             return {
@@ -115,7 +117,7 @@ const BillingDetails = () => {
           sx={{ fontWeight: '300 !imoportant' }}
           // key={index}
         >
-          {formatPrice(Number(totalAmount) || 0)}
+          {formatPrice(Number(cartTotals))}
         </Typography>
         {/* ))} */}
       </Box>
@@ -126,7 +128,7 @@ const BillingDetails = () => {
         </Typography>
         {/* {productsSelected?.map((product, index) => ( */}
         <Typography className={cx('total')}>
-          {formatPrice(Number(totalAmount) || 0)}
+          {formatPrice(Number(cartTotals))}
         </Typography>
         {/* ))} */}
       </Box>

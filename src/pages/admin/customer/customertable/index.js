@@ -34,8 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const columns = [
   {
-    id: 'firstName',
-    label: 'Name',
+    id: 'fullName',
+    label: 'Full Name',
     minWidth: 150,
   },
 
@@ -143,7 +143,10 @@ const CustomerTable = () => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column, index) => {
-                      const value = row[column.id];
+                      const value =
+                        column.id === 'fullName'
+                          ? `${row.firstName} ${row.lastName}`
+                          : row[column.id];
                       return (
                         <TableCell
                           key={index}
