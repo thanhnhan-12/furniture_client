@@ -14,7 +14,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { notifyRemoveAddress } from '../../../constants/common';
-import { saveAddressSelected } from '../../../redux/address/addressSlice';
+import { clearSaveAddress, saveAddressSelected } from '../../../redux/address/addressSlice';
 
 const Address = () => {
   const cx = classNames.bind(useStyles());
@@ -28,7 +28,7 @@ const Address = () => {
   const [saveAddress, setSaveAddress] = useState([]);
 
   const address = useAppSelector((state) => state.address.address);
-  console.log('Address: ', address);
+  // console.log('Address: ', address);
 
   const province = useAppSelector((state) => state.province.province);
 
@@ -41,7 +41,6 @@ const Address = () => {
       const updatedSaveAddress = saveAddress.filter(
         (address) => address.addressID !== addressID,
       );
-
       dispatch(saveAddressSelected(updatedSaveAddress));
 
       localStorage.setItem('saveAddress', JSON.stringify(updatedSaveAddress));
@@ -57,6 +56,7 @@ const Address = () => {
     // console.log("Address: ", selectedAddressInfo);
     if (selectedAddressInfo) {
       dispatch(saveAddressSelected(selectedAddressInfo));
+      // dispatch(getAddressByUser());
     }
   };
 

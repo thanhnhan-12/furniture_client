@@ -42,6 +42,20 @@ div .nav li {
   ul li {
     padding-right: 45px;
   }
+  .cartItemsLength {
+    background-color: rgb(255, 86, 48);
+    font-size: 1.6rem;
+    color: #fff;
+    border-radius: 2rem;
+    padding: 0.5rem 0.8rem;
+    position: relative;
+    top: 0;
+    right: 0;
+    left: -21%;
+    bottom: 0;
+    transform: scale(1) translate(50%, -50%);
+    z-index: 1;
+  }
 }
 
 @media (min-width: 350px) and (max-width: 650px) {

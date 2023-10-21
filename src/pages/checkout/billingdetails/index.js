@@ -2,18 +2,23 @@ import { Box, Button, Typography } from '@mui/material';
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
-import { formatPrice } from '../../../constants/common';
+import {
+  formatPrice,
+  nofifyOrderSuccessfully,
+} from '../../../constants/common';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import {
   refreshCheckout,
   setProductsSelected,
 } from '../../../redux/cart/cartSlice';
 import { checkCartForm } from '../../../redux/order/orderSlice';
-import { schemaCheckout } from '../../../constants/schema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import TransitionAlerts from './transitionalerts';
+import TransitionAlerts from './notification/transitionalerts';
 import { createOrder } from '../../../redux/order/orderAction';
+import { getCartByUser } from '../../../redux/cart/cartAction';
+import OrderSuccess from './notification/OrderSuccess';
+import { ToastContainer, Zoom } from 'react-toastify';
 
 const BillingDetails = () => {
   const cx = classNames.bind(useStyles());
@@ -29,8 +34,8 @@ const BillingDetails = () => {
   const totalAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce((accumulator, currentItem) => {
-          const productTotal = currentItem.quantity * currentItem.price; // Tính tổng tiền cho một sản phẩm
-          return accumulator + productTotal; // Cộng tổng tiền của sản phẩm này vào tổng tổng giá tiền
+          const productTotal = currentItem.quantity * currentItem.price;
+          return accumulator + productTotal;
         }, 0)
       : 0; // Giá trị ban đầu của accumulator là 0
 
@@ -41,6 +46,8 @@ const BillingDetails = () => {
   const saveAddress = useAppSelector((state) => state.address.saveAddress);
 
   const [openAlert, setOpenAlert] = useState(false);
+
+  const [showOrderSuccess, setShowOrderSuccess] = useState(false);
 
   const handleOpenAlert = () => {
     setOpenAlert(true);
@@ -70,14 +77,21 @@ const BillingDetails = () => {
             };
           }),
         }),
-      );
+      ).then(() => {
+        // Dispatch action hoàn thành
+        nofifyOrderSuccessfully();
+        dispatch(refreshCheckout());
+      });
 
-      dispatch(refreshCheckout());
+      // nofifyOrderSuccessfully();
+      // dispatch(refreshCheckout());
     }
   };
 
   return (
     <Box width="35%" display="flex" flexDirection="column" gap="2.2rem">
+      <ToastContainer draggable={false} transition={Zoom} autoClose={800} />
+
       <Box className={cx('flex')}>
         <Typography component="h2" className={cx('productHeading', 'mb')}>
           Product
@@ -159,6 +173,8 @@ const BillingDetails = () => {
         >
           Place order
         </Button>
+
+        {/* {showOrderSuccess && <OrderSuccess />} */}
 
         {openAlert && (
           <TransitionAlerts openAlert={openAlert} setOpenAlert={setOpenAlert} />

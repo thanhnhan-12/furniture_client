@@ -22,6 +22,9 @@ const authSlice = createSlice({
       state.roles = [];
       localStorage.removeItem('token');
       localStorage.removeItem('roles');
+      localStorage.removeItem('saveAddress');
+      localStorage.removeItem('userInfor');
+      localStorage.removeItem('productsSelected');
       state.isAuthenticated = false;
     },
   },

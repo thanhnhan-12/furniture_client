@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductIconHeart from '../../assets/svg/productIconHeart.svg';
 import { formatPrice, notifyAddCart } from '../../constants/common';
@@ -9,6 +9,7 @@ import { addToCart } from '../../redux/cart/cartSlice';
 import { createCart } from '../../redux/cart/cartAction';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getCartByUser } from '../../redux/cart/cartAction';
 
 const ProductItems = ({ productList }) => {
   const classes = useStyles();
@@ -19,6 +20,8 @@ const ProductItems = ({ productList }) => {
 
   const { roles, token } = useAppSelector((state) => state.auth);
 
+  const cartUser = useAppSelector((state) => state.cart.cartUser);
+
   const handleAddToCart = (productID) => {
     // console.log('Token:', token);
     if (!token) {
@@ -26,7 +29,9 @@ const ProductItems = ({ productList }) => {
     } else {
       notifyAddCart();
       // console.log('Product', productID);
-      dispatch(createCart({ productID, quantity: 1 }));
+      dispatch(createCart({ productID, quantity: 1 })).then(() => {
+        dispatch(getCartByUser());
+      });
     }
   };
 

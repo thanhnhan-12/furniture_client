@@ -7,7 +7,11 @@ import { schemaAddress } from '../../../../constants/schema';
 import { useAppDispatch, useAppSelector } from '../../../../redux';
 import { FormInput, FormSelect } from '../../../hookform';
 import useStyles from './styles';
-import { addAddress, getWard } from '../../../../redux/address/addressAction';
+import {
+  addAddress,
+  getAddressByUser,
+  getWard,
+} from '../../../../redux/address/addressAction';
 import { resetData } from '../../../../redux/address/wardSlice';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { notifyAddAddress } from '../../../../constants/common';
@@ -52,6 +56,7 @@ const FormAddress = ({ showForm, closeForm }) => {
         setFocus('ward');
         reset({ address: '' });
         setFocus('address');
+        dispatch(getAddressByUser());
       })
       .catch((error) => {
         console.error('Error:', error);

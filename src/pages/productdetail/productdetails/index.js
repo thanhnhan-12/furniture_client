@@ -8,7 +8,7 @@ import { formatPrice, notifyAddCart } from '../../../constants/common';
 import useStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux';
-import { createCart } from '../../../redux/cart/cartAction';
+import { createCart, getCartByUser } from '../../../redux/cart/cartAction';
 
 const productSize = [
   {
@@ -38,7 +38,7 @@ const ProductDetails = ({ productDetails }) => {
 
   const dispatch = useAppDispatch();
 
-  const { roles, token } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
 
   // console.log('Log: ', productDetails);
 
@@ -61,9 +61,16 @@ const ProductDetails = ({ productDetails }) => {
     } else {
       notifyAddCart();
       // console.log('Product', productID);
-      dispatch(createCart({ productID: productDetails?.productID, quantity: amount  }));
+      dispatch(
+        createCart({
+          productID: productDetails?.productID,
+          quantity: amount,
+        }),
+      ).then(() => {
+        dispatch(getCartByUser());
+      });
     }
-  }
+  };
 
   return (
     <div style={{ marginLeft: '10.6rem' }}>

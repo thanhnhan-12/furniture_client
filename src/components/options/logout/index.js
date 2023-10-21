@@ -20,9 +20,10 @@ const Logout = () => {
     <Box
       onClick={() => {
         dispatch(logout());
-        localStorage.removeItem('token');
-        localStorage.removeItem('roles');
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('roles');
         localStorage.setItem('isLoggedIn', 'false');
+        navigate('/');
         window.location.reload();
       }}
     >

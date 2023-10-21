@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { AlertTitle } from '@mui/material';
+import { AlertTitle, Typography } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -34,12 +34,29 @@ export default function TransitionAlerts({ openAlert, setOpenAlert }) {
         >
           <AlertTitle>Warning</AlertTitle>
           Please select product or address before payment
-          <Link
-            to="/address"
-            style={{ textDecoration: 'none', fontSize: '1.6rem', display: 'block' }}
-          >
-            Add Address
-          </Link>
+          <Box>
+            <Link
+              to="/address"
+              style={{
+                textDecoration: 'none',
+                fontSize: '1.6rem',
+              }}
+            >
+              Add Address
+            </Link>
+            <Typography component="span" sx={{ mx: '1rem' }}>
+              Or
+            </Typography>
+            <Link
+              to="/cart"
+              style={{
+                textDecoration: 'none',
+                fontSize: '1.6rem',
+              }}
+            >
+              Select product to checkout
+            </Link>
+          </Box>
         </Alert>
       </Collapse>
     </Box>

@@ -19,7 +19,7 @@ const addressSlice = createSlice({
     saveAddressSelected: (state, action) => {
       state.saveAddress = action.payload;
       localStorage.setItem('saveAddress', JSON.stringify(state.saveAddress));
-      console.log('Address: ', state.saveAddress);
+      // console.log('Address: ', state.saveAddress);
     },
   },
   extraReducers: (builder) => {

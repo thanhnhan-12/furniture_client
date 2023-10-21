@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../redux';
 import { deleteCartByID, getCartByUser } from '../../redux/cart/cartAction';
 import useStyles from './styles';
 import CartEmpty from '../../assets/svg/CartEmpty.svg';
+import { setProductsSelected } from '../../redux/cart/cartSlice';
 
 const ShoppingCart = ({ onClose, shown }) => {
   const cx = classNames.bind(useStyles());
@@ -25,6 +26,10 @@ const ShoppingCart = ({ onClose, shown }) => {
 
   // console.log('UserID: ', token);
 
+  const productsSelected = useAppSelector(
+    (state) => state.cart.productsSelected,
+  );
+
   const totalAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce((accumulator, currentItem) => {
@@ -38,6 +43,11 @@ const ShoppingCart = ({ onClose, shown }) => {
     // notifyRemoveCart();
     dispatch(deleteCartByID(cartID)).then(() => {
       dispatch(getCartByUser());
+      
+      const updatedProductsSelected = productsSelected.filter(
+        (item) => item.cartID !== cartID,
+      );
+      dispatch(setProductsSelected(updatedProductsSelected));
     });
   };
 

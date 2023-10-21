@@ -32,19 +32,21 @@ const cartSlice = createSlice({
 
     setProductsSelected: (state, action) => {
       state.productsSelected = action.payload;
+      state.cartTotals = action.payload;
       localStorage.setItem(
         'productsSelected',
         JSON.stringify(state.productsSelected),
       );
+      localStorage.setItem('cartTotals', JSON.stringify(state.cartTotals));
     },
 
     refreshCheckout: (state) => {
       state.productsSelected = [];
-      // state.cartUser = [];
+      state.cartTotals = [];
       state.loading = false;
       state.error = null;
       localStorage.removeItem('productsSelected');
-      // localStorage.removeItem('cartUser');
+      localStorage.removeItem('cartTotals');
     },
   },
   extraReducers: (builder) => {

@@ -25,12 +25,22 @@ const Navbar = () => {
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
+  const { token } = useAppSelector((state) => state.auth);
+
   const userInfor = useAppSelector((state) => state.auth.userInfor);
 
   useEffect(() => {
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(storedIsLoggedIn);
   }, []);
+
+  const cartItemsLength = useAppSelector((state) => state.cart.cartUser);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getCartByUser());
+    }
+  }, [dispatch]);
 
   return (
     <div className="containerNavbar">
@@ -100,6 +110,11 @@ const Navbar = () => {
           >
             <img src={NavbarIconCart} alt="" />
           </li>
+          {isAuthenticated || isLoggedIn ? (
+            <div className="cartItemsLength">{cartItemsLength.length}</div>
+          ) : (
+            <div></div>
+          )}
         </ul>
       </div>
 

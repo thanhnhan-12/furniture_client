@@ -45,7 +45,7 @@ export const nofifyLoginSuccessfully = () => {
     draggable: true,
     position: toast.POSITION.BOTTOM_CENTER,
   });
-}
+};
 
 export const nofifyRegisterSuccessfully = () => {
   toast('Register Successfully!', {
@@ -53,4 +53,12 @@ export const nofifyRegisterSuccessfully = () => {
     draggable: true,
     position: toast.POSITION.TOP_CENTER,
   });
-}
+};
+
+export const nofifyOrderSuccessfully = () => {
+  toast('Order Success. Please wait while the order is approved', {
+    className: 'notifyOrderSuccessful',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};

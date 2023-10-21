@@ -31,12 +31,12 @@ const Login = () => {
   });
 
   const handleOnSubmit = (data) => {
-    console.log('LOGIN', data);
+    // console.log('LOGIN', data);
     dispatch(loginUser(data))
       .unwrap()
       .then((payload) => {
         if (payload && payload.error) {
-          toastMessage.error('Sai email hoặc mật khẩu. Vui lòng thử lại.');
+          toastMessage.error('Incorrect Email or Password. Please try again!');
         } else {
           // Đăng nhập thành công
           dispatch(loginSuccess());
