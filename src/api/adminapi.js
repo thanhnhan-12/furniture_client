@@ -15,4 +15,8 @@ export const adminApi = {
   monthlyRevenueStatistics: () => {
     return client.get('/admin/monthlyRevenueStatistics');
   },
+
+  searchProductName: (productName) => {
+    return client.get(`/admin/searchProductName?productName=${productName}`);
+  },
 };

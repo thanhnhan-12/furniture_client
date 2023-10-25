@@ -3,6 +3,7 @@ import {
   bestSellingProducts,
   userStatistics,
   monthlyRevenueStatistics,
+  searchProductName,
 } from './adminAction';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     productListSelling: [],
     monthlyRevenue: [],
   },
+  searchProduct: [],
   loading: false,
   error: null,
 };
@@ -62,9 +64,23 @@ const adminSlice = createSlice({
       .addCase(monthlyRevenueStatistics.fulfilled, (state, action) => {
         state.loading = false;
         state.statistics.monthlyRevenue = action.payload;
-        console.log('User List Statistics: ', state.statistics.monthlyRevenue);
+        // console.log('User List Statistics: ', state.statistics.monthlyRevenue);
       })
       .addCase(monthlyRevenueStatistics.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(searchProductName.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(searchProductName.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchProduct = action.payload;
+        // console.log('Search Product: ', state.searchProduct);
+      })
+      .addCase(searchProductName.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
