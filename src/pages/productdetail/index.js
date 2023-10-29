@@ -21,7 +21,7 @@ const ProductDetail = () => {
 
   const productDetails = useAppSelector((state) => state.product.product);
 
-  // console.log('productDetails: ', productDetails);
+  console.log('productDetails: ', productDetails);
 
   const products = useAppSelector((state) => state.product.products);
 

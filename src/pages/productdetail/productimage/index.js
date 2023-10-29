@@ -7,7 +7,7 @@ const ProductImage = ({ productImages }) => {
 
   const [index, setIndex] = useState(0);
 
-  // console.log('Log', productImages);
+  console.log('Product Images: ', productImages);
 
   return (
     <div className={cx('allImg')}>

@@ -42,7 +42,7 @@ export const monthlyRevenueStatistics = createAsyncThunk(
 );
 
 export const searchProductName = createAsyncThunk(
-  'admin/monthlyRevenueStatistics',
+  'admin/searchProduct',
   async (productName) => {
     try {
       const { data } = await adminApi.searchProductName(productName);
