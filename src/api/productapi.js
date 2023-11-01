@@ -13,6 +13,10 @@ export const productApi = {
   },
 
   addProduct: (payload) => {
-    return client.post('/product/addProduct', payload);
+    return client.post('/product/addProduct', payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
 };

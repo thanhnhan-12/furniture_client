@@ -13,11 +13,14 @@ import { getAllCategory } from '../../../../redux/category/categoryAction';
 import useStyles from '../styles';
 import ArrowDownTrayIcon from '@heroicons/react/24/solid/ArrowDownTrayIcon';
 import { addProduct } from '../../../../redux/product/productAction';
+import { notifyAddProduct } from '../../../../constants/common';
 
 const AddProduct = () => {
   const cx = classNames.bind(useStyles());
 
-  const [privewImage, setPrivewImage] = useState(
+  const [imageFiles, setImageFiles] = useState();
+
+  const [previewImage, setPreviewImage] = useState(
     'https://fucoidannano.com/img/no_img.png',
   );
 
@@ -74,10 +77,16 @@ const AddProduct = () => {
         setFocus('quantity');
         reset({ category: '' });
         setFocus('category');
+        notifyAddProduct();
       })
       .catch((error) => {
         console.error('Error:', error);
       });
+  };
+
+  const handleImagesSelected = (e) => {
+    setImageFiles(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
   };
 
   return (
@@ -157,15 +166,20 @@ const AddProduct = () => {
             {/* <SvgIcon fontSize='large' >
               <ArrowDownTrayIcon />
             </SvgIcon> */}
-            <Typography component="input" type="file" />
+            <Typography
+              component="input"
+              type="file"
+              multiple
+              onChange={handleImagesSelected}
+            />
           </Box>
 
           <Box>
             <img
-              src={privewImage}
+              src={previewImage}
               alt=""
               width="100%"
-              style={{ borderRadius: '10px', maxHeight: '200px' }}
+              style={{ borderRadius: '10px', maxHeight: '60rem' }}
             />
           </Box>
         </Box>

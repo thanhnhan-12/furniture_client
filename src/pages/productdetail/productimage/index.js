@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import useStyles from './styles';
+import { localPathImages } from '../../../config';
 
 const ProductImage = ({ productImages }) => {
   const cx = classNames.bind(useStyles());
 
   const [index, setIndex] = useState(0);
 
-  console.log('Product Images: ', productImages);
+  // console.log('Product Images: ', productImages);
 
   return (
     <div className={cx('allImg')}>
@@ -19,7 +20,7 @@ const ProductImage = ({ productImages }) => {
             onClick={() => setIndex(i)}
           >
             <img
-              src={item.nameImage}
+              src={`${localPathImages}/${item.nameImage}`}
               alt=""
               style={{ width: '8.3rem', height: '5.5rem' }}
             />
@@ -30,7 +31,11 @@ const ProductImage = ({ productImages }) => {
       <div style={{ marginLeft: '2.8rem' }}>
         <div className={cx('img')}>
           <img
-            src={productImages && productImages[index].nameImage}
+            src={
+              productImages && productImages[index]
+                ? `${localPathImages}/${productImages[index].nameImage}`
+                : ''
+            }
             alt=""
             style={{ width: '48.1rem', height: '39.1rem' }}
           />

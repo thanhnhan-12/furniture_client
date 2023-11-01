@@ -62,3 +62,11 @@ export const nofifyOrderSuccessfully = () => {
     position: toast.POSITION.TOP_CENTER,
   });
 };
+
+export const notifyAddProduct = () => {
+  toast('Add Product Successfully ', {
+    className: 'notifyAdd',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};

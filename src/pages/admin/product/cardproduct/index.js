@@ -1,7 +1,8 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import useStyles from './styles';
 import { formatPrice } from '../../../../constants/common';
+import { localPathImages } from '../../../../config';
 
 const CardProduct = ({ cardProducts }) => {
   const classes = useStyles();
@@ -18,7 +19,11 @@ const CardProduct = ({ cardProducts }) => {
       {cardProducts.map((card, index) => (
         <Grid key={index} item xs={3} className={classes.productItemList}>
           <div>
-            <img src={card.nameImage} alt="" className={classes.nameImage} />
+            <img
+              src={`${localPathImages}/${card.nameImage}`}
+              alt=""
+              className={classes.nameImage}
+            />
             <div className={classes.productItemContent}>
               <h3 className={classes.productName}>{card.productName}</h3>
               <strong className={classes.price}>

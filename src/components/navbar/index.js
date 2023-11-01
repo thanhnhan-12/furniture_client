@@ -118,9 +118,9 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <PrivateUser>
+      {/* <PrivateUser> */}
         <ShoppingCart shown={isShow} onClose={() => setIsShow(false)} />
-      </PrivateUser>
+      {/* </PrivateUser> */}
 
       <Options show={isShows} close={() => setIsShows(false)} />
     </div>

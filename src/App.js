@@ -1,27 +1,24 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
+import Address from './components/options/address';
+import SidebarLayout from './layouts/sidebarlayout';
 import About from './pages/about';
+import Customers from './pages/admin/customer';
+import Dashboard from './pages/admin/dashboard';
+import OrderAdmin from './pages/admin/order';
+import ProductAdmin from './pages/admin/product';
+import AddProduct from './pages/admin/product/addproduct';
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
-import Contact from './pages/contact';
-import Home from './pages/home';
-import Shop from './pages/shop';
-import './App.css';
-import ProductDetail from './pages/productdetail';
 import Cart from './pages/cart';
 import Checkout from './pages/checkout';
-// import { PrivateUser } from './routes/private/user';
-import { useAppSelector } from './redux';
-import Address from './components/options/address';
-import MainLayout from './layouts/mainlayout';
+import Contact from './pages/contact';
+import Home from './pages/home';
+import ProductDetail from './pages/productdetail';
+import Shop from './pages/shop';
 import { PrivateDashboard } from './routes/private/admin';
-import Dashboard from './pages/admin/dashboard';
-import SidebarLayout from './layouts/sidebarlayout';
-import Customers from './pages/admin/customer';
-import ProductAdmin from './pages/admin/product';
-import OrderAdmin from './pages/admin/order';
-import AddProduct from './pages/admin/product/addproduct';
 
 const Layout = () => {
   return (
@@ -32,12 +29,6 @@ const Layout = () => {
     </>
   );
 };
-
-function Func() {
-  const { token } = useAppSelector((state) => state.authSlice);
-
-  return token;
-}
 
 const router = createBrowserRouter([
   {

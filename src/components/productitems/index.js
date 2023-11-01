@@ -10,6 +10,7 @@ import { createCart } from '../../redux/cart/cartAction';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getCartByUser } from '../../redux/cart/cartAction';
+import { localPathImages } from '../../config';
 
 const ProductItems = ({ productList }) => {
   const classes = useStyles();
@@ -54,7 +55,7 @@ const ProductItems = ({ productList }) => {
         <Grid key={index} item xs={3} className={classes.productItemList}>
           <div>
             <img
-              src={list.nameImage}
+              src={`${localPathImages}/${list.nameImage}`}
               alt=""
               className={classes.nameImage}
               onClick={() => handleNavigate(list.productID)}
