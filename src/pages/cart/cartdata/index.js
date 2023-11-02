@@ -6,6 +6,7 @@ import { formatPrice } from '../../../constants/common';
 import useStyles from '../cartproduct/styles';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import { setProductsSelected, totalPrice } from '../../../redux/cart/cartSlice';
+import { localPathImages } from '../../../config';
 
 const CartData = ({ rows, handleRemoveCart }) => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ const CartData = ({ rows, handleRemoveCart }) => {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography
             component="img"
-            src={params.value}
+            src={`${localPathImages}/${params.value}`}
             alt="Product Image"
             width={108}
             height={105}

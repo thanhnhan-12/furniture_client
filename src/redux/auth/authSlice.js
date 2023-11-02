@@ -25,6 +25,7 @@ const authSlice = createSlice({
       localStorage.removeItem('saveAddress');
       localStorage.removeItem('userInfor');
       localStorage.removeItem('productsSelected');
+      localStorage.removeItem('cartTotals');
       state.isAuthenticated = false;
     },
   },

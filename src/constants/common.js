@@ -70,3 +70,11 @@ export const notifyAddProduct = () => {
     position: toast.POSITION.TOP_CENTER,
   });
 };
+
+export const notifyFailedToAddProduct = () => {
+  toast('Failed To Add Product', {
+    className: 'notifyAdd',
+    draggable: true,
+    position: toast.POSITION.TOP_CENTER,
+  });
+};

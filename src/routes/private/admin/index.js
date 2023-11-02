@@ -18,6 +18,7 @@ export const PrivateDashboard = ({ children }) => {
 
   if (!checkRoleAdmin(roles, token)) {
     return <Navigate to="/auth/admin/login" replace />;
+    // return null;
   }
   return children;
 };

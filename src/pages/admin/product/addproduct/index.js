@@ -14,15 +14,18 @@ import useStyles from '../styles';
 import ArrowDownTrayIcon from '@heroicons/react/24/solid/ArrowDownTrayIcon';
 import { addProduct } from '../../../../redux/product/productAction';
 import { notifyAddProduct } from '../../../../constants/common';
+import { uploadImages } from '../../../../redux/images/imageAction';
+import { toastMessage } from '../../../../utils/toast';
+import { messageRequired } from '../../../../utils/common';
 
 const AddProduct = () => {
   const cx = classNames.bind(useStyles());
 
-  const [imageFiles, setImageFiles] = useState();
+  const [imageFiles, setImageFiles] = useState([]);
 
-  const [previewImage, setPreviewImage] = useState(
+  const [previewImage, setPreviewImage] = useState([
     'https://fucoidannano.com/img/no_img.png',
-  );
+  ]);
 
   const navigate = useNavigate();
 
@@ -57,16 +60,32 @@ const AddProduct = () => {
     quantity,
     category,
   }) => {
-    dispatch(
-      addProduct({
-        productName: productName,
-        description: description,
-        price: price,
-        quantity: quantity,
-        category: category,
-      }),
-    )
-      .then(() => {
+    // console.log('productName: ', productName);
+    // console.log('description: ', description);
+    // console.log('price: ', price);
+    // console.log('quantity: ', quantity);
+    // console.log('categoryID: ', category);
+    console.log('Image Files: ', imageFiles);
+
+    if (!imageFiles || imageFiles.length === 0) {
+      return toastMessage.error(messageRequired('Image File'));
+    }
+
+    const formData = new FormData();
+
+    const formImage = new FormData();
+
+    formData.append('productName: ', productName);
+    formData.append('description: ', description);
+    formData.append('price: ', price);
+    formData.append('quantity: ', quantity);
+    formData.append('categoryID: ', category);
+
+    dispatch(addProduct(formData))
+      .unwrap()
+      .then((data) => {
+        // console.log('Data', data);
+        notifyAddProduct();
         reset({ productName: '' });
         setFocus('productName');
         reset({ description: '' });
@@ -77,7 +96,10 @@ const AddProduct = () => {
         setFocus('quantity');
         reset({ category: '' });
         setFocus('category');
-        notifyAddProduct();
+
+        formImage.append('imageFiles', imageFiles);
+        formImage.append('productID', data.productID);
+        dispatch(uploadImages(formImage));
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -87,6 +109,15 @@ const AddProduct = () => {
   const handleImagesSelected = (e) => {
     setImageFiles(e.target.files[0]);
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
+
+    // const selectedFiles = Array.from(e.target.files); // Chuyển FileList thành mảng
+    // setImageFiles(selectedFiles);
+
+    // // Nếu bạn muốn hiển thị tất cả các hình ảnh đã chọn, bạn có thể sử dụng một mảng hình ảnh
+    // const previewImages = selectedFiles.map((file) =>
+    //   URL.createObjectURL(file),
+    // );
+    // setPreviewImage(previewImages);
   };
 
   return (
@@ -175,6 +206,19 @@ const AddProduct = () => {
           </Box>
 
           <Box>
+            {/* {previewImage.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Image ${index}`}
+                style={{
+                  borderRadius: '10px',
+                  maxHeight: '40rem',
+                  marginRight: '10px',
+                }}
+              />
+            ))} */}
+
             <img
               src={previewImage}
               alt=""

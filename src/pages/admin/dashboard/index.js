@@ -43,11 +43,11 @@ const Dashboard = () => {
     statistics: { userListStatistics, productListSelling, monthlyRevenue },
   } = useAppSelector((state) => state.admin);
 
-  console.log('Statistics: ', {
-    userStatistics: userListStatistics,
-    productSelling: productListSelling,
-    monthlyRevenue: monthlyRevenue,
-  });
+  // console.log('Statistics: ', {
+  //   userStatistics: userListStatistics,
+  //   productSelling: productListSelling,
+  //   monthlyRevenue: monthlyRevenue,
+  // });
 
   useEffect(() => {
     dispatch(userStatistics());

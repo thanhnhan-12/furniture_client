@@ -98,9 +98,9 @@ const router = createBrowserRouter([
   {
     path: 'admin',
     element: (
-      <PrivateDashboard>
-        <SidebarLayout />
-      </PrivateDashboard>
+      // <PrivateDashboard>
+      <SidebarLayout />
+      // </PrivateDashboard>
     ),
     children: [
       {

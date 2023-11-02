@@ -30,9 +30,9 @@ export const getProductByID = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
   'product/addProduct',
-  async (payload) => {
+  async (formData) => {
     try {
-      const { data } = await productApi.addProduct(payload);
+      const { data } = await productApi.addProduct(formData);
       return data;
     } catch (error) {
       toastMessage.setErrors(error);

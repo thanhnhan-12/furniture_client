@@ -10,12 +10,14 @@ import adminSlice from './admin/adminSlice';
 import authSlice from './auth/authSlice';
 import cartSlice from './cart/cartSlice';
 import categorySlice from './category/categorySlice';
+import imageSlice from './images/imageSlice';
 import orderSlice from './order/orderSlice';
 import productSlice from './product/productSlice';
 import userSlice from './user/userSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  images: imageSlice,
   user: userSlice,
   product: productSlice,
   category: categorySlice,

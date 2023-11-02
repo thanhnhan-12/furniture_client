@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../redux';
 import { Navigate } from 'react-router-dom';
 
 export const PrivateUser = ({ children }) => {
-  const { roles, token } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
 
   // const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 

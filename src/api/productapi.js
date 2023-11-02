@@ -12,11 +12,7 @@ export const productApi = {
     return client.get(`/product/${productID}`);
   },
 
-  addProduct: (payload) => {
-    return client.post('/product/addProduct', payload, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+  addProduct: (formData) => {
+    return client.post('/product/addProduct', formData);
   },
 };
