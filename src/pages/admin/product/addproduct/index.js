@@ -65,7 +65,7 @@ const AddProduct = () => {
     // console.log('price: ', price);
     // console.log('quantity: ', quantity);
     // console.log('categoryID: ', category);
-    console.log('Image Files: ', imageFiles);
+    // console.log('Image Files: ', imageFiles);
 
     if (!imageFiles || imageFiles.length === 0) {
       return toastMessage.error(messageRequired('Image File'));
@@ -75,11 +75,11 @@ const AddProduct = () => {
 
     const formImage = new FormData();
 
-    formData.append('productName: ', productName);
-    formData.append('description: ', description);
-    formData.append('price: ', price);
-    formData.append('quantity: ', quantity);
-    formData.append('categoryID: ', category);
+    formData.append('productName', productName);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('categoryID', category);
 
     dispatch(addProduct(formData))
       .unwrap()
@@ -97,8 +97,17 @@ const AddProduct = () => {
         reset({ category: '' });
         setFocus('category');
 
-        formImage.append('imageFiles', imageFiles);
+        // formImage.append('imageFiles', imageFiles);
+        // formImage.append('productID', data.productID);
+        // dispatch(uploadImages(formImage));
+
         formImage.append('productID', data.productID);
+
+        for (let i = 0; i < imageFiles.length; i++) {
+          // console.log('Image: ', imageFiles[i]);
+          formImage.append('imageFiles', imageFiles[i]);
+        }
+
         dispatch(uploadImages(formImage));
       })
       .catch((error) => {
@@ -107,17 +116,17 @@ const AddProduct = () => {
   };
 
   const handleImagesSelected = (e) => {
-    setImageFiles(e.target.files[0]);
-    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+    // setImageFiles(e.target.files[0]);
+    // setPreviewImage(URL.createObjectURL(e.target.files[0]));
 
-    // const selectedFiles = Array.from(e.target.files); // Chuyển FileList thành mảng
-    // setImageFiles(selectedFiles);
+    const selectedFiles = Array.from(e.target.files);
+    setImageFiles(selectedFiles);
 
-    // // Nếu bạn muốn hiển thị tất cả các hình ảnh đã chọn, bạn có thể sử dụng một mảng hình ảnh
-    // const previewImages = selectedFiles.map((file) =>
-    //   URL.createObjectURL(file),
-    // );
-    // setPreviewImage(previewImages);
+    const previewImages = selectedFiles.map((file) =>
+      URL.createObjectURL(file),
+    );
+    // console.log('Preview Images: ', previewImages);
+    setPreviewImage(previewImages);
   };
 
   return (
@@ -206,7 +215,7 @@ const AddProduct = () => {
           </Box>
 
           <Box>
-            {/* {previewImage.map((image, index) => (
+            {previewImage.map((image, index) => (
               <img
                 key={index}
                 src={image}
@@ -217,14 +226,14 @@ const AddProduct = () => {
                   marginRight: '10px',
                 }}
               />
-            ))} */}
+            ))}
 
-            <img
+            {/* <img
               src={previewImage}
               alt=""
               width="100%"
               style={{ borderRadius: '10px', maxHeight: '60rem' }}
-            />
+            /> */}
           </Box>
         </Box>
 
