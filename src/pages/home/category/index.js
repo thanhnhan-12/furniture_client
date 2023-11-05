@@ -4,12 +4,13 @@ import './styles.scss';
 import LayoutContainer from '../../../components/layoutcontainer/layoutcontainer';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import { getAllCategory } from '../../../redux/category/categoryAction';
+import Loader from '../../../utils/loader';
 
 const Category = () => {
   const dispatch = useAppDispatch();
 
   const categories = useAppSelector((state) => state.category.categories);
-  
+
   useEffect(() => {
     dispatch(getAllCategory());
   }, [dispatch]);
@@ -31,7 +32,7 @@ const Category = () => {
               </div>
             ))
           ) : (
-            <p>Loading categories...</p>
+            <Loader />
           )}
         </div>
       </div>
