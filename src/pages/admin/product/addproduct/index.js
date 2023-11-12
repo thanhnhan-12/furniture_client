@@ -86,15 +86,19 @@ const AddProduct = () => {
       .then((data) => {
         // console.log('Data', data);
         notifyAddProduct();
-        reset({ productName: '' });
+
+        reset({
+          productName: '',
+          description: '',
+          price: '',
+          quantity: '',
+          category: '',
+        });
+
         setFocus('productName');
-        reset({ description: '' });
         setFocus('description');
-        reset({ price: '' });
         setFocus('price');
-        reset({ quantity: '' });
         setFocus('quantity');
-        reset({ category: '' });
         setFocus('category');
 
         // formImage.append('imageFiles', imageFiles);
@@ -109,6 +113,9 @@ const AddProduct = () => {
         }
 
         dispatch(uploadImages(formImage));
+
+        setImageFiles([]);
+        setPreviewImage(['https://fucoidannano.com/img/no_img.png']);
       })
       .catch((error) => {
         console.error('Error:', error);

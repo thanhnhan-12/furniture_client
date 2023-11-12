@@ -84,7 +84,7 @@ const Dashboard = () => {
           <Line
             options={optionsDoughnut('Statistics of best-selling products')}
             data={renderdata({
-              data: productListSelling.map((item) => item.productID),
+              data: productListSelling.map((item) => item.totalSales),
               labels: productListSelling.map((item) => item.productName),
               colors: renderColors(productListSelling.length),
               title: 'Statistics of best-selling products',

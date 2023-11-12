@@ -4,6 +4,20 @@ import { getAllProduct, getProductByID, addProduct } from './productAction';
 const initialState = {
   products: [],
   product: [],
+
+  prodList: {
+    data: [],
+    total: 0,
+  },
+
+  prodFilters: {
+    keyword: '',
+    city: '',
+    companyfield: '',
+    page: 1,
+    created: 'DESC',
+  },
+
   loading: false,
   error: null,
 };
@@ -11,7 +25,11 @@ const initialState = {
 const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {},
+  reducers: {
+    changeHomeFilter: (state, action) => {
+      state.jobFilters = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllProduct.pending, (state) => {
@@ -40,7 +58,7 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      
+
       .addCase(addProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -56,6 +74,8 @@ const productSlice = createSlice({
   },
 });
 
-const { reducer } = productSlice;
+const { actions, reducer } = productSlice;
+
+export const { changeHomeFilter } = actions;
 
 export default reducer;
