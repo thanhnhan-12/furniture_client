@@ -34,7 +34,7 @@ ChartJS.register(
   Title,
 );
 
-const labels = ['Admin', 'Members'];
+const labels = ['Members', 'Admin'];
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();

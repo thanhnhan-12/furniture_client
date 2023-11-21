@@ -9,7 +9,6 @@ import Loader from '../../../utils/loader';
 import { getAllProduct } from '../../../redux/product/productAction';
 import CardProduct from './cardproduct';
 import { searchProductName } from '../../../redux/admin/adminAction';
-import PaginationProduct from '../../../components/pagination';
 
 const ProductAdmin = () => {
   const cx = classNames.bind(useStyles());
@@ -22,10 +21,6 @@ const ProductAdmin = () => {
   const dispatch = useAppDispatch();
 
   const cardProducts = useAppSelector((state) => state.product.products);
-
-  const prodList = useAppSelector((state) => state.product.prodList);
-
-  const prodFilters = useAppSelector((state) => state.product.prodFilters);
 
   const redirectToAddProduct = () => {
     navigate('/admin/add-product');

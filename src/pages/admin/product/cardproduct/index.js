@@ -1,11 +1,30 @@
-import { Grid } from '@mui/material';
-import React from 'react';
+import { Box, Grid, Pagination } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { formatPrice } from '../../../../constants/common';
 import { localPathImages } from '../../../../config';
+import { useAppDispatch, useAppSelector } from '../../../../redux';
+import { getAllProduct } from '../../../../redux/product/productAction';
+import { changeHomeFilter } from '../../../../redux/product/productSlice';
+import PaginationProduct from '../../../../components/pagination';
 
 const CardProduct = ({ cardProducts }) => {
   const classes = useStyles();
+
+  const dispatch = useAppDispatch();
+
+  const {
+    listData: { data, totalCurrentData, totalPage, totalData },
+    payloadFilters,
+  } = useAppSelector((state) => state.product);
+
+  const handleOnChangePage = (page) => {
+    const newFilters = {
+      ...payloadFilters,
+      page,
+    };
+    dispatch(changeHomeFilter(newFilters));
+  };
 
   return (
     <Grid
@@ -33,6 +52,12 @@ const CardProduct = ({ cardProducts }) => {
           </div>
         </Grid>
       ))}
+
+      {/* <PaginationProduct
+        totalPage={totalPage}
+        currentPage={payloadFilters.page}
+        onChange={handleOnChangePage}
+      /> */}
     </Grid>
   );
 };

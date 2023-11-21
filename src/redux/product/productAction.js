@@ -15,6 +15,19 @@ export const getAllProduct = createAsyncThunk(
   },
 );
 
+export const getProductList = createAsyncThunk(
+  'product/getProductList',
+  async (filters) => {
+    try {
+      const { data } = await productApi.getProductList(filters);
+      return data;
+    } catch (error) {
+      toastMessage.setErrors(error);
+      return error;
+    }
+  },
+);
+
 export const getProductByID = createAsyncThunk(
   'product/getProductByID',
   async (productID) => {

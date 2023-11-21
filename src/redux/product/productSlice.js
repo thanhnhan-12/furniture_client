@@ -1,21 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllProduct, getProductByID, addProduct } from './productAction';
+import {
+  getAllProduct,
+  getProductByID,
+  getProductList,
+  addProduct,
+} from './productAction';
+import { initFilters } from '../../constants/defaults';
 
 const initialState = {
   products: [],
   product: [],
 
-  prodList: {
+  listData: {
     data: [],
-    total: 0,
+    page: 0,
+    totalCurrentData: 0,
+    totalData: 0,
+    totalPage: 0,
   },
 
-  prodFilters: {
-    keyword: '',
-    city: '',
-    companyfield: '',
-    page: 1,
-    created: 'DESC',
+  payloadFilters: {
+    ...initFilters,
+    filters: 'ALL',
+    typeId: 'ALL',
   },
 
   loading: false,
@@ -27,7 +34,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     changeHomeFilter: (state, action) => {
-      state.jobFilters = action.payload;
+      state.payloadFilters = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +51,12 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+
+      // .addCase(getProductList.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.listData = action.payload;
+      //   console.log('List Data: ', state.listData);
+      // })
 
       .addCase(getProductByID.pending, (state) => {
         state.loading = true;

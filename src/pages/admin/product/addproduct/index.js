@@ -101,10 +101,6 @@ const AddProduct = () => {
         setFocus('quantity');
         setFocus('category');
 
-        // formImage.append('imageFiles', imageFiles);
-        // formImage.append('productID', data.productID);
-        // dispatch(uploadImages(formImage));
-
         formImage.append('productID', data.productID);
 
         for (let i = 0; i < imageFiles.length; i++) {

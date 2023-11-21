@@ -70,6 +70,7 @@ const ShoppingCart = ({ onClose, shown }) => {
           bottom: '0',
           zIndex: '2',
           bgcolor: 'rgba(0, 0, 0, 0.5)',
+          overflowY: 'scroll',
         }}
         onClick={() => {
           onClose();
@@ -78,7 +79,7 @@ const ShoppingCart = ({ onClose, shown }) => {
         <Box
           sx={{
             width: '41.7rem',
-            position: 'fixed',
+            position: 'absolute',
             right: '0',
             top: '0',
             backgroundColor: '#fff',
